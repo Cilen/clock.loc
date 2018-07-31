@@ -30,8 +30,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 
 Auth::routes();
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
+    Route::get('/', 'AdminController@index');
 
 });
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

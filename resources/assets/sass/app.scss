@@ -8,6 +8,14 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Vendors
+@import "vendor/tabulator/themes/tabulator_bootstrap";
+@import "vendor/tabulator/tabulator";
+
+//Pages
+@import "admin";
+
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
