@@ -13,6 +13,12 @@
                     Orders
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/-clock">
+                    <i class="fas fa-arrow-right"></i>
+                    Orders
+                </a>
+            </li>
         </ul>
     </div>
     <div class="border-bottom d-md-none"></div>
