@@ -8,15 +8,27 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/add-clock">
+                <a class="nav-link" href="/admin/clocks">
                     <i class="fas fa-arrow-right"></i>
-                    Orders
+                    Список годинників
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/-clock">
+                <a class="nav-link" href="/admin/clocks/create">
                     <i class="fas fa-arrow-right"></i>
-                    Orders
+                    Додати новий годинник
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/orders">
+                    <i class="fas fa-arrow-right"></i>
+                    Нові замовлення
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/feedbacks">
+                    <i class="fas fa-arrow-right"></i>
+                    Зворотній зв'язок
                 </a>
             </li>
         </ul>

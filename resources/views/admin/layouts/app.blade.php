@@ -26,7 +26,9 @@
         <div class="container-fluid">
             <div class="row">
                 @include('admin.layouts.sidebar')
-                @yield('content')
+                <main class="col-md-9 bg-light">
+                    @yield('content')
+                </main>
             </div>
         </div>
     </div>
