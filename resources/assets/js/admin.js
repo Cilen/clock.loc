@@ -4,7 +4,18 @@ $(document).ready(function () {
         if (va.href == document.URL) {
             $(this).addClass('active');
         }
-        console.log(va.href);
-        console.log(document.URL);
     });
+
 });
+
+window.runToastmessage = function (text, type) {
+    type = type || 'success';  // "notice", "success", "warning", "error"
+    $().toastmessage('showToast', {
+        text     : text,
+        sticky   : false,
+        inEffectDuration:  600,
+        stayTime: 3000,
+        position : 'top-right',
+        type     : type,
+    });
+};

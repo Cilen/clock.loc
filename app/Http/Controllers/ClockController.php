@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Clock;
+use App\Http\Requests\ClockRequest;
 use Illuminate\Http\Request;
+use test\Mockery\ReturnTypeObjectTypeHint;
 
 class ClockController extends Controller
 {
@@ -13,7 +16,9 @@ class ClockController extends Controller
      */
     public function index()
     {
-        return('Список годинників');
+
+        $data = Clock::all();
+        dd($data);
     }
 
     /**
@@ -32,9 +37,20 @@ class ClockController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClockRequest $request)
     {
-        //
+        $clock = Clock::create([
+            "name" => $request->input("name"),
+            "gender" => $request->input("gender"),
+            "type_of_indexation" => $request->input("typeOfIndexation"),
+            "type_of_mechanism" => $request->input("typeOfMechanism"),
+            "producer" => $request->input("producer"),
+            "price" => $request->input("price"),
+            "old_price" => $request->input("oldPrice"),
+            "availability" => $request->input("availability"),
+            "hide" => $request->input("hide"),
+            ]);
+        return redirect('admin/clocks/'.$clock->clock_id.'/edit');
     }
 
     /**
@@ -45,7 +61,7 @@ class ClockController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -56,7 +72,10 @@ class ClockController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Clock::find($id);
+        if ($data == null) return abort(404);
+        $data = $data->toArray();
+        return view('admin.addOrUpdateClock')->with(['data' => $data]);
     }
 
     /**
@@ -66,9 +85,22 @@ class ClockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClockRequest $request, $id)
     {
-        //
+        $clock = Clock::find($id);
+        $clock->update([
+            'name' => $request->input('name'),
+            'gender' => $request->input('gender'),
+            "type_of_indexation" => $request->input("typeOfIndexation"),
+            "type_of_mechanism" => $request->input("typeOfMechanism"),
+            "producer" => $request->input("producer"),
+            "price" => $request->input("price"),
+            "old_price" => $request->input("oldPrice"),
+            "availability" => $request->input("availability"),
+            "hide" => $request->input("hide"),
+        ]);
+        $data = Clock::find($id)->toArray();
+        return $data;
     }
 
     /**
@@ -80,5 +112,10 @@ class ClockController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function test (Request $request)
+    {
+        dd($request);
     }
 }

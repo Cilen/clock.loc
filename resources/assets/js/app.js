@@ -6,13 +6,15 @@
  */
 
 require('./bootstrap');
-require('./admin');
 
 require('@fortawesome/fontawesome-free/js/all.js');
 
 
 window.Vue = require('vue');
 
+require('./vendor/toastmessage');
+
+require('./admin');
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -20,8 +22,16 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('clock-form', require('./components/ClockForm.vue'));
+Vue.component('descriptions-form', require('./components/DescriptionsForm.vue'));
+Vue.component('characteristics-form', require('./components/CharacteristicsForm.vue'));
+Vue.component('images-form', require('./components/ImagesForm.vue'));
 
-// const app = new Vue({
-// //     el: '#app'
-// // });
+const app = new Vue({
+    el: '#app'
+});
+
+
+
+
 

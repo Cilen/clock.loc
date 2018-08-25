@@ -22,7 +22,9 @@ class CreateClocksTable extends Migration
             $table->string('producer');
             $table->integer('price');
             $table->integer('old_price');
-            $table->string('logo_uuid');
+            $table->string('availability');
+            $table->boolean('hide');
+            $table->string('logo_uuid')->nullable();
             $table->timestamps();
         });
         DB::statement("ALTER TABLE clocks AUTO_INCREMENT = 1000;");
