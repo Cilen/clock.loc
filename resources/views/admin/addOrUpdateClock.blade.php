@@ -45,7 +45,9 @@
     <script>
         @if (isset ($data))
             var data = {!! json_encode($data) !!};
-            var descriptionUrl = "{!! url('/admin/descriptions') !!}";
+            var descriptions = {!! json_encode($descriptions) !!};
+            var descriptionUrl = "{!! url('/admin/clocks/descriptions') !!}";
+            var descriptionUrl = "{!! url('/admin/clocks/characteristics') !!}";
         @endif
         var url = "{!! url('/admin/clocks') !!}";
     </script>

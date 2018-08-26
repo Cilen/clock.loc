@@ -32,7 +32,10 @@ Route::post('feedbacks', 'FeedbackController@story')->name('new-feedback');
 Auth::routes();
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::get('/', 'AdminController@index');
+
     Route::post('test', 'ClockController@test');
+    Route::put('clocks/descriptions/{id}', 'ClockController@setDescriptions');
+    Route::post('clocks/descriptions/{id}', 'ClockController@getDescriptions');
     Route::resource('clocks', 'ClockController');
 
     Route::get('orders/old', 'OrderController@oldOrders');

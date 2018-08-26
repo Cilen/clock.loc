@@ -165,7 +165,6 @@
                     this.hide = data.hide;
                     this.price = data.price;
                     this.oldPrice = data.old_price;
-                    console.log ("resetData");
                 };
             }
         },

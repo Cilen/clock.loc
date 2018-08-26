@@ -5,7 +5,7 @@
                 <label>Загальний опис</label>
             </div>
             <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ua" v-model="ua.general"></textarea>
+                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.general"></textarea>
             </div>
             <div class="col-6">
                 <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.general"></textarea>
@@ -16,7 +16,7 @@
                 <label>Механізм</label>
             </div>
             <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ua" v-model="ua.mechanism"></textarea>
+                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.mechanism"></textarea>
             </div>
             <div class="col-6">
                 <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.mechanism"></textarea>
@@ -27,7 +27,7 @@
                 <label>Корпус</label>
             </div>
             <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ua" v-model="ua.body"></textarea>
+                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.body"></textarea>
             </div>
             <div class="col-6">
                 <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.body"></textarea>
@@ -38,7 +38,7 @@
                 <label>Циферблат</label>
             </div>
             <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ua" v-model="ua.clockFace"></textarea>
+                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.clockFace"></textarea>
             </div>
             <div class="col-6">
                 <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.clockFace"></textarea>
@@ -49,7 +49,7 @@
                 <label>Скло</label>
             </div>
             <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ua" v-model="ua.glass"></textarea>
+                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.glass"></textarea>
             </div>
             <div class="col-6">
                 <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.glass"></textarea>
@@ -60,7 +60,7 @@
                 <label>Ремінець/браслет</label>
             </div>
             <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ua" v-model="ua.strap"></textarea>
+                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.strap"></textarea>
             </div>
             <div class="col-6">
                 <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.strap"></textarea>
@@ -71,7 +71,7 @@
                 <label>Функції</label>
             </div>
             <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ua" v-model="ua.functions"></textarea>
+                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.functions"></textarea>
             </div>
             <div class="col-6">
                 <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.functions"></textarea>
@@ -88,8 +88,7 @@
     export default {
         data: function () {
             return {
-                clockId: null,
-                ua: {
+                uk: {
                     general: null,
                     mechanism: null,
                     body: null,
@@ -117,14 +116,15 @@
                     method: 'post',
                     url: updateUrl,
                     data: {
-                        descriptionsUa: this.ua,
+                        _method: 'PUT',
+                        descriptionsUk: this.uk,
                         descriptionsRu: this.ru,
                     }
                 })
                     .then(response => {
                         if (response.data.length != 0) {
-                            window.data = response.data;
-                            this.resetData();
+                            this.uk = response.data["uk"];
+                            this.ru = response.data["ru"];
                             runToastmessage("Зміни успішно внесені в базу даних");
                         };
 
@@ -135,7 +135,18 @@
                             runToastmessage("Виникла помилка", "error");
                     });
             },
-        }
+            resetData: function () {
+                if (descriptions !== undefined) {
+                    for (let key in descriptions["uk"]) {
+                        this["uk"][key] = descriptions["uk"][key];
+                        this["ru"][key] = descriptions["ru"][key];
+                    }
+                };
+            },
+        },
+        created() {
+            this.resetData();
+        },
     }
 </script>
 <style scoped>

@@ -72,10 +72,11 @@ class ClockController extends Controller
      */
     public function edit($id)
     {
-        $data = Clock::find($id);
-        if ($data == null) return abort(404);
-        $data = $data->toArray();
-        return view('admin.addOrUpdateClock')->with(['data' => $data]);
+        $clock = Clock::find($id);
+        if ($clock == null) return abort(404);
+        $descriptions = $this->getDescriptions($clock);
+        $data = $clock->toArray();
+        return view('admin.addOrUpdateClock')->with(['data' => $data, "descriptions" => $descriptions]);
     }
 
     /**
@@ -112,6 +113,31 @@ class ClockController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function setDescriptions(Request $request, $id){
+        $clock = Clock::find($id);
+        $descriptionsUk = $request->input('descriptionsUk');
+        $descriptionsRu = $request->input('descriptionsRu');
+        $data['uk'] = [];
+        $data['ru'] = [];
+        foreach ($descriptionsUk as $key => $value) {
+            $des = $clock->descriptions()->updateOrCreate(["description_name" => $key], ["value_uk" => $descriptionsUk[$key], "value_ru" => $descriptionsRu[$key]]);
+            $data['uk'][$key] = $des["value_uk"];
+            $data['ru'][$key] = $des["value_ru"];
+        };
+        return $data;
+    }
+
+    public function getDescriptions(Clock $clock){
+        $descriptions = $clock->descriptions()->get();
+        $data['uk'] = [];
+        $data['ru'] = [];
+        foreach ($descriptions as $description) {
+            $data['uk'][$description['description_name']] = $description["value_uk"];
+            $data['ru'][$description['description_name']] = $description["value_ru"];
+        };
+        return $data;
     }
 
     public function test (Request $request)
