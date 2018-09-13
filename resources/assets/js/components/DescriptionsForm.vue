@@ -111,7 +111,7 @@
         },
         methods: {
             sendUpdate: function () {
-                var updateUrl = descriptionUrl + "/" + data.clock_id;
+                var updateUrl = clockUrl + "/descriptions/" + data.clock_id;
                 axios({
                     method: 'post',
                     url: updateUrl,
@@ -136,10 +136,10 @@
                     });
             },
             resetData: function () {
-                if (descriptions !== undefined) {
-                    for (let key in descriptions["uk"]) {
-                        this["uk"][key] = descriptions["uk"][key];
-                        this["ru"][key] = descriptions["ru"][key];
+                if (data.descriptions !== undefined) {
+                    for (let key in data.descriptions["uk"]) {
+                        this["uk"][key] = data.descriptions["uk"][key];
+                        this["ru"][key] = data.descriptions["ru"][key];
                     }
                 };
             },

@@ -15,7 +15,6 @@ class CreateClockFunctionsTable extends Migration
     {
         Schema::create('clock_functions', function (Blueprint $table) {
             $table->increments('function_id');
-            $table->string('function_name');
             $table->integer('clock_id')
                   ->references('clock_id')->on('clocks')
                   ->onDelete('cascade')

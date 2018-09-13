@@ -27,7 +27,7 @@
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="descriptions" role="tabpanel" aria-labelledby="descriptions-tab">
+            <div class="tab-pane fade  show active" id="descriptions" role="tabpanel" aria-labelledby="descriptions-tab">
                 <descriptions-form></descriptions-form>
             </div>
             <div class="tab-pane fade" id="characteristics" role="tabpanel" aria-labelledby="characteristics-tab">
@@ -45,9 +45,8 @@
     <script>
         @if (isset ($data))
             var data = {!! json_encode($data) !!};
-            var descriptions = {!! json_encode($descriptions) !!};
-            var descriptionUrl = "{!! url('/admin/clocks/descriptions') !!}";
-            var descriptionUrl = "{!! url('/admin/clocks/characteristics') !!}";
+            var clockUrl = "{!! url('/admin/clocks') !!}";
+            var imagesPath = "{!! url('/images/medium').'/' !!}"
         @endif
         var url = "{!! url('/admin/clocks') !!}";
     </script>

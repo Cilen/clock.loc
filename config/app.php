@@ -160,6 +160,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Intervention\Image\ImageServiceProvider::class,
+
     ],
 
     /*
@@ -210,6 +212,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

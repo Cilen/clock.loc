@@ -34,8 +34,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::get('/', 'AdminController@index');
 
     Route::post('test', 'ClockController@test');
+    Route::post('clocks/images/set-logo/{id}', 'ClockController@setLogo');
+    Route::post('clocks/images/{id}', 'ClockController@loadImages');
+    Route::delete('clocks/images/{id}', 'ClockController@deleteImage');
     Route::put('clocks/descriptions/{id}', 'ClockController@setDescriptions');
     Route::post('clocks/descriptions/{id}', 'ClockController@getDescriptions');
+    Route::put('clocks/characteristics/{id}', 'ClockController@setCharacteristics');
+    Route::post('clocks/characteristics/{id}', 'ClockController@getCharacteristics');
     Route::resource('clocks', 'ClockController');
 
     Route::get('orders/old', 'OrderController@oldOrders');

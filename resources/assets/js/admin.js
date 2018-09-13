@@ -8,6 +8,7 @@ $(document).ready(function () {
 
 });
 
+
 window.runToastmessage = function (text, type) {
     type = type || 'success';  // "notice", "success", "warning", "error"
     $().toastmessage('showToast', {

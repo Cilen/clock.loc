@@ -1,130 +1,134 @@
 <template>
     <div id="characteristicsForm">
+        <p class="h6 text-primary mb-4">Механізм</p>
         <div class="form-group row">
-            <div class="col-12">
-                <label>Загальний опис</label>
+            <label class="col-3 col-form-label" for="кharakterystykaMekhanizmu">Характеристика механізму</label>
+            <div class="col-9">
+                <input type="text" class="form-control" name="кharakterystykaMekhanizmu" id="кharakterystykaMekhanizmu" v-model="characteristics.кharakterystykaMekhanizmu">
+            </div>
+        </div>
+        <hr>
+        <p class="h6 text-primary mb-4">Функції</p>
+
+        <div class="form-group row">
+            <div class="col-6">
+                <textarea class="form-control" rows="4" placeholder="uk" v-model="functions.value_uk"></textarea>
             </div>
             <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.general"></textarea>
+                <textarea class="form-control" rows="4" placeholder="ru" v-model="functions.value_ru"></textarea>
             </div>
-            <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.general"></textarea>
+        </div>
+        <hr>
+        <p class="h6 text-primary mb-4">Корпус</p>
+        <div class="form-group row">
+            <label class="col-3 col-form-label" for="bodyMaterial">Матеріал корпусу</label>
+            <div class="col-4">
+                <select class="form-control" name="bodyMaterial" id="bodyMaterial" v-model="characteristics.bodyMaterial">
+                    <option value="" selected></option>
+                    <option value="polikarbonat">Полікарбонат</option>
+                    <option value="splav_metaliv">Сплав металів</option>
+                </select>
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-12">
-                <label>Механізм</label>
-            </div>
-            <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.mechanism"></textarea>
-            </div>
-            <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.mechanism"></textarea>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-12">
-                <label>Корпус</label>
-            </div>
-            <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.body"></textarea>
-            </div>
-            <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.body"></textarea>
+            <label class="col-3 col-form-label" for="glass">Скло</label>
+            <div class="col-4">
+                <select class="form-control" name="glass" id="glass" v-model="characteristics.glass">
+                    <option value="" selected></option>
+                    <option value="mineralne">Мінеральне</option>
+                    <option value="sapfirove">Сапфірове</option>
+                    <option value="пolikarbonatne">Полікарбонатне</option>
+                </select>
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-12">
-                <label>Циферблат</label>
+            <label class="col-3 col-form-label" for="style">Стиль</label>
+            <div class="col-4">
+                <select class="form-control" name="style" id="style" v-model="characteristics.style">
+                    <option value=""></option>
+                    <option value="klasychnyy">Класичний</option>
+                    <option value="sportyvnyy">Спортивний</option>
+                </select>
             </div>
-            <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.clockFace"></textarea>
+        </div>
+
+        <hr>
+        <p class="h6 text-primary mb-4">Ремінець</p>
+        <div class="form-group row">
+            <label class="col-3 col-form-label" for="strapMaterial">Матеріал ремінця</label>
+            <div class="col-4">
+                <select class="form-control" name="strapMaterial" id="strapMaterial" v-model="characteristics.strapMaterial">
+                    <option value=""></option>
+                    <option value="kauchukovyy">Каучуковий</option>
+                    <option value="shkiryanyy">Шкіряний</option>
+                    <option value="stalnyy">Стальний</option>
+                </select>
             </div>
-            <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.clockFace"></textarea>
+        </div>
+
+        <hr>
+        <p class="h6 text-primary mb-4">Габарити</p>
+        <div class="form-group row">
+            <label class="col-3 col-form-label" for="diametr">Діаметр</label>
+            <div class="col-4">
+                <input type="number" step="1" class="form-control" name="diametr" id="diametr" v-model="characteristics.diametr" v-on:input="toInt">
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-12">
-                <label>Скло</label>
-            </div>
-            <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.glass"></textarea>
-            </div>
-            <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.glass"></textarea>
+            <label class="col-3 col-form-label" for="tovshchyna">Товщина</label>
+            <div class="col-4">
+                <input type="number" step="1" class="form-control" name="tovshchyna" id="tovshchyna" v-model="characteristics.tovshchyna" v-on:input="toInt">
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-12">
-                <label>Ремінець/браслет</label>
-            </div>
-            <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.strap"></textarea>
-            </div>
-            <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.strap"></textarea>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-12">
-                <label>Функції</label>
-            </div>
-            <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="uk" v-model="uk.functions"></textarea>
-            </div>
-            <div class="col-6">
-                <textarea class="form-control" rows="4" placeholder="ru" v-model="ru.functions"></textarea>
-            </div>
-        </div>
+
+        <hr>
+
         <div class="form-group ">
             <button class="btn btn-success" v-on:click="sendUpdate">Зберегти</button>
         </div>
-
     </div>
+
 </template>
 
 <script>
     export default {
         data: function () {
             return {
-                uk: {
-                    general: null,
-                    mechanism: null,
-                    body: null,
-                    clockFace: null,
-                    glass: null,
-                    strap: null,
-                    functions: null,
+                characteristics: {
+                    кharakterystykaMekhanizmu: "",
+                    bodyMaterial: "",
+                    glass: "",
+                    style: "",
+                    strapMaterial: "",
+                    diametr: 0,
+                    tovshchyna: 0
                 },
-                ru: {
-                    general: null,
-                    mechanism: null,
-                    body: null,
-                    clockFace: null,
-                    glass: null,
-                    strap: null,
-                    functions: null,
-                },
-                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                functions: {
+                    value_uk: "",
+                    value_ru: "",
+                }
             }
         },
         methods: {
+            toInt: function (event) {
+                let targetId = event.currentTarget.id;
+                this[targetId] = parseInt(this[targetId], 10);
+            },
             sendUpdate: function () {
-                var updateUrl = characteristicUrl + "/" + data.clock_id;
+                let updateUrl = clockUrl + "/characteristics/" + data.clock_id;
                 axios({
                     method: 'post',
                     url: updateUrl,
                     data: {
                         _method: 'PUT',
-                        characteristicsUk: this.uk,
-                        characteristicsRu: this.ru,
+                        characteristics: this.characteristics,
+                        functions: this.functions
                     }
                 })
                     .then(response => {
                         if (response.data.length != 0) {
-                            this.uk = response.data["uk"];
-                            this.ru = response.data["ru"];
+                            this.characteristics = response.data["characteristics"];
+                            this.funtions = response.data["funtions"];
                             runToastmessage("Зміни успішно внесені в базу даних");
                         };
 
@@ -136,11 +140,11 @@
                     });
             },
             resetData: function () {
-                if (characteristics !== undefined) {
-                    for (let key in characteristics["uk"]) {
-                        this["uk"][key] = characteristics["uk"][key];
-                        this["ru"][key] = characteristics["ru"][key];
-                    }
+                if (data.characteristics !== undefined) {
+                    this.characteristics = data.characteristics;
+                };
+                if (data.functions !== undefined) {
+                    this.functions = data.functions;
                 };
             },
         },

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Clock;
 use App\Http\Requests\ClockRequest;
+use App\Http\Requests\ImageRequest;
 use Illuminate\Http\Request;
-use test\Mockery\ReturnTypeObjectTypeHint;
+use App\ClockImage;
+use Image;
 
 class ClockController extends Controller
 {
@@ -74,9 +76,12 @@ class ClockController extends Controller
     {
         $clock = Clock::find($id);
         if ($clock == null) return abort(404);
-        $descriptions = $this->getDescriptions($clock);
         $data = $clock->toArray();
-        return view('admin.addOrUpdateClock')->with(['data' => $data, "descriptions" => $descriptions]);
+        $data["characteristics"] = $this->getCharacteristics($clock);
+        $data["functions"] = $this->getFunctions($clock);
+        $data["descriptions"] = $this->getDescriptions($clock);
+        $data["clockImages"] = $this->getImages($clock);
+        return view('admin.addOrUpdateClock')->with("data", $data);
     }
 
     /**
@@ -140,6 +145,101 @@ class ClockController extends Controller
         return $data;
     }
 
+    public function setCharacteristics(Request $request, $id){
+        $clock = Clock::find($id);
+        $characteristics = $request->input('characteristics');
+        foreach ($characteristics as $key => $value) {
+            $clock->characteristics()->updateOrCreate(["characteristic_name" => $key], ["value" => $value]);
+        };
+        $functions = $request->input('functions');
+        $clock->functions()->updateOrCreate(["clock_id" => $id],["value_uk" => $functions["value_uk"], "value_ru" => $functions["value_ru"]]);
+        $data['characteristics'] = $this->getCharacteristics($clock);
+        $data['functions'] = $this->getFunctions($clock);
+        return $data;
+    }
+
+    public function getCharacteristics(Clock $clock){
+        $characteristics = $clock->characteristics()->get();
+        $data = [];
+        foreach ($characteristics as $characteristic) {
+            $data[$characteristic['characteristic_name']] = $characteristic["value"];
+        };
+        return $data;
+    }
+
+    public function getFunctions(Clock $clock){
+        $functions = $clock->functions()->select("value_uk", "value_ru")->first()->toArray();
+        return $functions;
+    }
+
+    public function loadImages(Request $request, $id){
+        if($request->post('image'))
+        {
+            $file = $request->post('image');
+            $image = Image::make($file);
+            $height = $image->height();
+            $width = $image->width();
+            if ($height < 400 || $width < 400){
+                return response()->json(['error' => 'Недостатній розмір зображення. Мінімальна ширина і висота повинна бути більшою 400px.'], 415);
+            } elseif ($height > 10000 || $width > 10000) {
+                return response()->json(['error' => 'Перевищено максимальний розмір зображення. Максимальна ширина або висота повинна бути меншою 10000px.'], 415);
+            }
+            $name = $id.str_random(5).".jpg";
+            $sizes = [
+                "small" => 100,
+                "medium" => 240,
+                "large" => 800
+            ];
+            foreach ($sizes as $sizeName => $size) {
+                if ($width / $height >= 1.5) {
+                    Image::make($file)->widen($size * 1.5)->encode('jpg', 75)->save(public_path('images/'.$sizeName."/").$name)->save();
+                } else {
+                    Image::make($file)->heighten($size )->encode('jpg', 75)->save(public_path('images/'.$sizeName."/").$name)->save();
+                }
+            }
+            $clockImage = ClockImage::create([
+                "clock_id" => $id,
+                "uuid" => $name,
+            ]);
+            return $clockImage->toArray();
+        }
+        return response()->json(['error' => 'Відсутнє зображення'], 422);
+    }
+
+    public function getImages(Clock $clock){
+        $clockImages= $clock->clockImages()->get()->toArray();
+        return $clockImages;
+    }
+
+    public function deleteImage(Request $request, $id){
+        $imageId = $request->input("imageId");
+        $image = ClockImage::find($imageId);
+        $imageUUID = $image->uuid;
+        $clock = Clock::find($id);
+        $logoUUID = $clock->logo_uuid;
+        if ($imageUUID == $logoUUID){
+            $clock->logo_uuid = null;
+            $clock->save();
+        }
+        unlink('images/small/'.$imageUUID);
+        unlink('images/medium/'.$imageUUID);
+        unlink('images/large/'.$imageUUID);
+        $image->delete();
+        return $this->getImages($clock);
+    }
+
+    public function setLogo(Request $request, $id){
+        $uuid = $request->input('uuid');
+        if (strlen($uuid) == 13) {
+            $logo = Clock::find($id);
+            $logo->logo_uuid = $uuid;
+            $logo->save();
+            return $logo;
+        } else {
+            return response()->json(["error" => "Невірний UUID зображення"], 422);
+        }
+
+    }
     public function test (Request $request)
     {
         dd($request);
