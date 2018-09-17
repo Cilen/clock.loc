@@ -33,7 +33,8 @@ Auth::routes();
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::get('/', 'AdminController@index');
 
-    Route::post('test', 'ClockController@test');
+    Route::put('clocks/{id}/update', 'ClockController@updateFromTable');
+    Route::delete('clocks/{id}/destroy', 'ClockController@destroyFromTable');
     Route::post('clocks/images/set-logo/{id}', 'ClockController@setLogo');
     Route::post('clocks/images/{id}', 'ClockController@loadImages');
     Route::delete('clocks/images/{id}', 'ClockController@deleteImage');

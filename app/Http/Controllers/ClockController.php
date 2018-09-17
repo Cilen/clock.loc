@@ -20,7 +20,7 @@ class ClockController extends Controller
     {
 
         $data = Clock::all();
-        dd($data);
+        return view('admin.clocksTable')->with('data', $data);
     }
 
     /**
@@ -120,6 +120,33 @@ class ClockController extends Controller
         //
     }
 
+    public function updateFromTable(ClockRequest $request, $id)
+    {
+        $clock = Clock::find($id);
+        $clock->update([
+            'name' => $request->input('name'),
+            'gender' => $request->input('gender'),
+            "type_of_indexation" => $request->input("typeOfIndexation"),
+            "type_of_mechanism" => $request->input("typeOfMechanism"),
+            "producer" => $request->input("producer"),
+            "price" => $request->input("price"),
+            "old_price" => $request->input("oldPrice"),
+            "availability" => $request->input("availability"),
+            "hide" => $request->input("hide"),
+        ]);
+        $data = Clock::all();
+        $data[0]['price'] = 99;
+        return $data;
+    }
+
+    public function destroyFromTable(Request $request, $id)
+    {
+        if ($request->input('clockId') != $id) return response()->json(["error" => "Невідома помилка"], 422);
+        Clock::destroy($id);
+        $data = Clock::all();
+        return $data;
+    }
+
     public function setDescriptions(Request $request, $id){
         $clock = Clock::find($id);
         $descriptionsUk = $request->input('descriptionsUk');
@@ -168,7 +195,8 @@ class ClockController extends Controller
     }
 
     public function getFunctions(Clock $clock){
-        $functions = $clock->functions()->select("value_uk", "value_ru")->first()->toArray();
+        $functions = $clock->functions()->select("value_uk", "value_ru")->first();
+        if (isset($functions)) $functions = $functions->toArray();
         return $functions;
     }
 

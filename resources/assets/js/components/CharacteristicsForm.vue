@@ -143,7 +143,7 @@
                 if (data.characteristics !== undefined) {
                     this.characteristics = data.characteristics;
                 };
-                if (data.functions !== undefined) {
+                if (data.functions !== undefined && data.functions !== null) {
                     this.functions = data.functions;
                 };
             },

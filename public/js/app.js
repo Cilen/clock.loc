@@ -377,33 +377,6 @@ module.exports = {
 /* 1 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
 /* globals __VUE_SSR_CONTEXT__ */
 
 // IMPORTANT: Do NOT use ES2015 features in this file.
@@ -507,6 +480,33 @@ module.exports = function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),
@@ -3450,7 +3450,7 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["default"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
 /* 7 */
@@ -14286,7 +14286,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(69);
+module.exports = __webpack_require__(74);
 
 
 /***/ }),
@@ -14320,6 +14320,7 @@ Vue.component('clock-form', __webpack_require__(48));
 Vue.component('descriptions-form', __webpack_require__(54));
 Vue.component('characteristics-form', __webpack_require__(59));
 Vue.component('images-form', __webpack_require__(64));
+Vue.component('clocks-table', __webpack_require__(69));
 
 var app = new Vue({
   el: '#app'
@@ -31495,7 +31496,7 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(18)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(18)(module)))
 
 /***/ }),
 /* 18 */
@@ -50972,7 +50973,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(41).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(41).setImmediate))
 
 /***/ }),
 /* 41 */
@@ -51042,7 +51043,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
 /* 42 */
@@ -51235,7 +51236,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(9)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(9)))
 
 /***/ }),
 /* 43 */
@@ -51421,7 +51422,7 @@ window.runToastmessage = function (text, type) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(46)
 /* template */
@@ -51544,7 +51545,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(49)
 }
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(52)
 /* template */
@@ -52310,7 +52311,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(55)
 }
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(57)
 /* template */
@@ -53004,7 +53005,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(60)
 }
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(62)
 /* template */
@@ -53236,7 +53237,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (data.characteristics !== undefined) {
                 this.characteristics = data.characteristics;
             };
-            if (data.functions !== undefined) {
+            if (data.functions !== undefined && data.functions !== null) {
                 this.functions = data.functions;
             };
         }
@@ -53696,7 +53697,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(65)
 }
-var normalizeComponent = __webpack_require__(2)
+var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(67)
 /* template */
@@ -54019,6 +54020,644 @@ if (false) {
 
 /***/ }),
 /* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(70)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(72)
+/* template */
+var __vue_template__ = __webpack_require__(73)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-181ca87c"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/ClocksTable.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-181ca87c", Component.options)
+  } else {
+    hotAPI.reload("data-v-181ca87c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(71);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("aef2888c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-181ca87c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ClocksTable.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-181ca87c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ClocksTable.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nform[data-v-181ca87c] {\n    margin-top: 1.2em;\n}\n#deleteModal h5[data-v-181ca87c] {\n    color: white;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 72 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function (_data) {
+        function data() {
+            return _data.apply(this, arguments);
+        }
+
+        data.toString = function () {
+            return _data.toString();
+        };
+
+        return data;
+    }(function () {
+        return {
+            clocks: data,
+            selectedDeleteClock: ""
+        };
+    }),
+    methods: {
+        toInt: function toInt(clock) {
+            clock.price = parseInt(clock.price, 10);
+            clock.old_price = parseInt(clock.old_price, 10);
+        },
+        sendUpdate: function sendUpdate(clock) {
+            var _this = this;
+
+            if (this.wait) {
+                return;
+            }
+            this.wait = true;
+            setTimeout(function () {
+                return _this.wait = false;
+            }, 1000);
+            var updateUrl = clockUrl + "/" + clock.clock_id + "/update";
+            axios({
+                method: 'post',
+                url: updateUrl,
+                data: {
+                    _method: "PUT",
+                    clockId: clock.clock_id,
+                    name: clock.name,
+                    gender: clock.gender,
+                    typeOfIndexation: clock.type_of_indexation,
+                    typeOfMechanism: clock.type_of_mechanism,
+                    producer: clock.producer,
+                    availability: clock.availability,
+                    hide: clock.hide,
+                    price: clock.price,
+                    oldPrice: clock.old_price
+                }
+            }).then(function (response) {
+                if (response.data.length != 0) {
+                    _this.clocks = response.data;
+                    runToastmessage("Зміни успішно внесені в базу даних");
+                };
+            }).catch(function (error) {
+                var errors = error.response.data.errors;
+                console.log(errors);
+                for (var key in errors) {
+                    runToastmessage(errors[key][0], "error");
+                }
+            });
+        },
+        showDeleteModal: function showDeleteModal(clock) {
+            $('#deleteModal').modal('show');
+            this.selectedDeleteClock = clock;
+        },
+        sendDestroy: function sendDestroy(clock) {
+            var _this2 = this;
+
+            $('#deleteModal').modal('hide');
+            this.selectedDeleteClock = "";
+            if (this.wait) {
+                return;
+            }
+            this.wait = true;
+            setTimeout(function () {
+                return _this2.wait = false;
+            }, 1000);
+            var url = clockUrl + "/" + clock.clock_id + "/destroy";
+            axios({
+                method: 'post',
+                url: url,
+                data: {
+                    _method: "DELETE",
+                    clockId: clock.clock_id
+                }
+            }).then(function (response) {
+                if (response.data.length != 0) {
+                    _this2.clocks = response.data;
+                    runToastmessage("Годинник успішно видалений з бази даних");
+                };
+            }).catch(function (error) {
+                var errors = error.response.data.errors;
+                runToastmessage("Невідома помилка", "error");
+            });
+        },
+        setUpdate: function setUpdate(clock) {
+            clock.updated_at = "now";
+        }
+    }
+
+});
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("table", { staticClass: "table table-striped table-sm mt-3" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.clocks, function(clock, key) {
+          return _c("tr", [
+            _c("th", { attrs: { scope: "row" } }, [
+              _vm._v(_vm._s(clock.clock_id))
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("a", { attrs: { href: "/clocks/" + clock.clock_id } }, [
+                _vm._v(_vm._s(clock.name))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(clock.producer))]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: clock.price,
+                    expression: "clock.price"
+                  }
+                ],
+                staticClass: "form-control form-control-sm",
+                attrs: { type: "number" },
+                domProps: { value: clock.price },
+                on: {
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(clock, "price", $event.target.value)
+                    },
+                    function($event) {
+                      _vm.toInt(clock)
+                      _vm.setUpdate(clock)
+                    }
+                  ]
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: clock.old_price,
+                    expression: "clock.old_price"
+                  }
+                ],
+                staticClass: "form-control form-control-sm",
+                attrs: { type: "number" },
+                domProps: { value: clock.old_price },
+                on: {
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(clock, "old_price", $event.target.value)
+                    },
+                    function($event) {
+                      _vm.toInt(clock)
+                      _vm.setUpdate(clock)
+                    }
+                  ]
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: clock.availability,
+                      expression: "clock.availability"
+                    }
+                  ],
+                  staticClass: "form-control form-control-sm",
+                  attrs: { name: "availability", id: "availability" },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          clock,
+                          "availability",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                      function($event) {
+                        _vm.setUpdate(clock)
+                      }
+                    ]
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "yes" } }, [
+                    _vm._v("В наявності")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "no" } }, [
+                    _vm._v("Немає в наявності")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "soon" } }, [
+                    _vm._v("Незабаром буде")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "by-order" } }, [
+                    _vm._v("Під замовлення")
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: clock.hide,
+                      expression: "clock.hide"
+                    }
+                  ],
+                  staticClass: "form-control form-control-sm",
+                  attrs: { name: "hide", id: "hide" },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          clock,
+                          "hide",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                      function($event) {
+                        _vm.setUpdate(clock)
+                      }
+                    ]
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "0", selected: "" } }, [
+                    _vm._v("Ні")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [_vm._v("Так")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger btn-sm",
+                  attrs: { type: "button", title: "Видалити годинник" },
+                  on: {
+                    click: function($event) {
+                      _vm.showDeleteModal(clock)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "far fa-trash-alt" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary btn-sm",
+                  attrs: {
+                    href: "clocks/" + clock.clock_id + "/edit",
+                    role: "button"
+                  }
+                },
+                [_c("i", { staticClass: "far fa-edit" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: clock.updated_at == "now",
+                      expression: "clock.updated_at == 'now'"
+                    }
+                  ],
+                  staticClass: "btn btn-success btn-sm",
+                  attrs: { type: "button", title: "Обновити цей параметр" },
+                  on: {
+                    click: function($event) {
+                      _vm.sendUpdate(clock)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "far fa-save" })]
+              )
+            ])
+          ])
+        })
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: { id: "deleteModal", role: "dialog", tabindex: "-1" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-sm", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Ні")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button", "data-toggle": "modal" },
+                    on: {
+                      click: function($event) {
+                        _vm.sendDestroy(_vm.selectedDeleteClock)
+                      }
+                    }
+                  },
+                  [_vm._v("Видалити")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Назва годинника")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Виробник")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Ціна")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Стара ціна")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Наявність")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Приховати")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Дії")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header bg-danger" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Увага")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("p", [_vm._v("Ви дійсно бажаєте видалити цей товар із бази даних?")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-181ca87c", module.exports)
+  }
+}
+
+/***/ }),
+/* 74 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
