@@ -144,7 +144,6 @@
                     url: url,
                     data: {
                         _method: "DELETE",
-                        clockId: clock.clock_id,
                     }
                 })
                     .then(response => {

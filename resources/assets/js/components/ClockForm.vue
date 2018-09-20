@@ -82,7 +82,26 @@
         <div class="form-group ">
             <button type="submit" class="btn btn-primary" v-if="update == false" form="clockForm">Створити</button>
             <button class="btn btn-success" v-if="update == true" v-on:click="sendUpdate">Редагувати</button>
-            <button class="btn btn-danger" v-if="update == true" v-on:click="sendDestroy">Видалити</button>
+            <button class="btn btn-danger" v-if="update == true" v-on:click="showDeleteModal">Видалити</button>
+        </div>
+        <div id="deleteModal" class="modal fade" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h5 class="modal-title">Увага</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Ви дійсно бажаєте видалити цей товар із бази даних?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Ні</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" v-on:click="sendDestroy()">Видалити</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -111,7 +130,12 @@
                 this[targetId] = parseInt(this[targetId], 10);
             },
             sendUpdate: function () {
-                var updateUrl = url + "/" + this.clockId;
+                if(this.wait){
+                    return
+                }
+                this.wait = true;
+                setTimeout(() => this.wait = false, 1000);
+                var updateUrl = clockUrl + "/" + this.clockId;
                 axios({
                     method: 'post',
                     url: updateUrl,
@@ -145,10 +169,35 @@
                         }
                     });
             },
-            sendCreate: function () {
-
+            showDeleteModal:function (){
+                $('#deleteModal').modal('show');
             },
             sendDestroy: function () {
+                if(this.wait){
+                    return
+                }
+                this.wait = true;
+                setTimeout(() => this.wait = false, 1000);
+                $('#deleteModal').modal('hide');
+                let destroyUrl = clockUrl + "/" + this.clockId;
+                axios({
+                    method: 'post',
+                    url: destroyUrl,
+                    data: {
+                        _method: 'DELETE',
+                    }
+                })
+                    .then(response => {
+                        if (response.data.length != 0) {
+                            window.location.href = "/admin/clocks"
+                        };
+
+                    })
+                    .catch(function (error) {
+                        let errors = error.response.data.errors;
+                        console.log(errors)
+                        runToastmessage("Невідома помилка", "error");
+                    });
 
             },
             resetData: function () {

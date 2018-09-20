@@ -117,7 +117,20 @@ class ClockController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $imagesFiles = Clock::find($id)->clockImages()->get()->toArray();
+        foreach ($imagesFiles as $image){
+            $imageUUID = $image['uuid'];
+            unlink('images/small/'.$imageUUID);
+            unlink('images/medium/'.$imageUUID);
+            unlink('images/large/'.$imageUUID);
+        }
+        $clock = Clock::find($id);
+        $clock->clockImages()->forceDelete();
+        $clock->characteristics()->forceDelete();
+        $clock->functions()->forceDelete();
+        $clock->descriptions()->forceDelete();
+        $clock->forceDelete();
+        return "true";
     }
 
     public function updateFromTable(ClockRequest $request, $id)
@@ -139,10 +152,9 @@ class ClockController extends Controller
         return $data;
     }
 
-    public function destroyFromTable(Request $request, $id)
+    public function destroyFromTable($id)
     {
-        if ($request->input('clockId') != $id) return response()->json(["error" => "Невідома помилка"], 422);
-        Clock::destroy($id);
+        $this->destroy($id);
         $data = Clock::all();
         return $data;
     }

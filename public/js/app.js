@@ -51755,6 +51755,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -51781,7 +51800,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         sendUpdate: function sendUpdate() {
             var _this = this;
 
-            var updateUrl = url + "/" + this.clockId;
+            if (this.wait) {
+                return;
+            }
+            this.wait = true;
+            setTimeout(function () {
+                return _this.wait = false;
+            }, 1000);
+            var updateUrl = clockUrl + "/" + this.clockId;
             axios({
                 method: 'post',
                 url: updateUrl,
@@ -51812,8 +51838,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
         },
-        sendCreate: function sendCreate() {},
-        sendDestroy: function sendDestroy() {},
+        showDeleteModal: function showDeleteModal() {
+            $('#deleteModal').modal('show');
+        },
+        sendDestroy: function sendDestroy() {
+            var _this2 = this;
+
+            if (this.wait) {
+                return;
+            }
+            this.wait = true;
+            setTimeout(function () {
+                return _this2.wait = false;
+            }, 1000);
+            $('#deleteModal').modal('hide');
+            var destroyUrl = clockUrl + "/" + this.clockId;
+            axios({
+                method: 'post',
+                url: destroyUrl,
+                data: {
+                    _method: 'DELETE'
+                }
+            }).then(function (response) {
+                if (response.data.length != 0) {
+                    window.location.href = "/admin/clocks";
+                };
+            }).catch(function (error) {
+                var errors = error.response.data.errors;
+                console.log(errors);
+                runToastmessage("Невідома помилка", "error");
+            });
+        },
         resetData: function resetData() {
             if (window.data !== undefined) {
                 console.log(window.data);
@@ -52285,14 +52340,93 @@ var render = function() {
       _vm.update == true
         ? _c(
             "button",
-            { staticClass: "btn btn-danger", on: { click: _vm.sendDestroy } },
+            {
+              staticClass: "btn btn-danger",
+              on: { click: _vm.showDeleteModal }
+            },
             [_vm._v("Видалити")]
           )
         : _vm._e()
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: { id: "deleteModal", role: "dialog", tabindex: "-1" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-sm", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Ні")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button", "data-toggle": "modal" },
+                    on: {
+                      click: function($event) {
+                        _vm.sendDestroy()
+                      }
+                    }
+                  },
+                  [_vm._v("Видалити")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header bg-danger" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Увага")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("p", [_vm._v("Ви дійсно бажаєте видалити цей товар із бази даних?")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -54275,8 +54409,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 method: 'post',
                 url: url,
                 data: {
-                    _method: "DELETE",
-                    clockId: clock.clock_id
+                    _method: "DELETE"
                 }
             }).then(function (response) {
                 if (response.data.length != 0) {
