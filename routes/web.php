@@ -11,14 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 {
     //Головна сторінка сайту
-    Route::get('/', 'ClockController@main');
+    Route::get('/', 'ClockController@mainPage')->name('main');
 
 //    Route::get('lang',function(){
 //        return view('lang');

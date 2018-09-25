@@ -1,0 +1,38 @@
+#header {
+  background-color: red;
+  .top-line{
+    background-color: #f8f9fa;
+  }
+  .middle-line{
+    background-color: #fff;
+    border-bottom: red solid 1px;
+  }
+  .bottom-line{
+    background-color: #ccc;
+  }
+  .phones{
+    .lifecell{
+      background-image: url("/images/lifecell.png");
+    }
+    .kyivstar{
+      background-image: url("/images/kyivstar.png");
+    }
+    .vodafone{
+      background-image: url("/images/vodafone.png");
+    }
+    .lifecell, .kyivstar, .vodafone{
+      background-repeat: no-repeat;
+      height: 24px;
+      padding-left: 32px;
+    }
+  }
+  .basket{
+    .basket-info{
+      height: 50px;
+    }
+    .shopping-cart{
+      height: 50px;
+      width: 50px;
+    }
+  }
+}

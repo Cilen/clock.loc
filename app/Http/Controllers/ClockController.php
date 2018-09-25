@@ -280,8 +280,9 @@ class ClockController extends Controller
         }
 
     }
-    public function test (Request $request)
-    {
-        dd($request);
+
+    public function mainPage(){
+        $data = Clock::all()->toArray();
+        return view('main')->with('data', $data);
     }
 }

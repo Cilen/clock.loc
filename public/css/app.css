@@ -11971,6 +11971,52 @@ a.text-dark:focus {
   color: #007bff;
 }
 
+#header {
+  background-color: red;
+}
+
+#header .top-line {
+  background-color: #f8f9fa;
+}
+
+#header .middle-line {
+  background-color: #fff;
+  border-bottom: red solid 1px;
+}
+
+#header .bottom-line {
+  background-color: #ccc;
+}
+
+#header .phones .lifecell {
+  background-image: url("/images/lifecell.png");
+}
+
+#header .phones .kyivstar {
+  background-image: url("/images/kyivstar.png");
+}
+
+#header .phones .vodafone {
+  background-image: url("/images/vodafone.png");
+}
+
+#header .phones .lifecell,
+#header .phones .kyivstar,
+#header .phones .vodafone {
+  background-repeat: no-repeat;
+  height: 24px;
+  padding-left: 32px;
+}
+
+#header .basket .basket-info {
+  height: 50px;
+}
+
+#header .basket .shopping-cart {
+  height: 50px;
+  width: 50px;
+}
+
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
