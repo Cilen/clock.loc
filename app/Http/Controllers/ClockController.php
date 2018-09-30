@@ -227,15 +227,11 @@ class ClockController extends Controller
             $name = $id.str_random(5).".jpg";
             $sizes = [
                 "small" => 100,
-                "medium" => 240,
+                "medium" => 260,
                 "large" => 800
             ];
             foreach ($sizes as $sizeName => $size) {
-                if ($width / $height >= 1.5) {
-                    Image::make($file)->widen($size * 1.5)->encode('jpg', 75)->save(public_path('images/'.$sizeName."/").$name)->save();
-                } else {
-                    Image::make($file)->heighten($size )->encode('jpg', 75)->save(public_path('images/'.$sizeName."/").$name)->save();
-                }
+                    Image::make($file)->resize($size, $size)->encode('jpg', 75)->save(public_path('images/'.$sizeName."/").$name)->save();
             }
             $clockImage = ClockImage::create([
                 "clock_id" => $id,

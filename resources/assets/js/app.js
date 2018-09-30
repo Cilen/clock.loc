@@ -26,7 +26,8 @@ Vue.component('clock-form', require('./components/ClockForm.vue'));
 Vue.component('descriptions-form', require('./components/DescriptionsForm.vue'));
 Vue.component('characteristics-form', require('./components/CharacteristicsForm.vue'));
 Vue.component('images-form', require('./components/ImagesForm.vue'));
-Vue.component('clocks-table', require('./components/ClocksTable.vue'));
+Vue.component('clocks-table', require('./components/ClocksTable.vue')); //Адмін таблиця годинників
+Vue.component('clocks-list', require('./components/ClocksList.vue')); //Прайслист
 
 const app = new Vue({
     el: '#app'

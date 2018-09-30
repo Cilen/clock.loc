@@ -23,11 +23,7 @@
 <body>
 <div id="app">
     @include('layouts.header')
-    <div class="container-fluid">
-        <div class="row">
-            @yield('content')
-        </div>
-    </div>
+    @yield('content')
 </div>
 @yield('scripts')
 
