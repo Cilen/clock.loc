@@ -278,7 +278,12 @@ class ClockController extends Controller
     }
 
     public function mainPage(){
-        $data = Clock::all()->toArray();
+        $model = Clock::all();
+        $data['clocks'] = $model->toArray();
+        $data['filter'] = [
+            "minPrice" => $model->min('price'),
+            "maxPrice" => $model->max('price')
+        ];
         return view('main')->with('data', $data);
     }
 }

@@ -14,7 +14,6 @@ window.Vue = require('vue');
 
 require('./vendor/toastmessage');
 
-require('./admin');
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -28,12 +27,15 @@ Vue.component('characteristics-form', require('./components/CharacteristicsForm.
 Vue.component('images-form', require('./components/ImagesForm.vue'));
 Vue.component('clocks-table', require('./components/ClocksTable.vue')); //Адмін таблиця годинників
 Vue.component('clocks-list', require('./components/ClocksList.vue')); //Прайслист
+Vue.component('filters', require('./components/Filters.vue')); //Прайслист
 
 const app = new Vue({
     el: '#app'
 });
 
 
+require('./admin');
+require('./site');
 
 
 

@@ -2,12 +2,14 @@
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-3 bg-danger">asdfasdf</div>
+                <div class="col-12 col-lg-3">
+                    <filters v-bind:filter="filter"></filters>
+                </div>
                 <div class="col-12 col-lg-9 ">
                     <div class="row pt-3">
 
 
-                        <div class="col-6 col-md-4" v-for="(clock, index) in data">
+                        <div class="col-6 col-md-4" v-for="(clock, index) in clocks">
                             <div class="card h-100">
                                 <a href="/shop/1015">
                                     <img class="card-img-top" v-if="clock.logo_uuid !== null" :src="imagesPath + clock.logo_uuid" alt="Card image cap">
@@ -53,19 +55,23 @@
 </template>
 
 <script>
+
     export default {
         data: function () {
             return {
-                imagesPath: imagesPath,
-                data: data,
+
             }
         },
+        props:['imagesPath', 'clocks', 'filter'],
         methods: {
+            log: function () {
+                console.log('sssss');
+            },
+            logi: function () {
+                console.log('iiiiii');
+            }
 
         },
-        created:function(){
-            console.log(this.data);
-        }
 
 
     }
