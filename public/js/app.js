@@ -57214,7 +57214,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {};
+        return {
+            query: ""
+
+        };
     },
     props: ['imagesPath', 'clocks', 'filter'],
     methods: {
@@ -57243,7 +57246,16 @@ var render = function() {
         _c(
           "div",
           { staticClass: "col-12 col-lg-3" },
-          [_c("filters", { attrs: { filter: _vm.filter } })],
+          [
+            _c("filters", {
+              attrs: { filter: _vm.filter },
+              on: {
+                query: function($event) {
+                  _vm.query += $event
+                }
+              }
+            })
+          ],
           1
         ),
         _vm._v(" "),
@@ -57566,12 +57578,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            minPrice: this.filter.minPrice,
-            maxPrice: this.filter.maxPrice
+            minPrice: 0,
+            maxPrice: 0,
+            characteristics: {
+                style: {
+                    klasychnyy: false,
+                    sportyvnyy: false
+                },
+                gender: {
+                    men: false,
+                    women: false
+                },
+                typeOfIndexation: {
+                    strelochnye: false,
+                    cifrovye: false,
+                    strelochnyePlusCifrovye: false
+                },
+                bodyMaterial: {
+                    polikarbonat: false,
+                    splavMetaliv: false
+                },
+                strapMaterial: {
+                    kauchukovyy: false,
+                    shkiryanyy: false,
+                    stalnyy: false
+                }
+            }
         };
     },
     props: ['filter'],
-    methods: {}
+    methods: {
+        sendUpdate: function sendUpdate() {
+            var queryString = '';
+            for (var key in this.characteristics) {
+                queryString += this.getUpdatedCharacteristics(key);
+            };
+            queryString += this.getUpdatedPrices();
+            this.$emit("query", queryString); //Вернути рядок у компоненту ClockList
+        },
+        getUpdatedCharacteristics: function getUpdatedCharacteristics(key) {
+            var val = "";
+            var query = "";
+            for (var entry in this.characteristics[key]) {
+                if (this.characteristics[key][entry] !== false) {
+                    val == "" ? val += entry : val += "," + entry;
+                }
+            }
+            if (val !== "") query = key + '=' + encodeURIComponent(val) + '&';
+            return query;
+        },
+        getUpdatedPrices: function getUpdatedPrices() {
+            var query = "";
+            if (this.minPrice != this.filter.minPrice) query += "minPrice" + '=' + encodeURIComponent(this.minPrice) + '&';
+            if (this.maxPrice != this.filter.maxPrice) query += "maxPrice" + '=' + encodeURIComponent(this.maxPrice) + '&';
+            return query;
+        }
+
+    }
 });
 
 var minPriceInput = document.getElementById('minPrice');
@@ -57602,6 +57665,7 @@ var render = function() {
         attrs: { id: "minPriceInput", step: "1", type: "text" },
         domProps: { value: _vm.minPrice },
         on: {
+          change: _vm.sendUpdate,
           input: function($event) {
             if ($event.target.composing) {
               return
@@ -57624,6 +57688,7 @@ var render = function() {
         attrs: { id: "maxPriceInput", step: "1", type: "text" },
         domProps: { value: _vm.maxPrice },
         on: {
+          change: _vm.sendUpdate,
           input: function($event) {
             if ($event.target.composing) {
               return
@@ -57636,219 +57701,738 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "mt-3", attrs: { id: "slider" } }),
     _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _vm._m(1),
-    _vm._v(" "),
-    _vm._m(2),
-    _vm._v(" "),
-    _vm._m(3),
-    _vm._v(" "),
-    _vm._m(4)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
+    _c("div", [
       _c("p", { staticClass: "filter-title mt-4" }, [_vm._v("Стиль")]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
-          [_vm._v("\n                Класичний\n            ")]
-        )
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.characteristics.style.klasychnyy,
+                expression: "characteristics.style.klasychnyy"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(_vm.characteristics.style.klasychnyy)
+                ? _vm._i(_vm.characteristics.style.klasychnyy, null) > -1
+                : _vm.characteristics.style.klasychnyy
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a = _vm.characteristics.style.klasychnyy,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.characteristics.style,
+                          "klasychnyy",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.characteristics.style,
+                          "klasychnyy",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.characteristics.style, "klasychnyy", $$c)
+                  }
+                },
+                _vm.sendUpdate
+              ]
+            }
+          }),
+          _vm._v("\n                Класичний\n            ")
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
-          [_vm._v("\n                Спортивний\n            ")]
-        )
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.characteristics.style.sportyvnyy,
+                expression: "characteristics.style.sportyvnyy"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(_vm.characteristics.style.sportyvnyy)
+                ? _vm._i(_vm.characteristics.style.sportyvnyy, null) > -1
+                : _vm.characteristics.style.sportyvnyy
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a = _vm.characteristics.style.sportyvnyy,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.characteristics.style,
+                          "sportyvnyy",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.characteristics.style,
+                          "sportyvnyy",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.characteristics.style, "sportyvnyy", $$c)
+                  }
+                },
+                _vm.sendUpdate
+              ]
+            }
+          }),
+          _vm._v("\n                Спортивний\n            ")
+        ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
+    ]),
+    _vm._v(" "),
+    _c("div", [
       _c("p", { staticClass: "filter-title mt-4" }, [_vm._v("Стать")]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
-          [_vm._v("\n                Чоловічий\n            ")]
-        )
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.characteristics.gender.men,
+                expression: "characteristics.gender.men"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(_vm.characteristics.gender.men)
+                ? _vm._i(_vm.characteristics.gender.men, null) > -1
+                : _vm.characteristics.gender.men
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a = _vm.characteristics.gender.men,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.characteristics.gender,
+                          "men",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.characteristics.gender,
+                          "men",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.characteristics.gender, "men", $$c)
+                  }
+                },
+                _vm.sendUpdate
+              ]
+            }
+          }),
+          _vm._v("\n                Чоловічий\n            ")
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
-          [_vm._v("\n                Жіночий\n            ")]
-        )
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.characteristics.gender.women,
+                expression: "characteristics.gender.women"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(_vm.characteristics.gender.women)
+                ? _vm._i(_vm.characteristics.gender.women, null) > -1
+                : _vm.characteristics.gender.women
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a = _vm.characteristics.gender.women,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.characteristics.gender,
+                          "women",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.characteristics.gender,
+                          "women",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.characteristics.gender, "women", $$c)
+                  }
+                },
+                _vm.sendUpdate
+              ]
+            }
+          }),
+          _vm._v("\n                Жіночий\n            ")
+        ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
+    ]),
+    _vm._v(" "),
+    _c("div", [
       _c("p", { staticClass: "filter-title mt-4" }, [_vm._v("Тип індексації")]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
-          [_vm._v("\n                Стрілочна\n            ")]
-        )
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.characteristics.typeOfIndexation.strelochnye,
+                expression: "characteristics.typeOfIndexation.strelochnye"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(
+                _vm.characteristics.typeOfIndexation.strelochnye
+              )
+                ? _vm._i(
+                    _vm.characteristics.typeOfIndexation.strelochnye,
+                    null
+                  ) > -1
+                : _vm.characteristics.typeOfIndexation.strelochnye
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a = _vm.characteristics.typeOfIndexation.strelochnye,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.characteristics.typeOfIndexation,
+                          "strelochnye",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.characteristics.typeOfIndexation,
+                          "strelochnye",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(
+                      _vm.characteristics.typeOfIndexation,
+                      "strelochnye",
+                      $$c
+                    )
+                  }
+                },
+                _vm.sendUpdate
+              ]
+            }
+          }),
+          _vm._v("\n                Стрілочна\n            ")
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
-          [_vm._v("\n                Цифрова\n            ")]
-        )
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.characteristics.typeOfIndexation.cifrovye,
+                expression: "characteristics.typeOfIndexation.cifrovye"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(
+                _vm.characteristics.typeOfIndexation.cifrovye
+              )
+                ? _vm._i(_vm.characteristics.typeOfIndexation.cifrovye, null) >
+                  -1
+                : _vm.characteristics.typeOfIndexation.cifrovye
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a = _vm.characteristics.typeOfIndexation.cifrovye,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.characteristics.typeOfIndexation,
+                          "cifrovye",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.characteristics.typeOfIndexation,
+                          "cifrovye",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(
+                      _vm.characteristics.typeOfIndexation,
+                      "cifrovye",
+                      $$c
+                    )
+                  }
+                },
+                _vm.sendUpdate
+              ]
+            }
+          }),
+          _vm._v("\n                Цифрова\n            ")
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
-          [_vm._v("\n                Комбінована\n            ")]
-        )
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value:
+                  _vm.characteristics.typeOfIndexation.strelochnyePlusCifrovye,
+                expression:
+                  "characteristics.typeOfIndexation.strelochnyePlusCifrovye"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(
+                _vm.characteristics.typeOfIndexation.strelochnyePlusCifrovye
+              )
+                ? _vm._i(
+                    _vm.characteristics.typeOfIndexation
+                      .strelochnyePlusCifrovye,
+                    null
+                  ) > -1
+                : _vm.characteristics.typeOfIndexation.strelochnyePlusCifrovye
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a =
+                      _vm.characteristics.typeOfIndexation
+                        .strelochnyePlusCifrovye,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.characteristics.typeOfIndexation,
+                          "strelochnyePlusCifrovye",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.characteristics.typeOfIndexation,
+                          "strelochnyePlusCifrovye",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(
+                      _vm.characteristics.typeOfIndexation,
+                      "strelochnyePlusCifrovye",
+                      $$c
+                    )
+                  }
+                },
+                _vm.sendUpdate
+              ]
+            }
+          }),
+          _vm._v("\n                Комбінована\n            ")
+        ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
+    ]),
+    _vm._v(" "),
+    _c("div", [
       _c("p", { staticClass: "filter-title mt-4" }, [
         _vm._v("Матеріал корпусу")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
-          [_vm._v("\n                Полікарбонат\n            ")]
-        )
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.characteristics.bodyMaterial.polikarbonat,
+                expression: "characteristics.bodyMaterial.polikarbonat"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(
+                _vm.characteristics.bodyMaterial.polikarbonat
+              )
+                ? _vm._i(_vm.characteristics.bodyMaterial.polikarbonat, null) >
+                  -1
+                : _vm.characteristics.bodyMaterial.polikarbonat
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a = _vm.characteristics.bodyMaterial.polikarbonat,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.characteristics.bodyMaterial,
+                          "polikarbonat",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.characteristics.bodyMaterial,
+                          "polikarbonat",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(
+                      _vm.characteristics.bodyMaterial,
+                      "polikarbonat",
+                      $$c
+                    )
+                  }
+                },
+                _vm.sendUpdate
+              ]
+            }
+          }),
+          _vm._v("\n                Полікарбонат\n            ")
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
-          [_vm._v("\n                Сплав металів\n            ")]
-        )
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.characteristics.bodyMaterial.splavMetaliv,
+                expression: "characteristics.bodyMaterial.splavMetaliv"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(
+                _vm.characteristics.bodyMaterial.splavMetaliv
+              )
+                ? _vm._i(_vm.characteristics.bodyMaterial.splavMetaliv, null) >
+                  -1
+                : _vm.characteristics.bodyMaterial.splavMetaliv
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a = _vm.characteristics.bodyMaterial.splavMetaliv,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.characteristics.bodyMaterial,
+                          "splavMetaliv",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.characteristics.bodyMaterial,
+                          "splavMetaliv",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(
+                      _vm.characteristics.bodyMaterial,
+                      "splavMetaliv",
+                      $$c
+                    )
+                  }
+                },
+                _vm.sendUpdate
+              ]
+            }
+          }),
+          _vm._v("\n                Сплав металів\n            ")
+        ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
+    ]),
+    _vm._v(" "),
+    _c("div", [
       _c("p", { staticClass: "filter-title mt-4" }, [
         _vm._v("Матеріал ремінця")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
-          [_vm._v("\n                Каучуковий\n            ")]
-        )
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.characteristics.strapMaterial.kauchukovyy,
+                expression: "characteristics.strapMaterial.kauchukovyy"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(
+                _vm.characteristics.strapMaterial.kauchukovyy
+              )
+                ? _vm._i(_vm.characteristics.strapMaterial.kauchukovyy, null) >
+                  -1
+                : _vm.characteristics.strapMaterial.kauchukovyy
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a = _vm.characteristics.strapMaterial.kauchukovyy,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.characteristics.strapMaterial,
+                          "kauchukovyy",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.characteristics.strapMaterial,
+                          "kauchukovyy",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(
+                      _vm.characteristics.strapMaterial,
+                      "kauchukovyy",
+                      $$c
+                    )
+                  }
+                },
+                _vm.sendUpdate
+              ]
+            }
+          }),
+          _vm._v("\n                Каучуковий\n            ")
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
-          [_vm._v("\n                Шкіряний\n            ")]
-        )
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.characteristics.strapMaterial.shkiryanyy,
+                expression: "characteristics.strapMaterial.shkiryanyy"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(
+                _vm.characteristics.strapMaterial.shkiryanyy
+              )
+                ? _vm._i(_vm.characteristics.strapMaterial.shkiryanyy, null) >
+                  -1
+                : _vm.characteristics.strapMaterial.shkiryanyy
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a = _vm.characteristics.strapMaterial.shkiryanyy,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.characteristics.strapMaterial,
+                          "shkiryanyy",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.characteristics.strapMaterial,
+                          "shkiryanyy",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(
+                      _vm.characteristics.strapMaterial,
+                      "shkiryanyy",
+                      $$c
+                    )
+                  }
+                },
+                _vm.sendUpdate
+              ]
+            }
+          }),
+          _vm._v("\n                Шкіряний\n            ")
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          staticClass: "form-check-input",
-          attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "form-check-label", attrs: { for: "defaultCheck1" } },
-          [_vm._v("\n                Стальний\n            ")]
-        )
+        _c("label", { staticClass: "form-check-label" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.characteristics.strapMaterial.stalnyy,
+                expression: "characteristics.strapMaterial.stalnyy"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox" },
+            domProps: {
+              checked: Array.isArray(_vm.characteristics.strapMaterial.stalnyy)
+                ? _vm._i(_vm.characteristics.strapMaterial.stalnyy, null) > -1
+                : _vm.characteristics.strapMaterial.stalnyy
+            },
+            on: {
+              change: [
+                function($event) {
+                  var $$a = _vm.characteristics.strapMaterial.stalnyy,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(
+                          _vm.characteristics.strapMaterial,
+                          "stalnyy",
+                          $$a.concat([$$v])
+                        )
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.characteristics.strapMaterial,
+                          "stalnyy",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.characteristics.strapMaterial, "stalnyy", $$c)
+                  }
+                },
+                _vm.sendUpdate
+              ]
+            }
+          }),
+          _vm._v("\n                Стальний\n            ")
+        ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -57912,6 +58496,11 @@ slider.noUiSlider.on('update', function (values, handle) {
     filterPriceInput[handle].value = values[handle];
     minPriceInput.dispatchEvent(new Event('input'));
     maxPriceInput.dispatchEvent(new Event('input'));
+});
+
+// Запустити подію change в полі input
+slider.noUiSlider.on('change', function (values, handle) {
+    minPriceInput.dispatchEvent(new Event('change'));
 });
 
 // Встановити мінімальне значення слайдеру із поля input

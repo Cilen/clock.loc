@@ -25,6 +25,11 @@ slider.noUiSlider.on('update', function (values, handle) {
     maxPriceInput.dispatchEvent(new Event('input'));
 });
 
+// Запустити подію change в полі input
+slider.noUiSlider.on('change', function (values, handle) {
+    minPriceInput.dispatchEvent(new Event('change'));
+});
+
 // Встановити мінімальне значення слайдеру із поля input
 minPriceInput.addEventListener('change', function () {
     slider.noUiSlider.set([this.value, null]);
@@ -34,3 +39,4 @@ minPriceInput.addEventListener('change', function () {
 maxPriceInput.addEventListener('change', function () {
     slider.noUiSlider.set([null, this.value]);
 });
+

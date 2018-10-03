@@ -282,8 +282,12 @@ class ClockController extends Controller
         $data['clocks'] = $model->toArray();
         $data['filter'] = [
             "minPrice" => $model->min('price'),
-            "maxPrice" => $model->max('price')
+            "maxPrice" => $model->max('price'),
         ];
         return view('main')->with('data', $data);
+    }
+
+    public function filter (Request $request){
+         return $request;
     }
 }

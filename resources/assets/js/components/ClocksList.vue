@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-3">
-                    <filters v-bind:filter="filter"></filters>
+                    <filters v-bind:filter="filter" v-on:query="query += $event"></filters>
                 </div>
                 <div class="col-12 col-lg-9 ">
                     <div class="row pt-3">
@@ -59,6 +59,7 @@
     export default {
         data: function () {
             return {
+                query: "",
 
             }
         },
