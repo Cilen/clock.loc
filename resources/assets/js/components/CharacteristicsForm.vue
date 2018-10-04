@@ -26,7 +26,7 @@
                 <select class="form-control" name="bodyMaterial" id="bodyMaterial" v-model="characteristics.bodyMaterial">
                     <option value="" selected></option>
                     <option value="polikarbonat">Полікарбонат</option>
-                    <option value="splav_metaliv">Сплав металів</option>
+                    <option value="splavMetaliv">Сплав металів</option>
                 </select>
             </div>
         </div>
@@ -140,10 +140,12 @@
                     });
             },
             resetData: function () {
-                if (data.characteristics !== undefined) {
+                if (data.characteristics.length !== 0) {
+                    console.log(data.characteristics);
+                    console.log("xxxx");
                     this.characteristics = data.characteristics;
                 };
-                if (data.functions !== undefined && data.functions !== null) {
+                if (data.functions.length !== 0) {
                     this.functions = data.functions;
                 };
             },

@@ -54304,11 +54304,9 @@ var render = function() {
                   _vm._v("Цифрова")
                 ]),
                 _vm._v(" "),
-                _c(
-                  "option",
-                  { attrs: { value: "strelochnye-plus-cifrovye" } },
-                  [_vm._v("Комбіновані")]
-                )
+                _c("option", { attrs: { value: "strelochnyePlusCifrovye" } }, [
+                  _vm._v("Комбіновані")
+                ])
               ]
             )
           ])
@@ -54527,7 +54525,7 @@ var render = function() {
                   _vm._v("Незабаром буде")
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "by-order" } }, [
+                _c("option", { attrs: { value: "byOrder" } }, [
                   _vm._v("Під замовлення")
                 ])
               ]
@@ -55636,10 +55634,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         resetData: function resetData() {
-            if (data.characteristics !== undefined) {
+            if (data.characteristics.length !== 0) {
+                console.log(data.characteristics);
+                console.log("xxxx");
                 this.characteristics = data.characteristics;
             };
-            if (data.functions !== undefined && data.functions !== null) {
+            if (data.functions.length !== 0) {
                 this.functions = data.functions;
             };
         }
@@ -55807,7 +55807,7 @@ var render = function() {
               _vm._v("Полікарбонат")
             ]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "splav_metaliv" } }, [
+            _c("option", { attrs: { value: "splavMetaliv" } }, [
               _vm._v("Сплав металів")
             ])
           ]
@@ -57143,7 +57143,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.card[data-v-719ed74c]:hover{\n    -webkit-box-shadow: 0 0 10px #aaa;\n            box-shadow: 0 0 10px #aaa;\n}\n.feedbacks[data-v-719ed74c] {\n    border-top: 1px solid rgba(0, 0, 0, 0.125);\n}\n.clock-name[data-v-719ed74c]{\n    font-family: \"Roboto Condensed\", sans-serif;\n    color: #212529;\n}\n.stars[data-v-719ed74c]{\n    color: #ffc107;\n}\n.comments[data-v-719ed74c]{\n    font-size: 0.9em;\n}\n.old-price[data-v-719ed74c]{\n    text-decoration: line-through;\n}\n.price[data-v-719ed74c]{\n    font-size: 1.5em;\n    line-height: 1;\n}\n\n", ""]);
+exports.push([module.i, "\n.card[data-v-719ed74c]:hover{\n    -webkit-box-shadow: 0 0 10px #aaa;\n            box-shadow: 0 0 10px #aaa;\n}\n.feedbacks[data-v-719ed74c] {\n    border-top: 1px solid rgba(0, 0, 0, 0.125);\n}\n.clock-name[data-v-719ed74c]{\n    font-family: \"Roboto Condensed\", sans-serif;\n    color: #212529;\n}\n.stars[data-v-719ed74c]{\n    color: #ffc107;\n}\n.comments[data-v-719ed74c]{\n    font-size: 0.9em;\n}\n.old-price[data-v-719ed74c]{\n    text-decoration: line-through;\n}\n.price[data-v-719ed74c]{\n    font-size: 1.5em;\n    line-height: 1;\n}\n.prices-wrapper[data-v-719ed74c]{\n    height: 3.2em;\n}\n\n", ""]);
 
 // exports
 
@@ -57210,24 +57210,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            query: ""
-
+            clocks: this.clocksData
         };
     },
-    props: ['imagesPath', 'clocks', 'filter'],
+    props: ['imagesPath', 'clocksData', 'filter', 'filterUrl', 'mainUrl'],
     methods: {
-        log: function log() {
-            console.log('sssss');
-        },
-        logi: function logi() {
-            console.log('iiiiii');
-        }
+        sendUpdate: function sendUpdate(query) {
+            var _this = this;
 
+            var stringUrl = this.filterUrl + '?' + query;
+            axios.get(stringUrl).then(function (response) {
+                return _this.clocks = response.data.clocks;
+            }).catch(function (error) {
+                // handle error
+                console.log(error);
+            }).then(function () {
+                if (query == "") {
+                    history.pushState('Best Time', 'Best Time', '/');
+                } else {
+                    var newUrl = 'shop?' + query;
+                    history.pushState('Best Time', 'Best Time', newUrl);
+                }
+            });
+        }
     }
 
 });
@@ -57251,7 +57263,7 @@ var render = function() {
               attrs: { filter: _vm.filter },
               on: {
                 query: function($event) {
-                  _vm.query += $event
+                  _vm.sendUpdate($event)
                 }
               }
             })
@@ -57262,9 +57274,9 @@ var render = function() {
         _c("div", { staticClass: "col-12 col-lg-9 " }, [
           _c(
             "div",
-            { staticClass: "row pt-3" },
+            { staticClass: "row " },
             _vm._l(_vm.clocks, function(clock, index) {
-              return _c("div", { staticClass: "col-6 col-md-4" }, [
+              return _c("div", { staticClass: "col-6 col-md-4 mt-3" }, [
                 _c("div", { staticClass: "card h-100" }, [
                   _c("a", { attrs: { href: "/shop/1015" } }, [
                     clock.logo_uuid !== null
@@ -57608,7 +57620,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     props: ['filter'],
     methods: {
-        sendUpdate: function sendUpdate() {
+        sendUpdatedString: function sendUpdatedString() {
             var queryString = '';
             for (var key in this.characteristics) {
                 queryString += this.getUpdatedCharacteristics(key);
@@ -57665,7 +57677,7 @@ var render = function() {
         attrs: { id: "minPriceInput", step: "1", type: "text" },
         domProps: { value: _vm.minPrice },
         on: {
-          change: _vm.sendUpdate,
+          change: _vm.sendUpdatedString,
           input: function($event) {
             if ($event.target.composing) {
               return
@@ -57688,7 +57700,7 @@ var render = function() {
         attrs: { id: "maxPriceInput", step: "1", type: "text" },
         domProps: { value: _vm.maxPrice },
         on: {
-          change: _vm.sendUpdate,
+          change: _vm.sendUpdatedString,
           input: function($event) {
             if ($event.target.composing) {
               return
@@ -57699,7 +57711,7 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "mt-3", attrs: { id: "slider" } }),
+    _c("div", { staticClass: "mt-3", attrs: { id: "filterSlider" } }),
     _vm._v(" "),
     _c("div", [
       _c("p", { staticClass: "filter-title mt-4" }, [_vm._v("Стиль")]),
@@ -57750,7 +57762,7 @@ var render = function() {
                     _vm.$set(_vm.characteristics.style, "klasychnyy", $$c)
                   }
                 },
-                _vm.sendUpdate
+                _vm.sendUpdatedString
               ]
             }
           }),
@@ -57804,7 +57816,7 @@ var render = function() {
                     _vm.$set(_vm.characteristics.style, "sportyvnyy", $$c)
                   }
                 },
-                _vm.sendUpdate
+                _vm.sendUpdatedString
               ]
             }
           }),
@@ -57862,7 +57874,7 @@ var render = function() {
                     _vm.$set(_vm.characteristics.gender, "men", $$c)
                   }
                 },
-                _vm.sendUpdate
+                _vm.sendUpdatedString
               ]
             }
           }),
@@ -57916,7 +57928,7 @@ var render = function() {
                     _vm.$set(_vm.characteristics.gender, "women", $$c)
                   }
                 },
-                _vm.sendUpdate
+                _vm.sendUpdatedString
               ]
             }
           }),
@@ -57983,7 +57995,7 @@ var render = function() {
                     )
                   }
                 },
-                _vm.sendUpdate
+                _vm.sendUpdatedString
               ]
             }
           }),
@@ -58044,7 +58056,7 @@ var render = function() {
                     )
                   }
                 },
-                _vm.sendUpdate
+                _vm.sendUpdatedString
               ]
             }
           }),
@@ -58112,7 +58124,7 @@ var render = function() {
                     )
                   }
                 },
-                _vm.sendUpdate
+                _vm.sendUpdatedString
               ]
             }
           }),
@@ -58179,7 +58191,7 @@ var render = function() {
                     )
                   }
                 },
-                _vm.sendUpdate
+                _vm.sendUpdatedString
               ]
             }
           }),
@@ -58240,7 +58252,7 @@ var render = function() {
                     )
                   }
                 },
-                _vm.sendUpdate
+                _vm.sendUpdatedString
               ]
             }
           }),
@@ -58307,7 +58319,7 @@ var render = function() {
                     )
                   }
                 },
-                _vm.sendUpdate
+                _vm.sendUpdatedString
               ]
             }
           }),
@@ -58368,7 +58380,7 @@ var render = function() {
                     )
                   }
                 },
-                _vm.sendUpdate
+                _vm.sendUpdatedString
               ]
             }
           }),
@@ -58422,7 +58434,7 @@ var render = function() {
                     _vm.$set(_vm.characteristics.strapMaterial, "stalnyy", $$c)
                   }
                 },
-                _vm.sendUpdate
+                _vm.sendUpdatedString
               ]
             }
           }),
@@ -58471,47 +58483,55 @@ window.runToastmessage = function (text, type) {
 /* 85 */
 /***/ (function(module, exports) {
 
-window.noUiSlider.create(slider, {
-    start: [data.filter.minPrice, data.filter.maxPrice],
-    animate: true,
-    connect: true,
-    step: 1,
-    range: {
-        'min': data.filter.minPrice,
-        'max': data.filter.maxPrice
-    },
-    format: {
-        to: function to(value) {
-            return parseInt(value, 10);
+if (window.location.pathname == '/' || window.location.pathname == '/shop') {
+    var filterSlider = document.getElementById('filterSlider');
+    window.noUiSlider.create(filterSlider, {
+        start: [data.filter.minPrice, data.filter.maxPrice],
+        animate: true,
+        connect: true,
+        step: 1,
+        range: {
+            'min': data.filter.minPrice,
+            'max': data.filter.maxPrice
         },
-        from: function from(value) {
-            return parseInt(value, 10);
+        format: {
+            to: function to(value) {
+                return parseInt(value, 10);
+            },
+            from: function from(value) {
+                return parseInt(value, 10);
+            }
         }
-    }
-});
+    });
 
-// Передати значення слайдеру в поля input
-var filterPriceInput = [minPriceInput, maxPriceInput];
-slider.noUiSlider.on('update', function (values, handle) {
-    filterPriceInput[handle].value = values[handle];
-    minPriceInput.dispatchEvent(new Event('input'));
-    maxPriceInput.dispatchEvent(new Event('input'));
-});
+    // Передати значення слайдеру в поля input
+    var filterPriceInput = [minPriceInput, maxPriceInput];
+    filterSlider.noUiSlider.on('update', function (values, handle) {
+        filterPriceInput[handle].value = values[handle];
+        minPriceInput.dispatchEvent(new Event('input'));
+        maxPriceInput.dispatchEvent(new Event('input'));
+    });
 
-// Запустити подію change в полі input
-slider.noUiSlider.on('change', function (values, handle) {
-    minPriceInput.dispatchEvent(new Event('change'));
-});
+    // Запустити подію change в полі input
+    filterSlider.noUiSlider.on('change', function (values, handle) {
+        minPriceInput.dispatchEvent(new Event('change'));
+    });
 
-// Встановити мінімальне значення слайдеру із поля input
-minPriceInput.addEventListener('change', function () {
-    slider.noUiSlider.set([this.value, null]);
-});
+    // Встановити мінімальне значення слайдеру із поля input
+    minPriceInput.addEventListener('change', function () {
+        filterSlider.noUiSlider.set([this.value, null]);
+    });
 
-// Встановити максимальне значення слайдеру із поля input
-maxPriceInput.addEventListener('change', function () {
-    slider.noUiSlider.set([null, this.value]);
-});
+    // Встановити максимальне значення слайдеру із поля input
+    maxPriceInput.addEventListener('change', function () {
+        filterSlider.noUiSlider.set([null, this.value]);
+    });
+}
+
+function setLocation(curLoc) {
+    location.href = curLoc;
+    location.hash = curLoc;
+}
 
 /***/ }),
 /* 86 */

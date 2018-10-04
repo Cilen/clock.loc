@@ -25,7 +25,7 @@
                             v-model="typeOfIndexation">
                         <option value="strelochnye">Стрілочна</option>
                         <option value="cifrovye">Цифрова</option>
-                        <option value="strelochnye-plus-cifrovye">Комбіновані</option>
+                        <option value="strelochnyePlusCifrovye">Комбіновані</option>
                     </select>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                         <option value="yes">В наявності</option>
                         <option value="no">Немає в наявності</option>
                         <option value="soon">Незабаром буде</option>
-                        <option value="by-order">Під замовлення</option>
+                        <option value="byOrder">Під замовлення</option>
                     </select>
                 </div>
             </div>

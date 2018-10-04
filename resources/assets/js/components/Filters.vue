@@ -2,21 +2,21 @@
     <div>
         <p class="filter-title mt-3">Ціна</p>
         <div class="d-flex">
-            <input id="minPriceInput" step="1" type="text" class="form-control form-control-sm mr-2" v-model="minPrice" v-on:change="sendUpdate">
-            <input id="maxPriceInput" step="1" type="text" class="form-control form-control-sm" v-model="maxPrice" v-on:change="sendUpdate">
+            <input id="minPriceInput" step="1" type="text" class="form-control form-control-sm mr-2" v-model="minPrice" v-on:change="sendUpdatedString">
+            <input id="maxPriceInput" step="1" type="text" class="form-control form-control-sm" v-model="maxPrice" v-on:change="sendUpdatedString">
         </div>
-        <div id="slider" class="mt-3"></div>
+        <div id="filterSlider" class="mt-3"></div>
         <div>
             <p class="filter-title mt-4">Стиль</p>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" v-model="characteristics.style.klasychnyy" v-on:change="sendUpdate">
+                    <input class="form-check-input" type="checkbox" v-model="characteristics.style.klasychnyy" v-on:change="sendUpdatedString">
                     Класичний
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" v-model="characteristics.style.sportyvnyy" v-on:change="sendUpdate">
+                    <input class="form-check-input" type="checkbox" v-model="characteristics.style.sportyvnyy" v-on:change="sendUpdatedString">
                     Спортивний
                 </label>
             </div>
@@ -26,13 +26,13 @@
             <p class="filter-title mt-4">Стать</p>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" v-model="characteristics.gender.men" v-on:change="sendUpdate">
+                    <input class="form-check-input" type="checkbox" v-model="characteristics.gender.men" v-on:change="sendUpdatedString">
                     Чоловічий
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" v-model="characteristics.gender.women" v-on:change="sendUpdate">
+                    <input class="form-check-input" type="checkbox" v-model="characteristics.gender.women" v-on:change="sendUpdatedString">
                     Жіночий
                 </label>
             </div>
@@ -43,19 +43,19 @@
             <p class="filter-title mt-4">Тип індексації</p>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" v-model="characteristics.typeOfIndexation.strelochnye" v-on:change="sendUpdate">
+                    <input class="form-check-input" type="checkbox" v-model="characteristics.typeOfIndexation.strelochnye" v-on:change="sendUpdatedString">
                     Стрілочна
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" v-model="characteristics.typeOfIndexation.cifrovye" v-on:change="sendUpdate">
+                    <input class="form-check-input" type="checkbox" v-model="characteristics.typeOfIndexation.cifrovye" v-on:change="sendUpdatedString">
                     Цифрова
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" v-model="characteristics.typeOfIndexation.strelochnyePlusCifrovye" v-on:change="sendUpdate">
+                    <input class="form-check-input" type="checkbox" v-model="characteristics.typeOfIndexation.strelochnyePlusCifrovye" v-on:change="sendUpdatedString">
                     Комбінована
                 </label>
             </div>
@@ -66,13 +66,13 @@
             <p class="filter-title mt-4">Матеріал корпусу</p>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" v-model="characteristics.bodyMaterial.polikarbonat" v-on:change="sendUpdate">
+                    <input class="form-check-input" type="checkbox" v-model="characteristics.bodyMaterial.polikarbonat" v-on:change="sendUpdatedString">
                     Полікарбонат
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox"  v-model="characteristics.bodyMaterial.splavMetaliv" v-on:change="sendUpdate">
+                    <input class="form-check-input" type="checkbox"  v-model="characteristics.bodyMaterial.splavMetaliv" v-on:change="sendUpdatedString">
                     Сплав металів
                 </label>
             </div>
@@ -83,19 +83,19 @@
             <p class="filter-title mt-4">Матеріал ремінця</p>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox"  v-model="characteristics.strapMaterial.kauchukovyy" v-on:change="sendUpdate">
+                    <input class="form-check-input" type="checkbox"  v-model="characteristics.strapMaterial.kauchukovyy" v-on:change="sendUpdatedString">
                     Каучуковий
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox"  v-model="characteristics.strapMaterial.shkiryanyy" v-on:change="sendUpdate">
+                    <input class="form-check-input" type="checkbox"  v-model="characteristics.strapMaterial.shkiryanyy" v-on:change="sendUpdatedString">
                     Шкіряний
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox"  v-model="characteristics.strapMaterial.stalnyy" v-on:change="sendUpdate">
+                    <input class="form-check-input" type="checkbox"  v-model="characteristics.strapMaterial.stalnyy" v-on:change="sendUpdatedString">
                     Стальний
                 </label>
             </div>
@@ -138,7 +138,7 @@
         },
         props: ['filter'],
         methods: {
-            sendUpdate: function(){
+            sendUpdatedString: function(){
                 let queryString = ''
                 for (let key in this.characteristics) {
                     queryString += this.getUpdatedCharacteristics(key);
@@ -168,8 +168,11 @@
         },
     }
 
+
     var minPriceInput = document.getElementById('minPrice');
     var maxPriceInput = document.getElementById('maxPrice');
+
+
 </script>
 
 <style scoped>

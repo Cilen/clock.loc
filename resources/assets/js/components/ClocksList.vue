@@ -3,13 +3,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-3">
-                    <filters v-bind:filter="filter" v-on:query="query += $event"></filters>
+                    <filters v-bind:filter="filter"
+                             v-on:query="sendUpdate($event)">
+
+                    </filters>
                 </div>
                 <div class="col-12 col-lg-9 ">
-                    <div class="row pt-3">
+                    <div class="row ">
 
 
-                        <div class="col-6 col-md-4" v-for="(clock, index) in clocks">
+                        <div class="col-6 col-md-4 mt-3" v-for="(clock, index) in clocks">
                             <div class="card h-100">
                                 <a href="/shop/1015">
                                     <img class="card-img-top" v-if="clock.logo_uuid !== null" :src="imagesPath + clock.logo_uuid" alt="Card image cap">
@@ -45,7 +48,6 @@
                                 </div>
                             </div>
 
-
                         </div>
                     </div>
                 </div>
@@ -59,19 +61,28 @@
     export default {
         data: function () {
             return {
-                query: "",
-
+                clocks: this.clocksData
             }
         },
-        props:['imagesPath', 'clocks', 'filter'],
+        props:['imagesPath', 'clocksData', 'filter', 'filterUrl', 'mainUrl'],
         methods: {
-            log: function () {
-                console.log('sssss');
-            },
-            logi: function () {
-                console.log('iiiiii');
+            sendUpdate: function (query) {
+                let stringUrl = this.filterUrl +'?' + query;
+                axios.get(stringUrl)
+                    .then(response => (this.clocks = response.data.clocks))
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+                    .then(function () {
+                        if (query == ""){
+                            history.pushState('Best Time', 'Best Time', '/');
+                        }else{
+                            let newUrl = 'shop?' + query;
+                            history.pushState('Best Time', 'Best Time', newUrl);
+                        }
+                    });
             }
-
         },
 
 
@@ -101,6 +112,9 @@
     .price{
         font-size: 1.5em;
         line-height: 1;
+    }
+    .prices-wrapper{
+        height: 3.2em;
     }
 
 </style>

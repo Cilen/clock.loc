@@ -26,12 +26,12 @@ class ClockRequest extends FormRequest
         return [
             "name" => "required|max:100",
             "gender" => "required|in:men,women",
-            "typeOfIndexation" => "required|in:strelochnye,cifrovye,strelochnye-plus-cifrovye",
+            "typeOfIndexation" => "required|in:strelochnye,cifrovye,strelochnyePlusCifrovye",
             "typeOfMechanism" => "required|in:quartz,mehanicheskie",
             "producer" => "required|max:50",
             "price" => "integer|nullable|min:0|max:999999",
             "oldPrice" => "integer|nullable|min:0|max:999999",
-            "availability" => "required|in:yes,no,soon,by-order",
+            "availability" => "required|in:yes,no,soon,byOrder",
             "hide" => "required|boolean",
         ];
     }

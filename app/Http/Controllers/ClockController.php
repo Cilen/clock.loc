@@ -148,7 +148,6 @@ class ClockController extends Controller
             "hide" => $request->input("hide"),
         ]);
         $data = Clock::all();
-        $data[0]['price'] = 99;
         return $data;
     }
 
@@ -288,6 +287,20 @@ class ClockController extends Controller
     }
 
     public function filter (Request $request){
-         return $request;
+        if ($request->input() !== []){
+            foreach ($request->input() as $key => $string){
+                $values = explode(',', $string);
+                $query[$key] = $values;
+                $model = Clock::filter($query)->get();
+            }
+        }else{
+            $model = Clock::all();
+        }
+        $data['clocks'] = $model->toArray();
+        $data['filter'] = [
+            "minPrice" => $model->min('price'),
+            "maxPrice" => $model->max('price'),
+        ];
+         return $data;
     }
 }

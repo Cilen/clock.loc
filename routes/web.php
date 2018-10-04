@@ -21,7 +21,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 //        return view('lang');
 //    });
 });
-Route::get('filter', 'ClockController@filter');
+Route::get('filter', 'ClockController@filter')->name('filter');
 Route::post('orders', 'OrderController@story')->name('new-order');
 Route::post('feedbacks', 'FeedbackController@story')->name('new-feedback');
 

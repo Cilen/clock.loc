@@ -24,4 +24,31 @@ class Clock extends Model
     public function clockImages(){
         return $this->hasMany('App\ClockImage', 'clock_id');
     }
+
+    public function scopeFilter($query, $parameters){
+        if (isset($parameters['gender'])) $query = $query->whereIn('gender', $parameters['gender']);
+        if (isset($parameters['typeOfIndexation'])) $query = $query->whereIn('type_of_indexation', $parameters['typeOfIndexation']);
+        if (isset($parameters['minPrice'])) $query = $query->where('price', '>', $parameters['minPrice']);
+        if (isset($parameters['maxPrice'])) $query = $query->where('price', '<', $parameters['maxPrice']);
+//        if (isset($parameters['style'])) $query = $query->characteristics()->whereIn('characteristic_name', $parameters['style']);
+        if (isset($parameters['style'])){
+            $data = $parameters['style'];
+            $query = $query->whereHas('characteristics', function ($q) use ($data) {
+                $q->whereIn('value', $data);
+            });
+        };
+        if (isset($parameters['bodyMaterial'])){
+            $data = $parameters['bodyMaterial'];
+            $query = $query->whereHas('characteristics', function ($q) use ($data) {
+                $q->whereIn('value', $data);
+            });
+        };
+        if (isset($parameters['strapMaterial'])){
+            $data = $parameters['strapMaterial'];
+            $query = $query->whereHas('characteristics', function ($q) use ($data) {
+                $q->whereIn('value', $data);
+            });
+        };
+        return $query;
+    }
 }
