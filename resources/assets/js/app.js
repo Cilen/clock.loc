@@ -14,6 +14,13 @@ window.Vue = require('vue');
 
 require('./vendor/toastmessage');
 
+
+//Localization in Vue
+const _ = require('lodash');
+window.trans = (string) => _.get(window.i18n, string);
+Vue.prototype.trans = string => _.get(window.i18n, string);
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

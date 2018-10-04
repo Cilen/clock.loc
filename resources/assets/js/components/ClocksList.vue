@@ -32,7 +32,7 @@
                                         </div>
                                         <div class="comments">
                                             <a href="">
-                                                <i class="far fa-comments mr-2"></i>відгуків 0
+                                                <i class="far fa-comments mr-2"></i>{{ trans('localization.comments')}} 0
                                             </a>
                                         </div>
                                     </div>
@@ -42,7 +42,7 @@
                                             <span class="price">{{clock.price}} грн</span>
                                         </div>
                                         <div class="button-wrapper d-flex align-items-end">
-                                            <button class="btn btn-success">Купити</button>
+                                            <button class="btn btn-success">{{ trans('localization.bay') }}</button>
                                         </div>
                                     </div>
                                 </div>

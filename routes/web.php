@@ -12,15 +12,20 @@
 */
 
 
-Route::group(['prefix' => LaravelLocalization::setLocale()], function()
+Route::group(['prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+],
+    function()
 {
     //Головна сторінка сайту
     Route::get('/', 'ClockController@mainPage')->name('main');
+    Route::get('/shop', 'ClockController@shopPage')->name('shop');
 
-//    Route::get('lang',function(){
-//        return view('lang');
-//    });
+    // Localization in Vue
+    Route::get('/js/lang.js', 'LocalizationController@getLocalizationFile')->name('assets.lang');
 });
+
+
 Route::get('filter', 'ClockController@filter')->name('filter');
 Route::post('orders', 'OrderController@story')->name('new-order');
 Route::post('feedbacks', 'FeedbackController@story')->name('new-feedback');
@@ -52,3 +57,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+

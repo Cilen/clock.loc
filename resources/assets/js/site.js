@@ -1,4 +1,4 @@
-if (window.location.pathname=='/'||window.location.pathname=='/shop') {
+if (window.location.pathname=='/ru'||window.location.pathname=='/uk'||window.location.pathname=='/ru/shop'||window.location.pathname=='/uk/shop') {
     let filterSlider = document.getElementById('filterSlider');
     window.noUiSlider.create(filterSlider, {
         start: [data.filter.minPrice, data.filter.maxPrice],
@@ -43,7 +43,5 @@ if (window.location.pathname=='/'||window.location.pathname=='/shop') {
     });
 }
 
-function setLocation(curLoc){
-    location.href = curLoc;
-    location.hash = curLoc;
-}
+
+

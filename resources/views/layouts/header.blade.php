@@ -8,22 +8,22 @@
                     </button>
                 </div>
                 <div class="col-2  d-lg-none">
-                    <a class="navbar-brand d-lg-none ml-4 " href="#">
+                    <a class="navbar-brand d-lg-none ml-4 " href="/">
                         <img src="/images/logo.png" width="60" height="30" alt="">
                     </a>
                 </div>
                 <div class="col-2 order-lg-0">
                     <div class="d-none d-lg-flex justify-content-start ">
-                        <a class="mr-2" href="#">
+                        <a class="mr-2" href="{{ LaravelLocalization::getLocalizedURL("uk") }}">
                             <img src="/images/ukraine.png" alt="Українська" title="Українська">
                         </a>
-                        <a class="mr-2" href="#">
+                        <a class="mr-2" href="{{ LaravelLocalization::getLocalizedURL("ru") }}">
                             <img src="/images/russia.png" alt="Русcкий" title="Русский">
                         </a>
                     </div>
                 </div>
                 <form class="form-inline col-5 col-lg-3 order-lg-2">
-                    <input class="form-control btn-sm d-none d-sm-block w-100" type="search" placeholder="Пошук" aria-label="Пошук">
+                    <input class="form-control btn-sm d-none d-sm-block w-100" type="search" placeholder="@lang('localization.search')" aria-label="@lang('localization.search')">
                 </form>
                 <div class="mobile-links d-lg-none col-2">
                     <div class="row">
@@ -42,13 +42,13 @@
                 <div class="collapse navbar-collapse col-lg-7 order-lg-1" id="navbarToggler">
                     <ul class="navbar-nav mt-2 mt-lg-0">
                         <li class="nav-item mr-2">
-                            <a class="nav-link" href="#">Блог</a>
+                            <a class="nav-link" href="#">@lang('localization.blog')</a>
                         </li>
                         <li class="nav-item mr-2">
-                            <a class="nav-link" href="#">Оплата та доставка</a>
+                            <a class="nav-link" href="#">@lang('localization.payment')</a>
                         </li>
                         <li class="nav-item mr-2">
-                            <a class="nav-link" href="#">Контакти</a>
+                            <a class="nav-link" href="#">@lang('localization.contacts')</a>
                         </li>
                     </ul>
                 </div>
@@ -59,8 +59,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-3">
-                    <a class="" href="#">
-                        <img class="mt-1 mb-1" src="/images/logo.png" alt="Українська" title="Українська">
+                    <a class="" href="/">
+                        <img class="mt-1 mb-1" src="/images/logo.png" alt="Clock Shop" title="Clock Shop">
                     </a>
                 </div>
                 <div class="col-3 offset-3">
@@ -80,8 +80,8 @@
                                 <i class="fas fa-shopping-cart h-50 w-50"></i>
                             </div>
                             <div class="basket-info d-inline-flex p-2 justify-content-center flex-column">
-                                <p class="m-0 d-flex align-items-start">В корзині: <strong class="ml-2">0</strong></p>
-                                <p class="m-0 d-flex align-items-start">Сума: <strong class="ml-2">999 грн</strong></p>
+                                <p class="m-0 d-flex align-items-start">@lang('localization.in_the_basket'): <strong class="ml-2">0</strong></p>
+                                <p class="m-0 d-flex align-items-start">@lang('localization.total'): <strong class="ml-2">999 грн</strong></p>
                             </div>
                         </div>
                     </a>

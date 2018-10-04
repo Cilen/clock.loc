@@ -1,102 +1,102 @@
 <template>
     <div>
-        <p class="filter-title mt-3">Ціна</p>
+        <p class="filter-title mt-3">{{ trans('localization.price')}}</p>
         <div class="d-flex">
             <input id="minPriceInput" step="1" type="text" class="form-control form-control-sm mr-2" v-model="minPrice" v-on:change="sendUpdatedString">
             <input id="maxPriceInput" step="1" type="text" class="form-control form-control-sm" v-model="maxPrice" v-on:change="sendUpdatedString">
         </div>
         <div id="filterSlider" class="mt-3"></div>
         <div>
-            <p class="filter-title mt-4">Стиль</p>
+            <p class="filter-title mt-4">{{ trans('localization.style')}}</p>
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" v-model="characteristics.style.klasychnyy" v-on:change="sendUpdatedString">
-                    Класичний
+                    {{ trans('localization.klasychnyy')}}
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" v-model="characteristics.style.sportyvnyy" v-on:change="sendUpdatedString">
-                    Спортивний
+                    {{ trans('localization.sportyvnyy')}}
                 </label>
             </div>
         </div>
 
         <div>
-            <p class="filter-title mt-4">Стать</p>
+            <p class="filter-title mt-4">{{ trans('localization.gender')}}</p>
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" v-model="characteristics.gender.men" v-on:change="sendUpdatedString">
-                    Чоловічий
+                    {{ trans('localization.men')}}
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" v-model="characteristics.gender.women" v-on:change="sendUpdatedString">
-                    Жіночий
+                    {{ trans('localization.women')}}
                 </label>
             </div>
         </div>
 
 
         <div>
-            <p class="filter-title mt-4">Тип індексації</p>
+            <p class="filter-title mt-4">{{ trans('localization.typeOfIndexation')}}</p>
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" v-model="characteristics.typeOfIndexation.strelochnye" v-on:change="sendUpdatedString">
-                    Стрілочна
+                    {{ trans('localization.strelochnye')}}
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" v-model="characteristics.typeOfIndexation.cifrovye" v-on:change="sendUpdatedString">
-                    Цифрова
+                    {{ trans('localization.cifrovye')}}
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" v-model="characteristics.typeOfIndexation.strelochnyePlusCifrovye" v-on:change="sendUpdatedString">
-                    Комбінована
+                    {{ trans('localization.strelochnyePlusCifrovye')}}
                 </label>
             </div>
         </div>
 
 
         <div>
-            <p class="filter-title mt-4">Матеріал корпусу</p>
+            <p class="filter-title mt-4">{{ trans('localization.bodyMaterial')}}</p>
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox" v-model="characteristics.bodyMaterial.polikarbonat" v-on:change="sendUpdatedString">
-                    Полікарбонат
+                    {{ trans('localization.polikarbonat')}}
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox"  v-model="characteristics.bodyMaterial.splavMetaliv" v-on:change="sendUpdatedString">
-                    Сплав металів
+                    {{ trans('localization.splavMetaliv')}}
                 </label>
             </div>
         </div>
 
 
         <div>
-            <p class="filter-title mt-4">Матеріал ремінця</p>
+            <p class="filter-title mt-4">{{ trans('localization.strapMaterial')}}</p>
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox"  v-model="characteristics.strapMaterial.kauchukovyy" v-on:change="sendUpdatedString">
-                    Каучуковий
+                    {{ trans('localization.kauchukovyy')}}
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox"  v-model="characteristics.strapMaterial.shkiryanyy" v-on:change="sendUpdatedString">
-                    Шкіряний
+                    {{ trans('localization.shkiryanyy')}}
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" type="checkbox"  v-model="characteristics.strapMaterial.stalnyy" v-on:change="sendUpdatedString">
-                    Стальний
+                    {{ trans('localization.stalnyy')}}
                 </label>
             </div>
         </div>

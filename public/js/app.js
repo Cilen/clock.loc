@@ -14308,6 +14308,15 @@ window.Vue = __webpack_require__(41);
 
 __webpack_require__(44);
 
+//Localization in Vue
+var _ = __webpack_require__(17);
+window.trans = function (string) {
+  return _.get(window.i18n, string);
+};
+Vue.prototype.trans = function (string) {
+  return _.get(window.i18n, string);
+};
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -57303,7 +57312,19 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(0, true),
+                    _c("div", { staticClass: "feedbacks d-flex mb-2" }, [
+                      _vm._m(0, true),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "comments" }, [
+                        _c("a", { attrs: { href: "" } }, [
+                          _c("i", { staticClass: "far fa-comments mr-2" }),
+                          _vm._v(
+                            _vm._s(_vm.trans("localization.comments")) +
+                              " 0\n                                        "
+                          )
+                        ])
+                      ])
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "prices-wrapper d-flex" }, [
                       _c(
@@ -57327,7 +57348,17 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _vm._m(1, true)
+                      _c(
+                        "div",
+                        {
+                          staticClass: "button-wrapper d-flex align-items-end"
+                        },
+                        [
+                          _c("button", { staticClass: "btn btn-success" }, [
+                            _vm._v(_vm._s(_vm.trans("localization.bay")))
+                          ])
+                        ]
+                      )
                     ])
                   ])
                 ])
@@ -57344,33 +57375,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "feedbacks d-flex mb-2" }, [
-      _c("div", { staticClass: "stars mr-auto" }, [
-        _c("i", { staticClass: "fas fa-star" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-star" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-star" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-star" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-star" })
-      ]),
+    return _c("div", { staticClass: "stars mr-auto" }, [
+      _c("i", { staticClass: "fas fa-star" }),
       _vm._v(" "),
-      _c("div", { staticClass: "comments" }, [
-        _c("a", { attrs: { href: "" } }, [
-          _c("i", { staticClass: "far fa-comments mr-2" }),
-          _vm._v("відгуків 0\n                                        ")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "button-wrapper d-flex align-items-end" }, [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Купити")])
+      _c("i", { staticClass: "fas fa-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star" }),
+      _vm._v(" "),
+      _c("i", { staticClass: "fas fa-star" })
     ])
   }
 ]
@@ -57661,7 +57675,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("p", { staticClass: "filter-title mt-3" }, [_vm._v("Ціна")]),
+    _c("p", { staticClass: "filter-title mt-3" }, [
+      _vm._v(_vm._s(_vm.trans("localization.price")))
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "d-flex" }, [
       _c("input", {
@@ -57714,7 +57730,9 @@ var render = function() {
     _c("div", { staticClass: "mt-3", attrs: { id: "filterSlider" } }),
     _vm._v(" "),
     _c("div", [
-      _c("p", { staticClass: "filter-title mt-4" }, [_vm._v("Стиль")]),
+      _c("p", { staticClass: "filter-title mt-4" }, [
+        _vm._v(_vm._s(_vm.trans("localization.style")))
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
         _c("label", { staticClass: "form-check-label" }, [
@@ -57766,7 +57784,11 @@ var render = function() {
               ]
             }
           }),
-          _vm._v("\n                Класичний\n            ")
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.trans("localization.klasychnyy")) +
+              "\n            "
+          )
         ])
       ]),
       _vm._v(" "),
@@ -57820,13 +57842,19 @@ var render = function() {
               ]
             }
           }),
-          _vm._v("\n                Спортивний\n            ")
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.trans("localization.sportyvnyy")) +
+              "\n            "
+          )
         ])
       ])
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("p", { staticClass: "filter-title mt-4" }, [_vm._v("Стать")]),
+      _c("p", { staticClass: "filter-title mt-4" }, [
+        _vm._v(_vm._s(_vm.trans("localization.gender")))
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
         _c("label", { staticClass: "form-check-label" }, [
@@ -57878,7 +57906,11 @@ var render = function() {
               ]
             }
           }),
-          _vm._v("\n                Чоловічий\n            ")
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.trans("localization.men")) +
+              "\n            "
+          )
         ])
       ]),
       _vm._v(" "),
@@ -57932,13 +57964,19 @@ var render = function() {
               ]
             }
           }),
-          _vm._v("\n                Жіночий\n            ")
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.trans("localization.women")) +
+              "\n            "
+          )
         ])
       ])
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("p", { staticClass: "filter-title mt-4" }, [_vm._v("Тип індексації")]),
+      _c("p", { staticClass: "filter-title mt-4" }, [
+        _vm._v(_vm._s(_vm.trans("localization.typeOfIndexation")))
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
         _c("label", { staticClass: "form-check-label" }, [
@@ -57999,7 +58037,11 @@ var render = function() {
               ]
             }
           }),
-          _vm._v("\n                Стрілочна\n            ")
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.trans("localization.strelochnye")) +
+              "\n            "
+          )
         ])
       ]),
       _vm._v(" "),
@@ -58060,7 +58102,11 @@ var render = function() {
               ]
             }
           }),
-          _vm._v("\n                Цифрова\n            ")
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.trans("localization.cifrovye")) +
+              "\n            "
+          )
         ])
       ]),
       _vm._v(" "),
@@ -58128,14 +58174,18 @@ var render = function() {
               ]
             }
           }),
-          _vm._v("\n                Комбінована\n            ")
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.trans("localization.strelochnyePlusCifrovye")) +
+              "\n            "
+          )
         ])
       ])
     ]),
     _vm._v(" "),
     _c("div", [
       _c("p", { staticClass: "filter-title mt-4" }, [
-        _vm._v("Матеріал корпусу")
+        _vm._v(_vm._s(_vm.trans("localization.bodyMaterial")))
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
@@ -58195,7 +58245,11 @@ var render = function() {
               ]
             }
           }),
-          _vm._v("\n                Полікарбонат\n            ")
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.trans("localization.polikarbonat")) +
+              "\n            "
+          )
         ])
       ]),
       _vm._v(" "),
@@ -58256,14 +58310,18 @@ var render = function() {
               ]
             }
           }),
-          _vm._v("\n                Сплав металів\n            ")
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.trans("localization.splavMetaliv")) +
+              "\n            "
+          )
         ])
       ])
     ]),
     _vm._v(" "),
     _c("div", [
       _c("p", { staticClass: "filter-title mt-4" }, [
-        _vm._v("Матеріал ремінця")
+        _vm._v(_vm._s(_vm.trans("localization.strapMaterial")))
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-check" }, [
@@ -58323,7 +58381,11 @@ var render = function() {
               ]
             }
           }),
-          _vm._v("\n                Каучуковий\n            ")
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.trans("localization.kauchukovyy")) +
+              "\n            "
+          )
         ])
       ]),
       _vm._v(" "),
@@ -58384,7 +58446,11 @@ var render = function() {
               ]
             }
           }),
-          _vm._v("\n                Шкіряний\n            ")
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.trans("localization.shkiryanyy")) +
+              "\n            "
+          )
         ])
       ]),
       _vm._v(" "),
@@ -58438,7 +58504,11 @@ var render = function() {
               ]
             }
           }),
-          _vm._v("\n                Стальний\n            ")
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.trans("localization.stalnyy")) +
+              "\n            "
+          )
         ])
       ])
     ])
@@ -58483,7 +58553,7 @@ window.runToastmessage = function (text, type) {
 /* 85 */
 /***/ (function(module, exports) {
 
-if (window.location.pathname == '/' || window.location.pathname == '/shop') {
+if (window.location.pathname == '/ru' || window.location.pathname == '/uk' || window.location.pathname == '/ru/shop' || window.location.pathname == '/uk/shop') {
     var filterSlider = document.getElementById('filterSlider');
     window.noUiSlider.create(filterSlider, {
         start: [data.filter.minPrice, data.filter.maxPrice],
@@ -58526,11 +58596,6 @@ if (window.location.pathname == '/' || window.location.pathname == '/shop') {
     maxPriceInput.addEventListener('change', function () {
         filterSlider.noUiSlider.set([null, this.value]);
     });
-}
-
-function setLocation(curLoc) {
-    location.href = curLoc;
-    location.hash = curLoc;
 }
 
 /***/ }),
