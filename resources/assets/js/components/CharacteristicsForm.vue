@@ -37,7 +37,7 @@
                     <option value="" selected></option>
                     <option value="mineralne">Мінеральне</option>
                     <option value="sapfirove">Сапфірове</option>
-                    <option value="пolikarbonatne">Полікарбонатне</option>
+                    <option value="polikarbonatne">Полікарбонатне</option>
                 </select>
             </div>
         </div>
@@ -109,13 +109,15 @@
                 }
             }
         },
+        props:['characteristicsData', 'functionsData', 'updateUrl'],
         methods: {
             toInt: function (event) {
                 let targetId = event.currentTarget.id;
                 this[targetId] = parseInt(this[targetId], 10);
             },
             sendUpdate: function () {
-                let updateUrl = clockUrl + "/characteristics/" + data.clock_id;
+                window.wait;
+                let updateUrl = this.updateUrl;
                 axios({
                     method: 'post',
                     url: updateUrl,
@@ -140,13 +142,11 @@
                     });
             },
             resetData: function () {
-                if (data.characteristics.length !== 0) {
-                    console.log(data.characteristics);
-                    console.log("xxxx");
-                    this.characteristics = data.characteristics;
+                if (Object.keys(this.characteristicsData).length !== 0) {
+                    this.characteristics = this.characteristicsData;
                 };
-                if (data.functions.length !== 0) {
-                    this.functions = data.functions;
+                if (this.functionsData != null) {
+                    this.functions = this.functionsData;
                 };
             },
         },

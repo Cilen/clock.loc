@@ -20,6 +20,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
     //Головна сторінка сайту
     Route::get('/', 'ClockController@mainPage')->name('main');
     Route::get('/shop', 'ClockController@shopPage')->name('shop');
+    Route::get('/shop/{id}', 'ClockController@show');
 
     // Localization in Vue
     Route::get('/js/lang.js', 'LocalizationController@getLocalizationFile')->name('assets.lang');

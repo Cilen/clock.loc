@@ -30,11 +30,14 @@ Vue.prototype.trans = string => _.get(window.i18n, string);
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('clock-form', require('./components/ClockForm.vue'));
 Vue.component('descriptions-form', require('./components/DescriptionsForm.vue'));
+Vue.component('descriptions', require('./components/Descriptions.vue'));
 Vue.component('characteristics-form', require('./components/CharacteristicsForm.vue'));
+Vue.component('characteristics', require('./components/Characteristics.vue'));
 Vue.component('images-form', require('./components/ImagesForm.vue'));
 Vue.component('clocks-table', require('./components/ClocksTable.vue')); //Адмін таблиця годинників
 Vue.component('clocks-list', require('./components/ClocksList.vue')); //Прайслист
-Vue.component('filters', require('./components/Filters.vue')); //Прайслист
+Vue.component('filters', require('./components/Filters.vue')); //Фільтри
+Vue.component('clock-page', require('./components/ClockPage.vue')); //Сторінка конкретного товару
 
 const app = new Vue({
     el: '#app'

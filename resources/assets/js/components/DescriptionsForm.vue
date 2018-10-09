@@ -109,9 +109,10 @@
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             }
         },
+        props:['descriptionsData', 'updateUrl'],
         methods: {
             sendUpdate: function () {
-                var updateUrl = clockUrl + "/descriptions/" + data.clock_id;
+                let updateUrl = this.updateUrl
                 axios({
                     method: 'post',
                     url: updateUrl,
@@ -136,10 +137,10 @@
                     });
             },
             resetData: function () {
-                if (data.descriptions !== undefined) {
-                    for (let key in data.descriptions["uk"]) {
-                        this["uk"][key] = data.descriptions["uk"][key];
-                        this["ru"][key] = data.descriptions["ru"][key];
+                if (this.descriptionsData !== undefined) {
+                    for (let key in this.descriptionsData["uk"]) {
+                        this["uk"][key] = this.descriptionsData["uk"][key];
+                        this["ru"][key] = this.descriptionsData["ru"][key];
                     }
                 };
             },

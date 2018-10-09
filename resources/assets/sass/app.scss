@@ -13,9 +13,12 @@
 @import "vendor/tabulator/tabulator";
 @import "vendor/jquery.toastmessage.css";
 @import "~nouislider/distribute/nouislider.css";
+@import "~slick-carousel/slick/slick";
+@import "~slick-carousel/slick/slick-theme";
 
 //Pages
 @import "admin";
+@import "item";
 
 //Layouts
 @import "header";

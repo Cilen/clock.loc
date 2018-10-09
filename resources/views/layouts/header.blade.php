@@ -71,6 +71,9 @@
                         <div class="vodafone">
                             (095) 640-01-98
                         </div>
+                        <div class="">
+                            <a href="#">Передзвоніть мені</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-3 d-flex align-items-center">

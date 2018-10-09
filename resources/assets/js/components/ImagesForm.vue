@@ -32,12 +32,12 @@
     export default {
         data(){
             return {
-                imagesPath: imagesPath,
-                images: data.clockImages,
+                images: this.imagesData,
                 imageData: [],
-                logoUUID: data.logo_uuid,
+                logoUUID: this.logo
             }
         },
+        props:["imagesData", "logo", "updateUrl", "setLogoUrl", "imagesPath"],
         methods: {
             onImageChange(e) {
                 let files = e.target.files || e.dataTransfer.files;
@@ -55,7 +55,7 @@
                 reader.readAsDataURL(file);
             },
             uploadImage(){
-                let updateUrl = clockUrl + "/images/" + data.clock_id;
+                let updateUrl = this.updateUrl;
                 axios.post(updateUrl, {"image": this.imageData,})
                     .then(response => {
                         this.images.push(response.data);
@@ -67,7 +67,7 @@
                     });
             },
             setLogo(imageUUID){
-                let url = clockUrl + "/images/" + "set-logo/" + data.clock_id;
+                let url = this.setLogoUrl;
                 axios.post(url, {"uuid": imageUUID,})
                     .then(response => {
                         this.logoUUID = response.data.logo_uuid;
@@ -79,7 +79,7 @@
                     });
             },
             deleteImage(imageId){
-                let url = clockUrl + "/images/" + data.clock_id;
+                let url = this.updateUrl;
                 let sendData = {
                     imageId: imageId,
                     _method: "DELETE"

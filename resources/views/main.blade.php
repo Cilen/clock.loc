@@ -5,6 +5,7 @@
                  v-bind:clocks-data='{!! json_encode($data["clocks"]) !!}'
                  v-bind:filter='{!! json_encode($data["filter"]) !!}'
                  v-bind:filter-url='"{!! route('filter') !!}"'
+                 v-bind:shop-url='"{!! route('shop') !!}"'
                  v-bind:main-url='"{!! route('main') !!}"'>
     </clocks-list>
 

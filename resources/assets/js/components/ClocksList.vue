@@ -14,12 +14,12 @@
 
                         <div class="col-6 col-md-4 mt-3" v-for="(clock, index) in clocks">
                             <div class="card h-100">
-                                <a href="/shop/1015">
+                                <a v-bind:href="shopUrl +'/' + clock.clock_id">
                                     <img class="card-img-top" v-if="clock.logo_uuid !== null" :src="imagesPath + clock.logo_uuid" alt="Card image cap">
                                     <img class="card-img-top" v-else :src="imagesPath + '../'+'no_image.png'" alt="Card image cap">
                                 </a>
                                 <div class="card-body px-2 pb-2">
-                                    <a href="">
+                                    <a v-bind:href="shopUrl +'/' + clock.clock_id">
                                         <h5 class="card-title clock-name">{{clock.name}}</h5>
                                     </a>
                                     <div class="feedbacks d-flex mb-2">
@@ -31,7 +31,7 @@
                                             <i class="fas fa-star"></i>
                                         </div>
                                         <div class="comments">
-                                            <a href="">
+                                            <a href="#">
                                                 <i class="far fa-comments mr-2"></i>{{ trans('localization.comments')}} 0
                                             </a>
                                         </div>
@@ -64,10 +64,11 @@
                 clocks: this.clocksData
             }
         },
-        props:['imagesPath', 'clocksData', 'filter', 'filterUrl', 'mainUrl'],
+        props:['imagesPath', 'clocksData', 'filter', 'filterUrl', 'mainUrl', 'shopUrl'],
         methods: {
             sendUpdate: function (query) {
                 let stringUrl = this.filterUrl +'?' + query;
+                let shopUrl = this.shopUrl;
                 axios.get(stringUrl)
                     .then(response => (this.clocks = response.data.clocks))
                     .catch(function (error) {
@@ -78,7 +79,7 @@
                         if (query == ""){
                             history.pushState('Best Time', 'Best Time', '/');
                         }else{
-                            let newUrl = 'shop?' + query;
+                            let newUrl = shopUrl + '?' + query;
                             history.pushState('Best Time', 'Best Time', newUrl);
                         }
                     });

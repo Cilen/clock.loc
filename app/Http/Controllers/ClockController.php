@@ -7,6 +7,7 @@ use App\Http\Requests\ClockRequest;
 use App\Http\Requests\ImageRequest;
 use Illuminate\Http\Request;
 use App\ClockImage;
+use Illuminate\Support\Facades\App;
 use Image;
 
 class ClockController extends Controller
@@ -18,7 +19,6 @@ class ClockController extends Controller
      */
     public function index()
     {
-
         $data = Clock::all();
         return view('admin.clocksTable')->with('data', $data);
     }
@@ -63,6 +63,8 @@ class ClockController extends Controller
      */
     public function show($id)
     {
+        $data = $this->getClockData($id);
+        return view('item')->with("data", $data);
 
     }
 
@@ -74,13 +76,7 @@ class ClockController extends Controller
      */
     public function edit($id)
     {
-        $clock = Clock::find($id);
-        if ($clock == null) return abort(404);
-        $data = $clock->toArray();
-        $data["characteristics"] = $this->getCharacteristics($clock);
-        $data["functions"] = $this->getFunctions($clock);
-        $data["descriptions"] = $this->getDescriptions($clock);
-        $data["clockImages"] = $this->getImages($clock);
+        $data = $this->getClockData($id);
         return view('admin.addOrUpdateClock')->with("data", $data);
     }
 
@@ -155,6 +151,18 @@ class ClockController extends Controller
     {
         $this->destroy($id);
         $data = Clock::all();
+        return $data;
+    }
+
+    public function getClockData($id){
+        $clock = Clock::find($id);
+        if ($clock == null) return abort(404);
+        $data = $clock->toArray();
+        $data["characteristics"] = $this->getCharacteristics($clock);
+        $data["functions"] = $this->getFunctions($clock);
+        $data["descriptions"] = $this->getDescriptions($clock);
+        $data["images"] = $this->getImages($clock);
+        $data["language"] = App::getLocale();
         return $data;
     }
 

@@ -20,8 +20,8 @@ class CreateDescriptionsTable extends Migration
                 ->references('clock_id')->on('clocks')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->string('value_uk')->nullable();
-            $table->string('value_ru')->nullable();
+            $table->text('value_uk')->nullable();
+            $table->text('value_ru')->nullable();
             $table->timestamps();
         });
     }

@@ -124,18 +124,14 @@
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             }
         },
+        props: ["clockData", "updateUrl"],
         methods: {
             toInt: function (event) {
-                var targetId = event.currentTarget.id;
+                let targetId = event.currentTarget.id;
                 this[targetId] = parseInt(this[targetId], 10);
             },
             sendUpdate: function () {
-                if(this.wait){
-                    return
-                }
-                this.wait = true;
-                setTimeout(() => this.wait = false, 1000);
-                var updateUrl = clockUrl + "/" + this.clockId;
+                let updateUrl = this.updateUrl;
                 axios({
                     method: 'post',
                     url: updateUrl,
@@ -155,8 +151,8 @@
                 })
                     .then(response => {
                         if (response.data.length != 0) {
-                            window.data = response.data;
-                            this.resetData();
+                            let resetData = response.data;
+                            this.resetData(resetData);
                             runToastmessage("Зміни успішно внесені в базу даних");
                         };
 
@@ -173,13 +169,8 @@
                 $('#deleteModal').modal('show');
             },
             sendDestroy: function () {
-                if(this.wait){
-                    return
-                }
-                this.wait = true;
-                setTimeout(() => this.wait = false, 1000);
                 $('#deleteModal').modal('hide');
-                let destroyUrl = clockUrl + "/" + this.clockId;
+                let destroyUrl = this.updateUrl;
                 axios({
                     method: 'post',
                     url: destroyUrl,
@@ -200,9 +191,9 @@
                     });
 
             },
-            resetData: function () {
-                if (window.data !== undefined) {
-                    console.log (window.data)
+            resetData: function (data) {
+                if (data !== undefined) {
+                    console.log (data)
                     this.update = true;
                     this.clockId = data.clock_id;
                     this.name = data.name;
@@ -218,7 +209,8 @@
             }
         },
         created() {
-            this.resetData();
+            let data = this.clockData
+            this.resetData(data);
         }
 
 

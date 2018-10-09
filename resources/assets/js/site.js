@@ -44,4 +44,12 @@ if (window.location.pathname=='/ru'||window.location.pathname=='/uk'||window.loc
 }
 
 
+window.wait = function () {
+    if(this.wait){
+        return
+    }
+    this.wait = true
+    setTimeout(() => this.wait = false, 1000);
+}
+
 
