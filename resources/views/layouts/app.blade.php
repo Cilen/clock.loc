@@ -27,6 +27,8 @@
     @yield('content')
 </div>
 @yield('scripts')
-
+<script>
+    var cart = {!! json_encode(session()->has('cart')? session()->get('cart') : null) !!};
+</script>
 </body>
 </html>

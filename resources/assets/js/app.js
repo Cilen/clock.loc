@@ -11,6 +11,7 @@ require('@fortawesome/fontawesome-free/js/all.js');
 
 
 window.Vue = require('vue');
+window.Vuex = require('vuex')
 
 require('./vendor/toastmessage');
 
@@ -19,6 +20,43 @@ require('./vendor/toastmessage');
 const _ = require('lodash');
 window.trans = (string) => _.get(window.i18n, string);
 Vue.prototype.trans = string => _.get(window.i18n, string);
+
+
+
+window.store = new Vuex.Store({
+    state: {
+        items: [],
+        totalPrice: 0,
+        totalQty: 0
+
+    },
+    getters: {
+        getTotalPrice: (state) => {return state.totalPrice},
+        getTotalQty: (state) => {return state.totalQty},
+    },
+    mutations: {
+
+        updateData(state, payload){
+            state.items = payload.items;
+            state.totalPrice = payload.totalPrice;
+            state.totalQty = payload.totalQty;
+        }
+    },
+    actions:{
+        async addToCart (context, clockId) {
+            axios.post('/cart/add', {
+                clockId: clockId,
+            })
+                .then((response) => {
+                    context.commit('updateData', response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+    }
+})
+
 
 
 /**
@@ -38,11 +76,15 @@ Vue.component('clocks-table', require('./components/ClocksTable.vue')); //Адм
 Vue.component('clocks-list', require('./components/ClocksList.vue')); //Прайслист
 Vue.component('filters', require('./components/Filters.vue')); //Фільтри
 Vue.component('clock-page', require('./components/ClockPage.vue')); //Сторінка конкретного товару
+Vue.component('cart', require('./components/Cart.vue')); //Сторінка конкретного товару
+
+
+
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store,
 });
-
 
 require('./admin');
 require('./site');

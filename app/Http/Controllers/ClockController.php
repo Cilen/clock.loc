@@ -219,12 +219,22 @@ class ClockController extends Controller
         if (isset($functions)) $functions = $functions->toArray();
         return $functions;
     }
-
     // Додати або редагути Cart
-    public function addToCart(Request $request, $id) {
+    public function addToCart(Request $request) {
+        $clockId = $request->input('clockId');
         $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
         $cart = Cart::get($oldCart);
-        $clock = Clock::find($id);
+        $clock = Clock::find($clockId);
+        $qty = isset($cart->items[$clockId]) ? ++$cart->items[$clockId]['qty'] : 1;
+        $cart->update($clock, $qty);
+        $request->session()->put('cart', $cart);
+        return json_encode($cart);
+    }
+    public function updateCart(Request $request) {
+        $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
+        $cart = Cart::get($oldCart);
+        if (isset($cart))
+            $clock = Clock::find($id);
         $qty = $request->input('qty');
         $cart->update($clock, $qty);
         $request->session()->put('cart', $cart);

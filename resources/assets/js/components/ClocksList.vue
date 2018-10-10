@@ -85,16 +85,7 @@
                     });
             },
             addToCart: function (clockId) {
-                axios.post(this.cartUrl, {
-                    firstName: 'Fred',
-                })
-                    .then(function (response) {
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-
+                this.$store.dispatch('addToCart', clockId);
             }
         },
 
