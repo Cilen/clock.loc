@@ -7,7 +7,7 @@ return [
     'payment' => 'Оплата и доставка',
     'contacts' => 'Контакты',
     'search' => 'Поиск',
-    'in_the_basket' => 'В корзине',
+    'in_the_cart' => 'В корзине',
     'total' => 'Сумма',
 
     //Card

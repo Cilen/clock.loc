@@ -60750,7 +60750,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             clocks: this.clocksData
         };
     },
-    props: ['imagesPath', 'clocksData', 'filter', 'filterUrl', 'mainUrl', 'shopUrl'],
+    props: ['imagesPath', 'clocksData', 'filter', 'filterUrl', 'mainUrl', 'shopUrl', 'cartUrl'],
     methods: {
         sendUpdate: function sendUpdate(query) {
             var _this = this;
@@ -60769,6 +60769,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     var newUrl = shopUrl + '?' + query;
                     history.pushState('Best Time', 'Best Time', newUrl);
                 }
+            });
+        },
+        addToCart: function addToCart(clockId) {
+            axios.post(this.cartUrl, {
+                firstName: 'Fred'
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
             });
         }
     }
@@ -60884,9 +60893,18 @@ var render = function() {
                           staticClass: "button-wrapper d-flex align-items-end"
                         },
                         [
-                          _c("button", { staticClass: "btn btn-success" }, [
-                            _vm._v(_vm._s(_vm.trans("localization.bay")))
-                          ])
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              on: {
+                                click: function($event) {
+                                  _vm.addToCart(clock.clock_id)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(_vm.trans("localization.bay")))]
+                          )
                         ]
                       )
                     ])

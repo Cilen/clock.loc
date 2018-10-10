@@ -42,7 +42,7 @@
                                             <span class="price">{{clock.price}} грн</span>
                                         </div>
                                         <div class="button-wrapper d-flex align-items-end">
-                                            <button class="btn btn-success">{{ trans('localization.bay') }}</button>
+                                            <button class="btn btn-success" v-on:click="addToCart(clock.clock_id)">{{ trans('localization.bay') }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                 clocks: this.clocksData
             }
         },
-        props:['imagesPath', 'clocksData', 'filter', 'filterUrl', 'mainUrl', 'shopUrl'],
+        props:['imagesPath', 'clocksData', 'filter', 'filterUrl', 'mainUrl', 'shopUrl', 'cartUrl'],
         methods: {
             sendUpdate: function (query) {
                 let stringUrl = this.filterUrl +'?' + query;
@@ -83,6 +83,18 @@
                             history.pushState('Best Time', 'Best Time', newUrl);
                         }
                     });
+            },
+            addToCart: function (clockId) {
+                axios.post(this.cartUrl, {
+                    firstName: 'Fred',
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
             }
         },
 

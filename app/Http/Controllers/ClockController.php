@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Clock;
 use App\Http\Requests\ClockRequest;
 use App\Http\Requests\ImageRequest;
@@ -217,6 +218,29 @@ class ClockController extends Controller
         $functions = $clock->functions()->select("value_uk", "value_ru")->first();
         if (isset($functions)) $functions = $functions->toArray();
         return $functions;
+    }
+
+    // Додати або редагути Cart
+    public function addToCart(Request $request, $id) {
+        $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
+        $cart = Cart::get($oldCart);
+        $clock = Clock::find($id);
+        $qty = $request->input('qty');
+        $cart->update($clock, $qty);
+        $request->session()->put('cart', $cart);
+    }
+    public function removeFromCart(Request $request, $id){
+        $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
+        $cart = Cart::get($oldCart);
+        $cart->update($id);
+        $request->session()->put('cart', $cart);
+    }
+    public function getCart() {
+        if (! session()->has('cart')) {
+            echo "No Cart";
+        }
+
+        dd(session()->get('cart'));
     }
 
     public function loadImages(Request $request, $id){

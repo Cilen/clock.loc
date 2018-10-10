@@ -78,13 +78,13 @@
                 </div>
                 <div class="col-3 d-flex align-items-center">
                     <a class="btn btn-success w-100 h-75" href="#">
-                        <div class="basket d-flex flex-row">
+                        <div class="cart d-flex flex-row">
                             <div class="d-inline-flex shopping-cart align-items-center justify-content-center">
                                 <i class="fas fa-shopping-cart h-50 w-50"></i>
                             </div>
-                            <div class="basket-info d-inline-flex p-2 justify-content-center flex-column">
-                                <p class="m-0 d-flex align-items-start">@lang('localization.in_the_basket'): <strong class="ml-2">0</strong></p>
-                                <p class="m-0 d-flex align-items-start">@lang('localization.total'): <strong class="ml-2">999 грн</strong></p>
+                            <div class="cart-info d-inline-flex p-2 justify-content-center flex-column">
+                                <p class="m-0 d-flex align-items-start">@lang('localization.in_the_cart'): <strong class="ml-2">{{ session()->has('cart')? session()->get('cart')->totalQty: 0}}</strong></p>
+                                <p class="m-0 d-flex align-items-start">@lang('localization.total'): <strong class="ml-2">{{ session()->has('cart')? session()->get('cart')->totalPrice: 0}} грн</strong></p>
                             </div>
                         </div>
                     </a>

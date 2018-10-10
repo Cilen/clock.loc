@@ -30,6 +30,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 Route::get('filter', 'ClockController@filter')->name('filter');
 Route::post('orders', 'OrderController@story')->name('new-order');
 Route::post('feedbacks', 'FeedbackController@story')->name('new-feedback');
+Route::post('cart/add', ['uses' => 'ClockController@addToCart', 'as' => 'addToCart']);
+Route::post('cart/remove', ['uses' => 'ClockController@removeFromCart', 'as' => 'removeFromCart']);
+Route::get('cart', ['uses' => 'ClockController@getCart', 'as' => 'getCart']);
 
 
 Auth::routes();

@@ -12592,11 +12592,11 @@ a.text-dark:focus {
   margin-bottom: 2px;
 }
 
-#header .basket .basket-info {
+#header .cart .cart-info {
   height: 50px;
 }
 
-#header .basket .shopping-cart {
+#header .cart .shopping-cart {
   height: 50px;
   width: 50px;
 }

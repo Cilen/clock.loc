@@ -7,7 +7,7 @@ return [
     'payment' => 'Оплата і доставка',
     'contacts' => 'Контакти',
     'search' => 'Пошук',
-    'in_the_basket' => 'В корзині',
+    'in_the_cart' => 'В корзині',
     'total' => 'Сума',
     '' => '',
 
