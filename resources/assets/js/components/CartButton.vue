@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <a class="btn btn-success w-100 h-75" href="#">
+    <div  class="col-3 d-flex align-items-center">
+        <a class="btn btn-success w-100 h-75" href="#"  data-toggle="modal" data-target="#cartModal">
             <div class="cart d-flex flex-row">
                 <div class="d-inline-flex shopping-cart align-items-center justify-content-center">
                     <i class="fas fa-shopping-cart h-50 w-50"></i>
