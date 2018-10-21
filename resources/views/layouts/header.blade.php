@@ -76,14 +76,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3 d-flex align-items-center">
-                    <cart v-bind:items-data='{!! session()->has("cart") ? json_encode(session()->get("cart")->items) : json_encode([]) !!}'
-                          v-bind:total-price-data='{!! session()->has("cart")? session()->get("cart")->totalPrice : 0 !!}'
-                          v-bind:total-qty-data='{!! session()->has("cart")? session()->get("cart")->totalQty : 0 !!}'
-                    ></cart>
-                </div>
+                <cart-button></cart-button>
             </div>
-
         </div>
     </div>
 </div>
+<cart v-bind:images-path='"{!! url('images/small').'/'!!}"'
+      v-bind:checkout-url='"{!! route('checkout').'/'!!}"'
+      v-bind:items-data='{!! session()->has("cart") ? json_encode(session()->get("cart")->items) : json_encode([]) !!}'
+      v-bind:total-price-data='{!! session()->has("cart")? session()->get("cart")->totalPrice : 0 !!}'
+      v-bind:total-qty-data='{!! session()->has("cart")? session()->get("cart")->totalQty : 0 !!}'
+></cart>

@@ -11,7 +11,7 @@
                 </div>
             </div>
         </a>
-</div>
+    </div>
 </template>
 
 <script>
@@ -22,7 +22,6 @@
 
             }
         },
-        props:['itemsData', 'totalPriceData', 'totalQtyData'],
         computed: {
             totalPrice () {
                 return this.$store.getters.getTotalPrice
@@ -30,22 +29,7 @@
             totalQty () {
                 return this.$store.getters.getTotalQty
             },
-        },
-        methods: {
-            uploadToStore: function () {
-                this.$store.commit('updateData', {
-                    items: this.itemsData,
-                    totalPrice: this.totalPriceData,
-                    totalQty: this.totalQtyData,
-                });
-            }
-
-        },
-        created: function(){
-            this.uploadToStore();
         }
-
-
     }
 </script>
 

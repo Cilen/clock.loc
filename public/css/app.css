@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.toast-container {
+@import url(https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab);.toast-container {
 	width: 280px;
 	z-index: 9999;
 }
@@ -12601,9 +12601,46 @@ a.text-dark:focus {
   width: 50px;
 }
 
+#headerMin {
+  border-bottom: red solid 1px;
+  margin-top: 0.2em;
+}
+
+#headerMin .phones {
+  padding-top: 0.5em;
+}
+
+#headerMin .phones p {
+  margin-bottom: 0;
+}
+
+#headerMin .phones .phones-title {
+  font-family: 'Roboto Mono', monospace;
+}
+
+#headerMin .phones .schedule-link {
+  font-family: 'Roboto Mono', monospace;
+}
+
+#workSchedule .work-time {
+  font-size: 3em;
+  font-weight: 400;
+}
+
+#workSchedule .schedule-note {
+  color: #dc3545;
+}
+
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 

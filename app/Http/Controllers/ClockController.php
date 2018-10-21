@@ -233,17 +233,24 @@ class ClockController extends Controller
     public function updateCart(Request $request) {
         $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
         $cart = Cart::get($oldCart);
-        if (isset($cart))
-            $clock = Clock::find($id);
-        $qty = $request->input('qty');
-        $cart->update($clock, $qty);
+        if (isset($cart)){
+            $clockId = $request->input("clockId");
+            $clock = Clock::find($clockId);
+            $qty = $request->input('qty');
+            $cart->update($clock, $qty);
+        }
         $request->session()->put('cart', $cart);
+        return json_encode($cart);
     }
-    public function removeFromCart(Request $request, $id){
+    public function removeFromCart(Request $request){
         $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
         $cart = Cart::get($oldCart);
-        $cart->update($id);
+        if (isset($cart)){
+            $clockId = $request->input("clockId");
+            $cart->remove($clockId);
+        }
         $request->session()->put('cart', $cart);
+        return json_encode($cart);
     }
     public function getCart() {
         if (! session()->has('cart')) {

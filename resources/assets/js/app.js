@@ -33,6 +33,7 @@ window.store = new Vuex.Store({
     getters: {
         getTotalPrice: (state) => {return state.totalPrice},
         getTotalQty: (state) => {return state.totalQty},
+        getItems: (state) => {return state.items},
     },
     mutations: {
 
@@ -54,6 +55,31 @@ window.store = new Vuex.Store({
                     console.log(error);
                 });
         },
+        async updateQty (context, clock){
+            axios.post('/cart/update', {
+                clockId: clock.clockId,
+                qty: clock.qty
+
+            })
+                .then((response) => {
+                    context.commit('updateData', response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        async removeFromCart (context, clock){
+            axios.post('/cart/remove', {
+                clockId: clock.clockId,
+
+            })
+                .then((response) => {
+                    context.commit('updateData', response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
 })
 
@@ -76,7 +102,9 @@ Vue.component('clocks-table', require('./components/ClocksTable.vue')); //Адм
 Vue.component('clocks-list', require('./components/ClocksList.vue')); //Прайслист
 Vue.component('filters', require('./components/Filters.vue')); //Фільтри
 Vue.component('clock-page', require('./components/ClockPage.vue')); //Сторінка конкретного товару
-Vue.component('cart', require('./components/Cart.vue')); //Сторінка конкретного товару
+Vue.component('cart-button', require('./components/CartButton.vue')); //Кнопка корзини
+Vue.component('cart', require('./components/Cart.vue')); //Корзина
+Vue.component('checkout', require('./components/Checkout')); //Оформлення заказів
 
 
 

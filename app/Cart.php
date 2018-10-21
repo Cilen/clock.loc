@@ -18,7 +18,8 @@ class Cart
             'price' => $clock->price,
             'clockId' => $clock->clock_id,
             'total' => $clock->price * $qty,
-            'name' => $clock->name
+            'name' => $clock->name,
+            'logo_uuid' => $clock->logo_uuid,
         ];
         $this->items[$clock->clock_id] = $storedItem;
         $this->getTotal();

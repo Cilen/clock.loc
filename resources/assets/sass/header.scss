@@ -38,3 +38,29 @@
     }
   }
 }
+
+#headerMin{
+  border-bottom: red solid 1px;
+  margin-top: 0.2em;
+  .phones{
+    padding-top: 0.5em;
+    p{
+      margin-bottom: 0;
+    }
+    .phones-title{
+      font-family: 'Roboto Mono', monospace;
+    }
+    .schedule-link{
+      font-family: 'Roboto Mono', monospace;
+    }
+  }
+}
+#workSchedule{
+  .work-time{
+    font-size: 3em;
+    font-weight: 400;
+  }
+  .schedule-note{
+    color: #dc3545;
+  }
+}

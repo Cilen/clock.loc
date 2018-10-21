@@ -31,7 +31,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('checkout');
+
     }
 
     /**

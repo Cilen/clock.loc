@@ -34,6 +34,7 @@ Route::post('cart/add', ['uses' => 'ClockController@addToCart', 'as' => 'addToCa
 Route::post('cart/update', ['uses' => 'ClockController@updateCart', 'as' => 'updateCart']);
 Route::post('cart/remove', ['uses' => 'ClockController@removeFromCart', 'as' => 'removeFromCart']);
 Route::get('cart', ['uses' => 'ClockController@getCart', 'as' => 'getCart']);
+Route::get('checkout', ['uses' => 'OrderController@create', 'as' => 'checkout']);
 
 
 Auth::routes();
