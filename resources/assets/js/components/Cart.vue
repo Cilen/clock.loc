@@ -109,7 +109,6 @@
                     totalPrice: this.totalPriceData,
                     totalQty: this.totalQtyData,
                 });
-                console.log(this.currentUrl);
             },
             plusOneToCart: function(item){
                 this.$store.dispatch('updateQty', {

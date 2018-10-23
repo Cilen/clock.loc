@@ -84,6 +84,8 @@ return [
     'deliveryMethod' => 'Cпособ доставки',
     'novaPoshta' => 'Нова Пошта',
     'ukrposhta' => 'Укрпошта',
-    '' => '',
+    'enterYourCity' => 'Введите свой город',
+
+
 
 ];

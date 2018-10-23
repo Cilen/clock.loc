@@ -15,6 +15,7 @@
 @import "~nouislider/distribute/nouislider.css";
 @import "~slick-carousel/slick/slick";
 @import "~slick-carousel/slick/slick-theme";
+@import "~stf-vue-select/dist/lib/stf-vue-select.min.css";
 
 //Pages
 @import "admin";
@@ -31,4 +32,8 @@
 .btn:focus,.btn:active {
   outline: none !important;
   box-shadow: none;
+}
+// Checkout
+.stf-select__inner-wrapper{
+  padding: 0;
 }

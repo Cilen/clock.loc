@@ -11,7 +11,10 @@ require('@fortawesome/fontawesome-free/js/all.js');
 
 
 window.Vue = require('vue');
-window.Vuex = require('vuex')
+window.Vuex = require('vuex');
+import {StfSelect, StfSelectOption} from "stf-vue-select";
+
+
 
 require('./vendor/toastmessage');
 
@@ -105,6 +108,9 @@ Vue.component('clock-page', require('./components/ClockPage.vue')); //Сторі
 Vue.component('cart-button', require('./components/CartButton.vue')); //Кнопка корзини
 Vue.component('cart', require('./components/Cart.vue')); //Корзина
 Vue.component('checkout', require('./components/Checkout')); //Оформлення заказів
+Vue.component('stf-select-option', StfSelectOption);
+Vue.component('stf-select', StfSelect);
+
 
 
 
