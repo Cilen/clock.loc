@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use NovaPoshta\ApiModels\Address;
+use NovaPoshta\MethodParameters\Address_getWarehouses;
+use NovaPoshta\MethodParameters\Address_getCities;
 
 class OrderController extends Controller
 {
@@ -43,7 +46,12 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->input('firstName');
+        if ($request->session()->has('cart')) {
+            $cart = $request->session()->get('cart');
+
+        } else return response()->json(['error' => 'Корзина товарів пуста'], 403);
+        return response()->json('Created', 201);
     }
 
     /**
@@ -89,5 +97,12 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function getWarehouses(Request $request)
+    {
+        $data = new Address_getWarehouses();
+        $data->setCityRef($request->input('ref'));
+        $city = Address::getWarehouses($data)->data;
+        return($city);
     }
 }

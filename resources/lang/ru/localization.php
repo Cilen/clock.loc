@@ -84,7 +84,13 @@ return [
     'deliveryMethod' => 'Cпособ доставки',
     'novaPoshta' => 'Нова Пошта',
     'ukrposhta' => 'Укрпошта',
-    'enterYourCity' => 'Введите свой город',
+    'enterYourCity' => 'Введите свой город ...',
+    'warehous' => 'Отделение',
+    'enterYourWarehous' => 'Введити номер отделение ...',
+    'fieldIsRequired' => 'Поле обязательное для заполнения',
+    'invalidPhoneNumber' => 'Укажите корректный номер телефона',
+    '' => '',
+    '' => '',
 
 
 

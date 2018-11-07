@@ -28,13 +28,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
 
 Route::get('filter', 'ClockController@filter')->name('filter');
-Route::post('orders', 'OrderController@story')->name('new-order');
+Route::post('orders', 'OrderController@store')->name('newOrder');
 Route::post('feedbacks', 'FeedbackController@story')->name('new-feedback');
 Route::post('cart/add', ['uses' => 'ClockController@addToCart', 'as' => 'addToCart']);
 Route::post('cart/update', ['uses' => 'ClockController@updateCart', 'as' => 'updateCart']);
 Route::post('cart/remove', ['uses' => 'ClockController@removeFromCart', 'as' => 'removeFromCart']);
 Route::get('cart', ['uses' => 'ClockController@getCart', 'as' => 'getCart']);
 Route::get('checkout', ['uses' => 'OrderController@create', 'as' => 'checkout']);
+Route::get('nova-poshta/get-warehouses', 'OrderController@getWarehouses');
+Route::post('nova-poshta/get-warehouses', 'OrderController@getWarehouses');
 
 
 Auth::routes();

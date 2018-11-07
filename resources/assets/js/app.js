@@ -30,7 +30,8 @@ window.store = new Vuex.Store({
     state: {
         items: [],
         totalPrice: 0,
-        totalQty: 0
+        totalQty: 0,
+        clientInfo: {},
 
     },
     getters: {
@@ -44,6 +45,9 @@ window.store = new Vuex.Store({
             state.items = payload.items;
             state.totalPrice = payload.totalPrice;
             state.totalQty = payload.totalQty;
+        },
+        updateClientInfo (state, clientInfo){
+            state.clientInfo = clientInfo;
         }
     },
     actions:{
