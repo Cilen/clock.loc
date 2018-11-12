@@ -300,15 +300,15 @@
             },
             createOrder: function () {
                 if (this.validation()) {
-                    // this.uploadToStore();
+                    let warehous = this.warehousNovaPoshta || this.warehousUkrposhta;
                     console.log(this.newOrderUrl);
                     axios.post(this.newOrderUrl, {
                         firstName: this.firstName,
                         lastName: this.lastName,
                         phone: this.phone,
                         deliveryMethod: this.deliveryMethod,
-                        city: this.city,
-                        warehous: this.warehousNovaPoshta || this.warehousUkrposhta,
+                        city: JSON.stringify(this.city),
+                        warehous: JSON.stringify(warehous),
                         payMethod: this.payMethod,
                     })
                         .then((response) => {

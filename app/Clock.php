@@ -25,6 +25,11 @@ class Clock extends Model
         return $this->hasMany('App\ClockImage', 'clock_id');
     }
 
+    public function confirmedCart()
+    {
+        return $this->belongsTo('App\ConfirmedCart','clock_id', 'clock_id');
+    }
+
     public function scopeFilter($query, $parameters){
         if (isset($parameters['gender'])) $query = $query->whereIn('gender', $parameters['gender']);
         if (isset($parameters['typeOfIndexation'])) $query = $query->whereIn('type_of_indexation', $parameters['typeOfIndexation']);
