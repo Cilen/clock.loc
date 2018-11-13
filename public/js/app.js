@@ -65636,6 +65636,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -65661,7 +65679,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         };
     },
-    props: ['imagesPath', 'shopUrl', 'cartUrl', 'newOrderUrl'],
+    props: ['imagesPath', 'shopUrl', 'cartUrl', 'newOrderUrl', 'checkoutSuccessUrl'],
     computed: {
         totalPrice: function totalPrice() {
             return this.$store.getters.getTotalPrice;
@@ -65749,6 +65767,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.warehousNovaPoshta = "";
         },
         createOrder: function createOrder() {
+            var _this3 = this;
+
             if (this.validation()) {
                 var warehous = this.warehousNovaPoshta || this.warehousUkrposhta;
                 console.log(this.newOrderUrl);
@@ -65760,8 +65780,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     city: JSON.stringify(this.city),
                     warehous: JSON.stringify(warehous),
                     payMethod: this.payMethod
-                }).then(function (response) {}).catch(function (error) {
+                }).then(function (response) {
+                    document.location.href = _this3.checkoutSuccessUrl;
+                }).catch(function (error) {
                     console.log(error);
+                    $('#errorOrder').modal();
                 });
             }
         },
@@ -66521,7 +66544,56 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "errorOrder",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "successOrder",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header bg-danger" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "errorOrderTitle" }
+                  },
+                  [_vm._v(_vm._s(_vm.trans("localization.errorOrder")))]
+                ),
+                _vm._v(" "),
+                _vm._m(3)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.trans("localization.errorOrderText")) +
+                    "\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(4)
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -66559,6 +66631,38 @@ var staticRenderFns = [
           }
         },
         [_vm._v("Редагувати замовлення")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
       )
     ])
   }

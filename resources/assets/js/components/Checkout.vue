@@ -183,6 +183,24 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="errorOrder" tabindex="-1" role="dialog" aria-labelledby="successOrder" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h5 class="modal-title" id="errorOrderTitle">{{ trans('localization.errorOrder')}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{ trans('localization.errorOrderText')}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -211,7 +229,7 @@
                 }
             }
         },
-        props: ['imagesPath', 'shopUrl', 'cartUrl', 'newOrderUrl'],
+        props: ['imagesPath', 'shopUrl', 'cartUrl', 'newOrderUrl', 'checkoutSuccessUrl'],
         computed: {
             totalPrice () {
                 return this.$store.getters.getTotalPrice
@@ -312,10 +330,11 @@
                         payMethod: this.payMethod,
                     })
                         .then((response) => {
-
+                            document.location.href = this.checkoutSuccessUrl;
                         })
                         .catch(function (error) {
                             console.log(error);
+                            $('#errorOrder').modal()
                         });
                 }
             },

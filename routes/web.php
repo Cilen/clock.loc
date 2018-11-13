@@ -35,6 +35,7 @@ Route::post('cart/update', ['uses' => 'ClockController@updateCart', 'as' => 'upd
 Route::post('cart/remove', ['uses' => 'ClockController@removeFromCart', 'as' => 'removeFromCart']);
 Route::get('cart', ['uses' => 'ClockController@getCart', 'as' => 'getCart']);
 Route::get('checkout', ['uses' => 'OrderController@create', 'as' => 'checkout']);
+Route::get('checkout/success', ['uses' => 'OrderController@success', 'as' => 'checkoutSuccess']);
 Route::get('nova-poshta/get-warehouses', 'OrderController@getWarehouses');
 Route::post('nova-poshta/get-warehouses', 'OrderController@getWarehouses');
 

@@ -72,6 +72,7 @@ class OrderController extends Controller
             $confirmedCart = $order->confirmedCart()->insert($data);
             if (!$confirmedCart) return response()->json(['error' => 'Creation ConfirmedCart'], 500);
         } else return response()->json(['error' => 'Корзина товарів пуста'], 403);
+        $request->session()->put('confirmedCart', true);
         return response()->json('Created', 201);
     }
 
@@ -125,5 +126,12 @@ class OrderController extends Controller
         $data->setCityRef($request->input('ref'));
         $city = Address::getWarehouses($data)->data;
         return($city);
+    }
+    public function success(Request $request)
+    {
+        if (!($request->session()->has('confirmedCart'))) return redirect("/");
+        $request->session()->forget('cart');
+        $request->session()->forget('confirmedCart');
+        return view('checkoutSuccess');
     }
 }
