@@ -66318,7 +66318,7 @@ var render = function() {
                     staticClass: "col-sm-4 col-form-label",
                     attrs: { for: "warehousesUkrposhta" }
                   },
-                  [_vm._v(_vm._s(_vm.trans("localization.warehousNovaPoshta")))]
+                  [_vm._v(_vm._s(_vm.trans("localization.warehous")))]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-8" }, [

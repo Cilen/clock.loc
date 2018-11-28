@@ -72,6 +72,8 @@ class OrderController extends Controller
             $confirmedCart = $order->confirmedCart()->insert($data);
             if (!$confirmedCart) return response()->json(['error' => 'Creation ConfirmedCart'], 500);
         } else return response()->json(['error' => 'Корзина товарів пуста'], 403);
+        $request->session()->put('orderId', $order->order_id);
+        $request->session()->put('payMethod', $order->pay_method);
         $request->session()->put('confirmedCart', true);
         return response()->json('Created', 201);
     }
@@ -130,8 +132,12 @@ class OrderController extends Controller
     public function success(Request $request)
     {
         if (!($request->session()->has('confirmedCart'))) return redirect("/");
+        $data['payMethod'] = $request->session()->get('payMethod');
+        $data['orderId'] = $request->session()->get('orderId');
+        $request->session()->forget('payMethod');
+        $request->session()->forget('orderId');
         $request->session()->forget('cart');
         $request->session()->forget('confirmedCart');
-        return view('checkoutSuccess');
+        return view('checkoutSuccess')->with('data', $data);
     }
 }

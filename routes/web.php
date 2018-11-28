@@ -21,7 +21,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
     Route::get('/', 'ClockController@mainPage')->name('main');
     Route::get('/shop', 'ClockController@shopPage')->name('shop');
     Route::get('/shop/{id}', 'ClockController@show');
-
+    Route::get('checkout/test', function (){
+        $data['payMethod'] = 'online';
+        $data['orderId'] = 1022;
+        return view('checkoutSuccess')->with('data', $data);
+    });
     // Localization in Vue
     Route::get('/js/lang.js', 'LocalizationController@getLocalizationFile')->name('assets.lang');
 });
@@ -38,6 +42,8 @@ Route::get('checkout', ['uses' => 'OrderController@create', 'as' => 'checkout'])
 Route::get('checkout/success', ['uses' => 'OrderController@success', 'as' => 'checkoutSuccess']);
 Route::get('nova-poshta/get-warehouses', 'OrderController@getWarehouses');
 Route::post('nova-poshta/get-warehouses', 'OrderController@getWarehouses');
+
+
 
 
 Auth::routes();

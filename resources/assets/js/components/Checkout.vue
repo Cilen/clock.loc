@@ -118,7 +118,7 @@
                         </div>
 
                         <div class="form-group row" v-if="deliveryMethod === 'ukrposhta'">
-                            <label for="warehousesUkrposhta" class="col-sm-4 col-form-label">{{ trans('localization.warehousNovaPoshta')}}</label>
+                            <label for="warehousesUkrposhta" class="col-sm-4 col-form-label">{{ trans('localization.warehous')}}</label>
                             <div class="col-sm-8">
                                 <input type="email" class="form-control" id="warehousesUkrposhta" v-model="warehousUkrposhta">
                             </div>

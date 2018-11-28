@@ -26,6 +26,7 @@ class CreateOrdersTable extends Migration
             $table->boolean('revised');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE orders AUTO_INCREMENT = 1000;");
     }
 
     /**
