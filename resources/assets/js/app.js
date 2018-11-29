@@ -107,6 +107,7 @@ Vue.component('characteristics', require('./components/Characteristics.vue'));
 Vue.component('images-form', require('./components/ImagesForm.vue'));
 Vue.component('clocks-table', require('./components/ClocksTable.vue')); //Адмін таблиця годинників
 Vue.component('clocks-list', require('./components/ClocksList.vue')); //Прайслист
+Vue.component('orders-table', require('./components/OrdersTable.vue')); //Адмін таблиця замовлень
 Vue.component('filters', require('./components/Filters.vue')); //Фільтри
 Vue.component('clock-page', require('./components/ClockPage.vue')); //Сторінка конкретного товару
 Vue.component('cart-button', require('./components/CartButton.vue')); //Кнопка корзини

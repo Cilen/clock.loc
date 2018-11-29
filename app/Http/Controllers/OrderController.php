@@ -18,7 +18,8 @@ class OrderController extends Controller
 //    Показати список нових замовлень
     public function index()
     {
-        //
+        $data = Order::where('revised', false)->get()->toArray();
+        return view('admin.ordersTable')->with('data', $data);
     }
 
 
