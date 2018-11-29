@@ -37,7 +37,7 @@
                         <a class="btn btn-success btn-sm" title="Переглянути" v-bind:href="ordersUrl + '/' + order.order_id" role="button">
                             <i class="far fa-file-alt"></i>
                         </a>
-                        <button type="button" class="btn btn-primary btn-sm" title="Позначити як переглянуте" v-on:click="showDeleteModal(order)">
+                        <button type="button" class="btn btn-primary btn-sm" title="Позначити як переглянуте" v-on:click="sendUpdate(order.order_id)">
                             <i class="far fa-check-square"></i>
                         </button>
                     </td>
@@ -76,33 +76,24 @@
         },
         props: ['ordersData', 'ordersUrl'],
         methods: {
-            sendUpdate: function (clock) {
+            sendUpdate: function (orderId) {
                 if(this.wait){
                     return
                 }
                 this.wait = true;
                 setTimeout(() => this.wait = false, 1000);
-                let updateUrl = clockUrl + "/" + clock.clock_id+"/update";
+                let updateUrl = this.ordersUrl + "/" + orderId;
                 axios({
                     method: 'post',
                     url: updateUrl,
                     data: {
                         _method: "PUT",
-                        clockId: clock.clock_id,
-                        name: clock.name,
-                        gender: clock.gender,
-                        typeOfIndexation: clock.type_of_indexation,
-                        typeOfMechanism: clock.type_of_mechanism,
-                        producer: clock.producer,
-                        availability: clock.availability,
-                        hide: clock.hide,
-                        price: clock.price,
-                        oldPrice: clock.old_price,
+                        revised: true
                     }
                 })
                     .then(response => {
                         if (response.data.length != 0) {
-                            this.clocks = response.data;
+                            this.updateOrders(response.data);
                             runToastmessage("Зміни успішно внесені в базу даних");
                         };
 
@@ -115,41 +106,6 @@
                         }
                     });
             },
-            showDeleteModal:function (clock){
-                $('#deleteModal').modal('show');
-                this.selectedDeleteClock = clock;
-            },
-            sendDestroy: function (clock) {
-                $('#deleteModal').modal('hide');
-                this.selectedDeleteClock = "";
-                if(this.wait){
-                    return
-                }
-                this.wait = true;
-                setTimeout(() => this.wait = false, 1000);
-                let url = clockUrl + "/" + clock.clock_id +"/destroy";
-                axios({
-                    method: 'post',
-                    url: url,
-                    data: {
-                        _method: "DELETE",
-                    }
-                })
-                    .then(response => {
-                        if (response.data.length != 0) {
-                            this.clocks = response.data;
-                            runToastmessage("Годинник успішно видалений з бази даних");
-                        };
-
-                    })
-                    .catch(function (error) {
-                        let errors = error.response.data.errors;
-                        runToastmessage("Невідома помилка", "error");
-                    });
-            },
-            setUpdate: function (clock) {
-                clock.updated_at = "now";
-             },
             updateOrders: function (data) {
                 this.orders = data;
             },

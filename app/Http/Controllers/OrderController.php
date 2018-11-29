@@ -19,7 +19,7 @@ class OrderController extends Controller
     public function index()
     {
         $data = Order::where('revised', false)->get()->toArray();
-        return view('admin.ordersTable')->with('data', $data);
+        return view('admin.ordersTable')->with(['data' => $data, 'title' => "Нові замовлення"]);
     }
 
 
@@ -110,7 +110,16 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $revised = $request->input('revised');
+        if (is_bool($revised)) {
+            $order = Order::find($id);
+            $order->revised = $revised;
+            $order->save();
+            $data = Order::where('revised', false)->get()->toArray();
+            return $data;
+        }
+        return response()->json(["error" => "Невірні вхідні дані"], 422);
+
     }
 
     /**

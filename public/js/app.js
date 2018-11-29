@@ -62986,7 +62986,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     props: ['ordersData', 'ordersUrl'],
     methods: {
-        sendUpdate: function sendUpdate(clock) {
+        sendUpdate: function sendUpdate(orderId) {
             var _this = this;
 
             if (this.wait) {
@@ -62996,26 +62996,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             setTimeout(function () {
                 return _this.wait = false;
             }, 1000);
-            var updateUrl = clockUrl + "/" + clock.clock_id + "/update";
+            var updateUrl = this.ordersUrl + "/" + orderId;
             axios({
                 method: 'post',
                 url: updateUrl,
                 data: {
                     _method: "PUT",
-                    clockId: clock.clock_id,
-                    name: clock.name,
-                    gender: clock.gender,
-                    typeOfIndexation: clock.type_of_indexation,
-                    typeOfMechanism: clock.type_of_mechanism,
-                    producer: clock.producer,
-                    availability: clock.availability,
-                    hide: clock.hide,
-                    price: clock.price,
-                    oldPrice: clock.old_price
+                    revised: true
                 }
             }).then(function (response) {
                 if (response.data.length != 0) {
-                    _this.clocks = response.data;
+                    _this.updateOrders(response.data);
                     runToastmessage("Зміни успішно внесені в базу даних");
                 };
             }).catch(function (error) {
@@ -63025,42 +63016,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     runToastmessage(errors[key][0], "error");
                 }
             });
-        },
-        showDeleteModal: function showDeleteModal(clock) {
-            $('#deleteModal').modal('show');
-            this.selectedDeleteClock = clock;
-        },
-        sendDestroy: function sendDestroy(clock) {
-            var _this2 = this;
-
-            $('#deleteModal').modal('hide');
-            this.selectedDeleteClock = "";
-            if (this.wait) {
-                return;
-            }
-            this.wait = true;
-            setTimeout(function () {
-                return _this2.wait = false;
-            }, 1000);
-            var url = clockUrl + "/" + clock.clock_id + "/destroy";
-            axios({
-                method: 'post',
-                url: url,
-                data: {
-                    _method: "DELETE"
-                }
-            }).then(function (response) {
-                if (response.data.length != 0) {
-                    _this2.clocks = response.data;
-                    runToastmessage("Годинник успішно видалений з бази даних");
-                };
-            }).catch(function (error) {
-                var errors = error.response.data.errors;
-                runToastmessage("Невідома помилка", "error");
-            });
-        },
-        setUpdate: function setUpdate(clock) {
-            clock.updated_at = "now";
         },
         updateOrders: function updateOrders(data) {
             this.orders = data;
@@ -63153,7 +63108,7 @@ var render = function() {
                   attrs: { type: "button", title: "Позначити як переглянуте" },
                   on: {
                     click: function($event) {
-                      _vm.showDeleteModal(order)
+                      _vm.sendUpdate(order.order_id)
                     }
                   }
                 },

@@ -12722,6 +12722,17 @@ a.text-dark:focus {
   color: #007bff;
 }
 
+.admin-company-name {
+  margin-left: 1rem;
+  font-size: 1.4em;
+  font-weight: 600;
+}
+
+.admin-title {
+  font-size: 1.4em;
+  margin: 0;
+}
+
 .slick-prev:before,
 .slick-next:before {
   font-size: 28px;
