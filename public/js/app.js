@@ -62964,18 +62964,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -62986,7 +62974,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     props: ['ordersData', 'ordersUrl'],
     methods: {
-        sendUpdate: function sendUpdate(orderId) {
+        sendUpdate: function sendUpdate(orderId, revisedValue) {
             var _this = this;
 
             if (this.wait) {
@@ -63002,7 +62990,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 url: updateUrl,
                 data: {
                     _method: "PUT",
-                    revised: true
+                    revised: revisedValue
                 }
             }).then(function (response) {
                 if (response.data.length != 0) {
@@ -63012,9 +63000,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 var errors = error.response.data.errors;
                 console.log(errors);
-                for (var key in errors) {
-                    runToastmessage(errors[key][0], "error");
-                }
+                runToastmessage("Помилка. Зміни не внесені в базу даних", "error");
             });
         },
         updateOrders: function updateOrders(data) {
@@ -63088,6 +63074,14 @@ var render = function() {
                   ]),
             _vm._v(" "),
             _c("td", [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(order.created_at) +
+                  "\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
               _c(
                 "a",
                 {
@@ -63101,26 +63095,48 @@ var render = function() {
                 [_c("i", { staticClass: "far fa-file-alt" })]
               ),
               _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary btn-sm",
-                  attrs: { type: "button", title: "Позначити як переглянуте" },
-                  on: {
-                    click: function($event) {
-                      _vm.sendUpdate(order.order_id)
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "far fa-check-square" })]
-              )
+              order.revised === 0
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary btn-sm",
+                      attrs: {
+                        type: "button",
+                        title: "Позначити як переглянуте"
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.sendUpdate(order.order_id, true)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "far fa-check-square" })]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              order.revised === 1
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-warning btn-sm",
+                      attrs: {
+                        type: "button",
+                        title: "Позначити як не переглянуте"
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.sendUpdate(order.order_id, false)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "far fa-square" })]
+                  )
+                : _vm._e()
             ])
           ])
         })
       )
-    ]),
-    _vm._v(" "),
-    _vm._m(1)
+    ])
   ])
 }
 var staticRenderFns = [
@@ -63140,28 +63156,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Спосіб оплати")]),
         _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Дата")]),
+        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Дії")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: { id: "deleteModal", role: "dialog", tabindex: "-1" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog modal-sm", attrs: { role: "document" } },
-          [_c("div", { staticClass: "modal-content" })]
-        )
-      ]
-    )
   }
 ]
 render._withStripped = true

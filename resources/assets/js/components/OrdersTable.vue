@@ -8,6 +8,7 @@
                     <th scope="col">Номер телефону</th>
                     <th scope="col">Загальна ціна</th>
                     <th scope="col">Спосіб оплати</th>
+                    <th scope="col">Дата</th>
                     <th scope="col">Дії</th>
                 </tr>
             </thead>
@@ -34,35 +35,22 @@
                         Невизначено
                     </td>
                     <td>
+                        {{order.created_at}}
+                    </td>
+                    <td>
                         <a class="btn btn-success btn-sm" title="Переглянути" v-bind:href="ordersUrl + '/' + order.order_id" role="button">
                             <i class="far fa-file-alt"></i>
                         </a>
-                        <button type="button" class="btn btn-primary btn-sm" title="Позначити як переглянуте" v-on:click="sendUpdate(order.order_id)">
+                        <button type="button" class="btn btn-primary btn-sm" title="Позначити як переглянуте" v-if="order.revised === 0" v-on:click="sendUpdate(order.order_id, true)">
                             <i class="far fa-check-square"></i>
+                        </button>
+                        <button type="button" class="btn btn-warning btn-sm" title="Позначити як не переглянуте" v-if="order.revised === 1" v-on:click="sendUpdate(order.order_id, false)">
+                            <i class="far fa-square"></i>
                         </button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <div id="deleteModal" class="modal fade" role="dialog" tabindex="-1">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <!--<div class="modal-header bg-danger">-->
-                        <!--<h5 class="modal-title">Увага</h5>-->
-                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-                            <!--<span aria-hidden="true">&times;</span>-->
-                        <!--</button>-->
-                    <!--</div>-->
-                    <!--<div class="modal-body">-->
-                        <!--<p>Ви дійсно бажаєте видалити цей товар із бази даних?</p>-->
-                    <!--</div>-->
-                    <!--<div class="modal-footer">-->
-                            <!--<button type="button" class="btn btn-success" data-dismiss="modal">Ні</button>-->
-                            <!--<button type="button" class="btn btn-danger" data-toggle="modal" v-on:click="sendDestroy(selectedDeleteClock)">Видалити</button>-->
-                    <!--</div>-->
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -76,7 +64,7 @@
         },
         props: ['ordersData', 'ordersUrl'],
         methods: {
-            sendUpdate: function (orderId) {
+            sendUpdate: function (orderId, revisedValue) {
                 if(this.wait){
                     return
                 }
@@ -88,7 +76,7 @@
                     url: updateUrl,
                     data: {
                         _method: "PUT",
-                        revised: true
+                        revised: revisedValue
                     }
                 })
                     .then(response => {
@@ -100,10 +88,8 @@
                     })
                     .catch(function (error) {
                         let errors = error.response.data.errors;
-                        console.log(errors)
-                        for (let key in errors) {
-                            runToastmessage(errors[key][0], "error");
-                        }
+                        console.log(errors);
+                            runToastmessage("Помилка. Зміни не внесені в базу даних", "error");
                     });
             },
             updateOrders: function (data) {

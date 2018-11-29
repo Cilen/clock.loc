@@ -57,7 +57,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::post('clocks/characteristics/{id}', 'ClockController@getCharacteristics');
     Route::resource('clocks', 'ClockController');
 
-    Route::get('orders/old', 'OrderController@oldOrders');
+    Route::get('orders/old', ['uses' => 'OrderController@oldOrders', 'as' => 'oldOrders']);
     Route::resource('orders', 'OrderController');
 
     Route::get('feedbacks/old', 'FeedbackController@oldFeedbacks');

@@ -18,15 +18,15 @@ class OrderController extends Controller
 //    Показати список нових замовлень
     public function index()
     {
-        $data = Order::where('revised', false)->get()->toArray();
+        $data = Order::where('revised', false)->orderBy('order_id', 'desc')->get()->toArray();
         return view('admin.ordersTable')->with(['data' => $data, 'title' => "Нові замовлення"]);
     }
-
 
 //    Показати список старих замовлень
     public function oldOrders()
     {
-        return('Старі замовлення');
+        $data = Order::where('revised', true)->orderBy('order_id', 'desc')->get()->toArray();
+        return view('admin.ordersTable')->with(['data' => $data, 'title' => "Старі замовлення"]);
     }
 
     /**
@@ -115,10 +115,10 @@ class OrderController extends Controller
             $order = Order::find($id);
             $order->revised = $revised;
             $order->save();
-            $data = Order::where('revised', false)->get()->toArray();
+            $data = Order::where('revised', ! $revised)->get()->toArray();
             return $data;
         }
-        return response()->json(["error" => "Невірні вхідні дані"], 422);
+        return response()->json(["error" => "Невірні вхідні дані"], 403);
 
     }
 

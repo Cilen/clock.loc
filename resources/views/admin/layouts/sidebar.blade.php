@@ -20,9 +20,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/orders">
+                <a class="nav-link" href="{{route('orders.index')}}">
                     <i class="fas fa-arrow-right"></i>
                     Нові замовлення
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('oldOrders')}}">
+                    <i class="fas fa-arrow-right"></i>
+                    Старі замовлення
                 </a>
             </li>
             <li class="nav-item">
