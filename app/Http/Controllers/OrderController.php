@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Clock;
+use App\ConfirmedCart;
 use App\Order;
 use Illuminate\Http\Request;
 use NovaPoshta\ApiModels\Address;
@@ -87,7 +89,15 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Order::findOrFail($id);
+        $cart = $data->confirmedCart()->get()->toArray();
+        $data = $data->toArray();
+        foreach ($cart as $key => $value){
+            $cart[$key]['clock'] = Clock::find($value['clock_id'])->toArray();
+        }
+        $data['city'] = json_decode($data['city'], true);
+        $data['warehous'] = json_decode($data['warehous'], true);
+        return view('admin.orderDetails')->with(['data' => $data, 'title' => "Замовлення №".$id, 'cart' => $cart]);
     }
 
     /**
@@ -111,13 +121,19 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $revised = $request->input('revised');
-        if (is_bool($revised)) {
+        if (isset($revised)) {
+            $revised = boolval($revised);
             $order = Order::find($id);
             $order->revised = $revised;
             $order->save();
-            $data = Order::where('revised', ! $revised)->get()->toArray();
-            return $data;
-        }
+
+            if ($request->ajax()){
+                $data = Order::where('revised', ! $revised)->get()->toArray();
+                return $data;
+            }
+            return $this->index();
+
+        } else
         return response()->json(["error" => "Невірні вхідні дані"], 403);
 
     }

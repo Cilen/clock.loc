@@ -76,7 +76,7 @@
                     url: updateUrl,
                     data: {
                         _method: "PUT",
-                        revised: revisedValue
+                        revised: revisedValue,
                     }
                 })
                     .then(response => {

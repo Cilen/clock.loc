@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">
-    <a class="d-none d-md-block navbar-brand border-right col-md-3 mr-0 admin-company-name" href="{{route('main')}}">Clock Shop</a>
+    <a class="d-none d-md-block navbar-brand border-right col-md-3 admin-company-name" href="{{route('main')}}">Clock Shop</a>
     <div class="col">
         <p class="admin-title text-light">{{isset($title) ? $title : "Aдмін-панель" }}</p>
     </div>

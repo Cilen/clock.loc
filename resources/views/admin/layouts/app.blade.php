@@ -22,6 +22,11 @@
 </head>
 <body>
     <div id="app">
+        <div class="container-fluid">
+            <div class="row">
+
+            </div>
+        </div>
         @include('admin.layouts.navbar')
         <div class="container-fluid">
             <div class="row">

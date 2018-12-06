@@ -10,7 +10,7 @@ class ConfirmedCart extends Model
     protected $fillable = ['order_id','clock_id','qty'];
 
 
-    public function functions(){
+    public function clock(){
         return $this->hasOne('App\Clock', 'clock_id');
     }
 
