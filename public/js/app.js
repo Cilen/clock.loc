@@ -31582,6 +31582,7 @@ Vue.component('clock-page', __webpack_require__(105)); //Сторінка кон
 Vue.component('cart-button', __webpack_require__(110)); //Кнопка корзини
 Vue.component('cart', __webpack_require__(115)); //Корзина
 Vue.component('checkout', __webpack_require__(120)); //Оформлення заказів
+Vue.component('feedback-modal', __webpack_require__(140)); //Зворотній звязок (модальне вікно)
 Vue.component('stf-select-option', __WEBPACK_IMPORTED_MODULE_1_stf_vue_select__["StfSelectOption"]);
 Vue.component('stf-select', __WEBPACK_IMPORTED_MODULE_1_stf_vue_select__["StfSelect"]);
 
@@ -66065,7 +66066,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$forceUpdate();
         },
         phoneValide: function phoneValide(phone) {
-            if (phone.length != 10) this.phone = "";
+            if (phone.length == 10) {
+                this.validationErrors.phone = false;
+            } else {
+                this.phone = "";
+                this.validationErrors.phone = true;
+            }
         },
         getCityList: function getCityList(str) {
             var _this = this;
@@ -67129,6 +67135,418 @@ window.wait = function () {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 128 */,
+/* 129 */,
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(141)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(143)
+/* template */
+var __vue_template__ = __webpack_require__(144)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-6b286d81"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/FeedbackModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6b286d81", Component.options)
+  } else {
+    hotAPI.reload("data-v-6b286d81", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 141 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(142);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("e20870c6", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b286d81\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./FeedbackModal.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6b286d81\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./FeedbackModal.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 142 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.invalid[data-v-6b286d81] {\n    width: 100%;\n    margin-top: 0.25rem;\n    font-size: 80%;\n    color: #dc3545\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 143 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            phone: "",
+            firstName: "",
+            validationErrors: {
+                firstName: false,
+                phone: false
+            }
+
+        };
+    },
+    props: ['feedbackUrl'],
+    methods: {
+        phoneToInt: function phoneToInt(phone) {
+            phone = phone.replace(/[^0-9]/g, '');
+            this.phone = phone;
+            this.$forceUpdate();
+        },
+        phoneValide: function phoneValide(phone) {
+            if (phone.length == 10) {
+                this.validationErrors.phone = false;
+            } else {
+                this.phone = "";
+                this.validationErrors.phone = true;
+            }
+        },
+        validation: function validation() {
+            var data = true;
+            if (this.firstName == '') {
+                this.validationErrors.firstName = true;
+                data = false;
+            } else this.validationErrors.firstName = false;
+            if (this.phone.length != 10 || isNaN(this.phone)) {
+                this.validationErrors.phone = true;
+                data = false;
+            } else this.validationErrors.phone = false;
+            return data;
+        },
+        createFeedback: function createFeedback() {
+            if (this.validation()) {
+
+                console.log(this.feedbackUrl);
+                // axios.post(this.newOrderUrl, {
+                //     firstName: this.firstName,
+                //     lastName: this.lastName,
+                //     phone: this.phone,
+                //     deliveryMethod: this.deliveryMethod,
+                //     city: JSON.stringify(this.city),
+                //     warehous: JSON.stringify(warehous),
+                //     payMethod: this.payMethod,
+                // })
+                //     .then((response) => {
+                //         document.location.href = this.checkoutSuccessUrl;
+                //     })
+                //     .catch(function (error) {
+                //         console.log(error);
+                //         $('#errorOrder').modal()
+                //     });
+                $('#feedbackModal').modal('hide');
+            }
+        }
+
+    },
+    created: function created() {}
+});
+
+/***/ }),
+/* 144 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "feedbackModal",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "feedbackModal",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog " }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c("div", { staticClass: "modal-header" }, [
+            _c("h5", { staticClass: "modal-title" }, [
+              _vm._v(_vm._s(_vm.trans("localization.feedback")))
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c("div", { staticClass: "container-fluid" }, [
+              _c("p", [
+                _vm._v(_vm._s(_vm.trans("localization.feedbackProposition")))
+              ]),
+              _vm._v(" "),
+              _c("form", [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "feedbackFirstName" } }, [
+                    _vm._v(_vm._s(_vm.trans("localization.firstName")))
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.firstName,
+                        expression: "firstName"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    class: { "is-invalid": _vm.validationErrors.firstName },
+                    attrs: { type: "text", id: "feedbackFirstName" },
+                    domProps: { value: _vm.firstName },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.firstName = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.validationErrors.firstName,
+                          expression: "validationErrors.firstName"
+                        }
+                      ],
+                      staticClass: "invalid"
+                    },
+                    [_vm._v(_vm._s(_vm.trans("localization.fieldIsRequired")))]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "feedbackPhone" } }, [
+                    _vm._v(_vm._s(_vm.trans("localization.phone")))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      class: { "is-invalid": _vm.validationErrors.phone },
+                      attrs: {
+                        type: "tel",
+                        id: "phone",
+                        placeholder: "09xxxxxxxx",
+                        autocomplete: "tel",
+                        maxlength: "10",
+                        pattern: "(.){10}",
+                        required: ""
+                      },
+                      domProps: { value: _vm.phone },
+                      on: {
+                        input: function($event) {
+                          _vm.phoneToInt($event.target.value)
+                        },
+                        change: function($event) {
+                          _vm.phoneValide($event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.validationErrors.phone,
+                            expression: "validationErrors.phone"
+                          }
+                        ],
+                        staticClass: "invalid"
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(_vm.trans("localization.invalidPhoneNumber"))
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-success btn-lg w-100 px-0",
+                    attrs: { href: "#", role: "button" },
+                    on: { click: _vm.createFeedback }
+                  },
+                  [_vm._v(_vm._s(_vm.trans("localization.callMeBack")))]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("div", { staticClass: "input-group-text pt-0 pb-0" }, [_vm._v("+38")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6b286d81", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

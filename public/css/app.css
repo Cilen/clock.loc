@@ -12792,9 +12792,14 @@ a.text-dark:focus {
   background-image: url("/images/vodafone.png");
 }
 
+#header .phones .phone-icon {
+  background-image: url("/images/phone.svg");
+}
+
 #header .phones .lifecell,
 #header .phones .kyivstar,
-#header .phones .vodafone {
+#header .phones .vodafone,
+#header .phones .phone-icon {
   background-repeat: no-repeat;
   height: 24px;
   padding-left: 32px;

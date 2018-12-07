@@ -255,7 +255,12 @@
                 this.$forceUpdate();
             },
             phoneValide: function (phone) {
-                if (phone.length != 10) this.phone = "";
+                if (phone.length == 10){
+                    this.validationErrors.phone = false;
+                } else {
+                    this.phone = "";
+                    this.validationErrors.phone = true;
+                }
             },
             getCityList: function (str) {
                 if (str.length >=3){

@@ -20,7 +20,10 @@
     .vodafone{
       background-image: url("/images/vodafone.png");
     }
-    .lifecell, .kyivstar, .vodafone{
+    .phone-icon{
+      background-image: url("/images/phone.svg");
+    }
+    .lifecell, .kyivstar, .vodafone, .phone-icon{
       background-repeat: no-repeat;
       height: 24px;
       padding-left: 32px;

@@ -71,8 +71,8 @@
                         <div class="vodafone">
                             (095) 640-01-98
                         </div>
-                        <div class="">
-                            <a href="#">Передзвоніть мені</a>
+                        <div class="phone-icon">
+                            <a href="#" data-toggle="modal" data-target="#feedbackModal">@lang('localization.callMeBack')</a>
                         </div>
                     </div>
                 </div>
@@ -87,3 +87,6 @@
       v-bind:total-price-data='{!! session()->has("cart")? session()->get("cart")->totalPrice : 0 !!}'
       v-bind:total-qty-data='{!! session()->has("cart")? session()->get("cart")->totalQty : 0 !!}'
 ></cart>
+<feedback-modal v-bind:feedback-url='"{!! route('new-feedback') !!}"'
+></feedback-modal>
+
