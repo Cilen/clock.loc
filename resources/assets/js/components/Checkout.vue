@@ -255,7 +255,7 @@
                 this.$forceUpdate();
             },
             phoneValide: function (phone) {
-                if (phone.length == 10){
+                if (phone.length == 10 && phone < 1000000000){
                     this.validationErrors.phone = false;
                 } else {
                     this.phone = "";
@@ -353,7 +353,7 @@
                     this.validationErrors.lastName = true;
                     data = false;
                 } else this.validationErrors.lastName = false;
-                if (this.phone.length != 10 || isNaN(this.phone)){
+                if (this.phone.length != 10 || isNaN(this.phone) || this.phone >= 1000000000){
                     this.validationErrors.phone = true;
                     data = false;
                 } else this.validationErrors.phone = false;

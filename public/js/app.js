@@ -66066,7 +66066,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$forceUpdate();
         },
         phoneValide: function phoneValide(phone) {
-            if (phone.length == 10) {
+            if (phone.length == 10 && phone < 1000000000) {
                 this.validationErrors.phone = false;
             } else {
                 this.phone = "";
@@ -66166,7 +66166,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.validationErrors.lastName = true;
                 data = false;
             } else this.validationErrors.lastName = false;
-            if (this.phone.length != 10 || isNaN(this.phone)) {
+            if (this.phone.length != 10 || isNaN(this.phone) || this.phone >= 1000000000) {
                 this.validationErrors.phone = true;
                 data = false;
             } else this.validationErrors.phone = false;
@@ -67312,7 +67312,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$forceUpdate();
         },
         phoneValide: function phoneValide(phone) {
-            if (phone.length == 10) {
+            if (phone.length == 10 && phone < 1000000000) {
                 this.validationErrors.phone = false;
             } else {
                 this.phone = "";
@@ -67325,38 +67325,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.validationErrors.firstName = true;
                 data = false;
             } else this.validationErrors.firstName = false;
-            if (this.phone.length != 10 || isNaN(this.phone)) {
+            if (this.phone.length != 10 || isNaN(this.phone) || this.phone >= 1000000000) {
                 this.validationErrors.phone = true;
                 data = false;
             } else this.validationErrors.phone = false;
             return data;
         },
         createFeedback: function createFeedback() {
-            if (this.validation()) {
+            var _this = this;
 
-                console.log(this.feedbackUrl);
-                // axios.post(this.newOrderUrl, {
-                //     firstName: this.firstName,
-                //     lastName: this.lastName,
-                //     phone: this.phone,
-                //     deliveryMethod: this.deliveryMethod,
-                //     city: JSON.stringify(this.city),
-                //     warehous: JSON.stringify(warehous),
-                //     payMethod: this.payMethod,
-                // })
-                //     .then((response) => {
-                //         document.location.href = this.checkoutSuccessUrl;
-                //     })
-                //     .catch(function (error) {
-                //         console.log(error);
-                //         $('#errorOrder').modal()
-                //     });
-                $('#feedbackModal').modal('hide');
+            if (this.validation()) {
+                axios.post(this.feedbackUrl, {
+                    firstName: this.firstName,
+                    phone: this.phone
+                }).then(function (response) {
+                    $('#feedbackModal').modal('hide');
+                    _this.firstName = "";
+                    _this.phone = "";
+                }).catch(function (error) {
+                    console.log(error);
+                    // $('#errorOrder').modal()
+                });
             }
         }
 
-    },
-    created: function created() {}
+    }
 });
 
 /***/ }),

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Feedback;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
@@ -39,7 +40,13 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $feedback = Feedback::create([
+            'first_name' => $request->input('firstName'),
+            'phone' => $request->input('phone'),
+            'revised' => false
+        ]);
+        if (!$feedback) return response()->json(['error' => 'Creation Feedback'], 500);
+        return response()->json('Created', 201);
     }
 
     /**

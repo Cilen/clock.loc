@@ -29,7 +29,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
 Route::get('filter', 'ClockController@filter')->name('filter');
 Route::post('orders', 'OrderController@store')->name('newOrder');
-Route::post('feedbacks', 'FeedbackController@story')->name('new-feedback');
+Route::post('feedbacks', 'FeedbackController@store')->name('new-feedback');
 Route::post('cart/add', ['uses' => 'ClockController@addToCart', 'as' => 'addToCart']);
 Route::post('cart/update', ['uses' => 'ClockController@updateCart', 'as' => 'updateCart']);
 Route::post('cart/remove', ['uses' => 'ClockController@removeFromCart', 'as' => 'removeFromCart']);
