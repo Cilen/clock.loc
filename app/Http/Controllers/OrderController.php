@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Clock;
-use App\ConfirmedCart;
 use App\Order;
 use Illuminate\Http\Request;
 use NovaPoshta\ApiModels\Address;
 use NovaPoshta\MethodParameters\Address_getWarehouses;
-use NovaPoshta\MethodParameters\Address_getCities;
+use App\Helpers\SendMail;
 
 class OrderController extends Controller
 {
@@ -20,14 +19,14 @@ class OrderController extends Controller
 //    Показати список нових замовлень
     public function index()
     {
-        $data = Order::where('revised', false)->orderBy('order_id', 'desc')->get()->toArray();
+        $data = Order::select('order_id', 'client_first_name', 'client_last_name', 'phone', 'total_price', 'pay_method', 'revised', 'created_at')->where('revised', false)->orderBy('order_id', 'desc')->get()->toArray();
         return view('admin.ordersTable')->with(['data' => $data, 'title' => "Нові замовлення"]);
     }
 
 //    Показати список старих замовлень
     public function oldOrders()
     {
-        $data = Order::where('revised', true)->orderBy('order_id', 'desc')->get()->toArray();
+        $data = Order::select('order_id', 'client_first_name', 'client_last_name', 'phone', 'total_price', 'pay_method', 'revised', 'created_at')->where('revised', true)->orderBy('order_id', 'desc')->get()->toArray();
         return view('admin.ordersTable')->with(['data' => $data, 'title' => "Старі замовлення"]);
     }
 
@@ -46,9 +45,10 @@ class OrderController extends Controller
      * Додати нове замовлення в базу даних
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Helpers\SendMail  $mail
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, SendMail $mail)
     {
         if ($request->session()->has('cart')) {
             $cart = $request->session()->get('cart');
@@ -78,6 +78,7 @@ class OrderController extends Controller
         $request->session()->put('orderId', $order->order_id);
         $request->session()->put('payMethod', $order->pay_method);
         $request->session()->put('confirmedCart', true);
+        $mail->orderMail($request->input('firstName'), $request->input('lastName'), $request->input('phone'), $cart->items, $cart->totalPrice);
         return response()->json('Created', 201);
     }
 
@@ -128,7 +129,7 @@ class OrderController extends Controller
             $order->save();
 
             if ($request->ajax()){
-                $data = Order::where('revised', ! $revised)->get()->toArray();
+                $data = Order::select('order_id', 'client_first_name', 'client_last_name', 'phone', 'total_price', 'pay_method', 'revised', 'created_at')->where('revised', ! $revised)->orderBy('order_id', 'desc')->get()->toArray();
                 return $data;
             }
             return $this->index();
