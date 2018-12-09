@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Feedback;
 use Illuminate\Http\Request;
+use App\Helpers\SendMail;
+
 
 class FeedbackController extends Controller
 {
@@ -14,7 +16,8 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        //
+        $data = Feedback::orderBy('revised', 'asc')->latest()->get()->toJson();
+        return view('admin.feedbacksTable')->with(['data' => $data, 'title' => "Зворотній зв'язок"]);
     }
 
     public function oldFeedbacks()
@@ -36,9 +39,10 @@ class FeedbackController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Helpers\SendMail  $mail
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, SendMail $mail)
     {
         $feedback = Feedback::create([
             'first_name' => $request->input('firstName'),
@@ -46,6 +50,7 @@ class FeedbackController extends Controller
             'revised' => false
         ]);
         if (!$feedback) return response()->json(['error' => 'Creation Feedback'], 500);
+        $mail->feedbackMail($request->input('firstName'),$request->input('phone'));
         return response()->json('Created', 201);
     }
 
@@ -80,7 +85,21 @@ class FeedbackController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $revised = $request->input('revised');
+        if (isset($revised)) {
+            $revised = boolval($revised);
+            $order = Feedback::find($id);
+            $order->revised = $revised;
+            $order->save();
+
+            if ($request->ajax()){
+                $data = Feedback::orderBy('revised', 'asc')->latest()->get()->toJson();
+                return $data;
+            }
+            return $this->index();
+
+        } else
+            return response()->json(["error" => "Невірні вхідні дані"], 403);
     }
 
     /**

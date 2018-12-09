@@ -39,6 +39,19 @@ return [
     '' => '',
     '' => '',
 
+    //Item
+    'productCode' => 'Код товару',
+    'writeComments' => '',
+    'availability' => 'Наличие',
+    'availabilityYes' => 'В наличии',
+    'availabilityNo' => 'Нет в наличии',
+    'availabilitySoon' => 'Вскоре будет',
+    'availabilityByOrder' => 'Под заказ',
+    'itemDescriptions' => 'Описание',
+    'itemCharacteristics' => 'Характеристики',
+    'itemComments' => 'Отзывы',
+    '' => '',
+
 
     //CheckoutSuccess
     'checkoutSuccess' => 'Спасибо, ваш заказ принят',

@@ -196,7 +196,7 @@
                         {{ trans('localization.errorOrderText')}}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">{{ trans('localization.ok')}}</button>
                     </div>
                 </div>
             </div>
@@ -398,5 +398,8 @@
              font-size: 80%;
              color: #dc3545
          }
+    .modal-header {
+        color: white;
+    }
 
 </style>

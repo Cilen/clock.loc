@@ -3,45 +3,38 @@
         <table class="table table-striped table-sm mt-3">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">№ замовлення</th>
-                    <th scope="col">Прізвище / Ім'я</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Ім'я</th>
                     <th scope="col">Номер телефону</th>
-                    <th scope="col">Загальна ціна</th>
-                    <th scope="col">Спосіб оплати</th>
+                    <th scope="col">Статус</th>
                     <th scope="col">Дата</th>
                     <th scope="col">Дії</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(order, key) in orders">
-                    <th scope="row">{{order.order_id}}</th>
+                <tr v-for="(feedback, key) in feedbacks">
+                    <th scope="row">{{feedback.feedback_id}}</th>
                     <td>
-                        {{order.client_last_name}} {{order.client_last_name}}
+                        {{feedback.first_name}}
 
                     </td>
                     <td>
-                        0{{order.phone}}
+                        0{{feedback.phone}}
                     </td>
-                    <td>
-                        {{order.total_price}}
+                    <td v-if='feedback.revised === 0' class="text-success">
+                        Новий
                     </td>
-                    <td v-if='order.pay_method === "cash"'>
-                        Готівкою
-                    </td>
-                    <td v-else-if='order.pay_method === "online"'>
-                        Онлайн
+                    <td v-else-if='feedback.revised === 1'>
+                        Переглянуто
                     </td>
                     <td v-else>
                         Невизначено
                     </td>
                     <td>
-                        {{order.created_at}}
+                        {{feedback.created_at}}
                     </td>
                     <td>
-                        <a class="btn btn-success btn-sm" title="Переглянути" v-bind:href="ordersUrl + '/' + order.order_id" role="button">
-                            <i class="far fa-file-alt"></i>
-                        </a>
-                        <button type="button" class="btn btn-primary btn-sm" title="Позначити як переглянуте" v-if="order.revised === 0" v-on:click="sendUpdate(order.order_id, true)">
+                        <button type="button" class="btn btn-success btn-sm" title="Позначити як переглянуте" v-if="feedback.revised === 0" v-on:click="sendUpdate(feedback.feedback_id, true)">
                             <i class="far fa-check-square"></i>
                         </button>
                     </td>
@@ -55,19 +48,19 @@
     export default {
         data: function () {
             return {
-                orders: [],
+                feedbacks: [],
                 selectedDeleteClock: ""
             }
         },
-        props: ['ordersData', 'ordersUrl'],
+        props: ['feedbacksData', 'feedbacksUrl'],
         methods: {
-            sendUpdate: function (orderId, revisedValue) {
+            sendUpdate: function (feedbackId, revisedValue) {
                 if(this.wait){
                     return
                 }
                 this.wait = true;
                 setTimeout(() => this.wait = false, 1000);
-                let updateUrl = this.ordersUrl + "/" + orderId;
+                let updateUrl = this.feedbacksUrl + "/" + feedbackId;
                 axios({
                     method: 'post',
                     url: updateUrl,
@@ -86,15 +79,15 @@
                     .catch(function (error) {
                         let errors = error.response.data.errors;
                         console.log(errors);
-                            runToastmessage("Помилка. Зміни не внесені в базу даних", "error");
+                        runToastmessage("Помилка. Зміни не внесені в базу даних", "error");
                     });
             },
             updateOrders: function (data) {
-                this.orders = data;
+                this.feedbacks = data;
             },
         },
         created: function(){
-            this.updateOrders(this.ordersData);
+            this.updateOrders(this.feedbacksData);
         },
 
 

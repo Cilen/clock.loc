@@ -114,6 +114,7 @@ Vue.component('cart-button', require('./components/CartButton.vue')); //Кноп
 Vue.component('cart', require('./components/Cart.vue')); //Корзина
 Vue.component('checkout', require('./components/Checkout')); //Оформлення заказів
 Vue.component('feedback-modal', require('./components/FeedbackModal')); //Зворотній звязок (модальне вікно)
+Vue.component('feedbacks-table', require('./components/FeedbacksTable')); //Адмін таблиця зворотнього звязку
 Vue.component('stf-select-option', StfSelectOption);
 Vue.component('stf-select', StfSelect);
 

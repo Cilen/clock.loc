@@ -31399,7 +31399,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(127);
+module.exports = __webpack_require__(132);
 
 
 /***/ }),
@@ -31582,7 +31582,8 @@ Vue.component('clock-page', __webpack_require__(105)); //Сторінка кон
 Vue.component('cart-button', __webpack_require__(110)); //Кнопка корзини
 Vue.component('cart', __webpack_require__(115)); //Корзина
 Vue.component('checkout', __webpack_require__(120)); //Оформлення заказів
-Vue.component('feedback-modal', __webpack_require__(140)); //Зворотній звязок (модальне вікно)
+Vue.component('feedback-modal', __webpack_require__(125)); //Зворотній звязок (модальне вікно)
+Vue.component('feedbacks-table', __webpack_require__(145)); //Адмін таблиця зворотнього звязку
 Vue.component('stf-select-option', __WEBPACK_IMPORTED_MODULE_1_stf_vue_select__["StfSelectOption"]);
 Vue.component('stf-select', __WEBPACK_IMPORTED_MODULE_1_stf_vue_select__["StfSelect"]);
 
@@ -31591,8 +31592,8 @@ var app = new Vue({
     store: store
 });
 
-__webpack_require__(125);
-__webpack_require__(126);
+__webpack_require__(130);
+__webpack_require__(131);
 
 /***/ }),
 /* 17 */
@@ -62962,9 +62963,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -63112,25 +63110,6 @@ var render = function() {
                       }
                     },
                     [_c("i", { staticClass: "far fa-check-square" })]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              order.revised === 1
-                ? _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-warning btn-sm",
-                      attrs: {
-                        type: "button",
-                        title: "Позначити як не переглянуте"
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.sendUpdate(order.order_id, false)
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "far fa-square" })]
                   )
                 : _vm._e()
             ])
@@ -65800,7 +65779,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\ninput[type=number][data-v-40b3b37d]::-webkit-inner-spin-button,\ninput[type=number][data-v-40b3b37d]::-webkit-outer-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n}\n.col-form-label[data-v-40b3b37d]{\n    font-size: 1.1em;\n}\n.logo[data-v-40b3b37d]{\n    height: 50px;\n    width: 50px;\n    padding: 2px;\n}\n.logo-cell[data-v-40b3b37d]{\n    width: 65px;\n}\n.product-name[data-v-40b3b37d]{\n    font-family: 'Roboto Condensed', sans-serif;\n    font-size: 1em;\n}\n.check-total-title[data-v-40b3b37d]{\n    font-size: 1.2em;\n    font-weight: 600;\n}\n.check-total[data-v-40b3b37d]{\n    font-size: 1.4em;\n    font-weight: 600;\n}\n.invalid[data-v-40b3b37d] {\n         width: 100%;\n         margin-top: 0.25rem;\n         font-size: 80%;\n         color: #dc3545\n}\n\n", ""]);
+exports.push([module.i, "\ninput[type=number][data-v-40b3b37d]::-webkit-inner-spin-button,\ninput[type=number][data-v-40b3b37d]::-webkit-outer-spin-button {\n    -webkit-appearance: none;\n    margin: 0;\n}\n.col-form-label[data-v-40b3b37d]{\n    font-size: 1.1em;\n}\n.logo[data-v-40b3b37d]{\n    height: 50px;\n    width: 50px;\n    padding: 2px;\n}\n.logo-cell[data-v-40b3b37d]{\n    width: 65px;\n}\n.product-name[data-v-40b3b37d]{\n    font-family: 'Roboto Condensed', sans-serif;\n    font-size: 1em;\n}\n.check-total-title[data-v-40b3b37d]{\n    font-size: 1.2em;\n    font-weight: 600;\n}\n.check-total[data-v-40b3b37d]{\n    font-size: 1.4em;\n    font-weight: 600;\n}\n.invalid[data-v-40b3b37d] {\n         width: 100%;\n         margin-top: 0.25rem;\n         font-size: 80%;\n         color: #dc3545\n}\n.modal-header[data-v-40b3b37d] {\n    color: white;\n}\n\n", ""]);
 
 // exports
 
@@ -66956,7 +66935,16 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(4)
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v(_vm._s(_vm.trans("localization.ok")))]
+                )
+              ])
             ])
           ]
         )
@@ -67018,21 +67006,6 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -67046,122 +67019,18 @@ if (false) {
 
 /***/ }),
 /* 125 */
-/***/ (function(module, exports) {
-
-$(document).ready(function () {
-    var links = $('.sidebar ul li a');
-    $.each(links, function (key, va) {
-        if (va.href == document.URL) {
-            $(this).addClass('active');
-        }
-    });
-});
-
-window.runToastmessage = function (text, type) {
-    type = type || 'success'; // "notice", "success", "warning", "error"
-    $().toastmessage('showToast', {
-        text: text,
-        sticky: false,
-        inEffectDuration: 600,
-        stayTime: 3000,
-        position: 'top-right',
-        type: type
-    });
-};
-
-/***/ }),
-/* 126 */
-/***/ (function(module, exports) {
-
-if (window.location.pathname == '/ru' || window.location.pathname == '/uk' || window.location.pathname == '/ru/shop' || window.location.pathname == '/uk/shop') {
-    var filterSlider = document.getElementById('filterSlider');
-    window.noUiSlider.create(filterSlider, {
-        start: [data.filter.minPrice, data.filter.maxPrice],
-        animate: true,
-        connect: true,
-        step: 1,
-        range: {
-            'min': data.filter.minPrice,
-            'max': data.filter.maxPrice
-        },
-        format: {
-            to: function to(value) {
-                return parseInt(value, 10);
-            },
-            from: function from(value) {
-                return parseInt(value, 10);
-            }
-        }
-    });
-
-    // Передати значення слайдеру в поля input
-    var filterPriceInput = [minPriceInput, maxPriceInput];
-    filterSlider.noUiSlider.on('update', function (values, handle) {
-        filterPriceInput[handle].value = values[handle];
-        minPriceInput.dispatchEvent(new Event('input'));
-        maxPriceInput.dispatchEvent(new Event('input'));
-    });
-
-    // Запустити подію change в полі input
-    filterSlider.noUiSlider.on('change', function (values, handle) {
-        minPriceInput.dispatchEvent(new Event('change'));
-    });
-
-    // Встановити мінімальне значення слайдеру із поля input
-    minPriceInput.addEventListener('change', function () {
-        filterSlider.noUiSlider.set([this.value, null]);
-    });
-
-    // Встановити максимальне значення слайдеру із поля input
-    maxPriceInput.addEventListener('change', function () {
-        filterSlider.noUiSlider.set([null, this.value]);
-    });
-}
-
-window.wait = function () {
-    var _this = this;
-
-    if (this.wait) {
-        return;
-    }
-    this.wait = true;
-    setTimeout(function () {
-        return _this.wait = false;
-    }, 1000);
-};
-
-/***/ }),
-/* 127 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 128 */,
-/* 129 */,
-/* 130 */,
-/* 131 */,
-/* 132 */,
-/* 133 */,
-/* 134 */,
-/* 135 */,
-/* 136 */,
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(141)
+  __webpack_require__(126)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(143)
+var __vue_script__ = __webpack_require__(128)
 /* template */
-var __vue_template__ = __webpack_require__(144)
+var __vue_template__ = __webpack_require__(129)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -67200,13 +67069,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 141 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(142);
+var content = __webpack_require__(127);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -67226,7 +67095,7 @@ if(false) {
 }
 
 /***/ }),
-/* 142 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -67234,17 +67103,49 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.invalid[data-v-6b286d81] {\n    width: 100%;\n    margin-top: 0.25rem;\n    font-size: 80%;\n    color: #dc3545\n}\n\n", ""]);
+exports.push([module.i, "\n.invalid[data-v-6b286d81] {\n    width: 100%;\n    margin-top: 0.25rem;\n    font-size: 80%;\n    color: #dc3545\n}\n.modal-header[data-v-6b286d81] {\n    color: white;\n}\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 143 */
+/* 128 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -67334,17 +67235,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createFeedback: function createFeedback() {
             var _this = this;
 
+            if (this.wait) {
+                return;
+            }
+            this.wait = true;
+            setTimeout(function () {
+                return _this.wait = false;
+            }, 1000);
+            $('#feedbackModal').modal('hide');
             if (this.validation()) {
                 axios.post(this.feedbackUrl, {
                     firstName: this.firstName,
                     phone: this.phone
                 }).then(function (response) {
-                    $('#feedbackModal').modal('hide');
                     _this.firstName = "";
                     _this.phone = "";
+                    $('#successFeedback').modal('show');
                 }).catch(function (error) {
                     console.log(error);
-                    // $('#errorOrder').modal()
+                    $('#errorFeedback').modal('show');
                 });
             }
         }
@@ -67353,115 +67262,68 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 144 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "modal fade",
-      attrs: {
-        id: "feedbackModal",
-        tabindex: "-1",
-        role: "dialog",
-        "aria-labelledby": "feedbackModal",
-        "aria-hidden": "true"
-      }
-    },
-    [
-      _c("div", { staticClass: "modal-dialog " }, [
-        _c("div", { staticClass: "modal-content" }, [
-          _c("div", { staticClass: "modal-header" }, [
-            _c("h5", { staticClass: "modal-title" }, [
-              _vm._v(_vm._s(_vm.trans("localization.feedback")))
-            ]),
-            _vm._v(" "),
-            _vm._m(0)
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-body" }, [
-            _c("div", { staticClass: "container-fluid" }, [
-              _c("p", [
-                _vm._v(_vm._s(_vm.trans("localization.feedbackProposition")))
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "feedbackModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "feedbackModal",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog " }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header bg-success" }, [
+              _c("h5", { staticClass: "modal-title" }, [
+                _vm._v(_vm._s(_vm.trans("localization.feedback")))
               ]),
               _vm._v(" "),
-              _c("form", [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "feedbackFirstName" } }, [
-                    _vm._v(_vm._s(_vm.trans("localization.firstName")))
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.firstName,
-                        expression: "firstName"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    class: { "is-invalid": _vm.validationErrors.firstName },
-                    attrs: { type: "text", id: "feedbackFirstName" },
-                    domProps: { value: _vm.firstName },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.firstName = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.validationErrors.firstName,
-                          expression: "validationErrors.firstName"
-                        }
-                      ],
-                      staticClass: "invalid"
-                    },
-                    [_vm._v(_vm._s(_vm.trans("localization.fieldIsRequired")))]
-                  )
+              _vm._m(0)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("div", { staticClass: "container-fluid" }, [
+                _c("p", [
+                  _vm._v(_vm._s(_vm.trans("localization.feedbackProposition")))
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "feedbackPhone" } }, [
-                    _vm._v(_vm._s(_vm.trans("localization.phone")))
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group" }, [
-                    _vm._m(1),
+                _c("form", [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "feedbackFirstName" } }, [
+                      _vm._v(_vm._s(_vm.trans("localization.firstName")))
+                    ]),
                     _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.firstName,
+                          expression: "firstName"
+                        }
+                      ],
                       staticClass: "form-control",
-                      class: { "is-invalid": _vm.validationErrors.phone },
-                      attrs: {
-                        type: "tel",
-                        id: "phone",
-                        placeholder: "09xxxxxxxx",
-                        autocomplete: "tel",
-                        maxlength: "10",
-                        pattern: "(.){10}",
-                        required: ""
-                      },
-                      domProps: { value: _vm.phone },
+                      class: { "is-invalid": _vm.validationErrors.firstName },
+                      attrs: { type: "text", id: "feedbackFirstName" },
+                      domProps: { value: _vm.firstName },
                       on: {
                         input: function($event) {
-                          _vm.phoneToInt($event.target.value)
-                        },
-                        change: function($event) {
-                          _vm.phoneValide($event.target.value)
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.firstName = $event.target.value
                         }
                       }
                     }),
@@ -67473,37 +67335,154 @@ var render = function() {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: _vm.validationErrors.phone,
-                            expression: "validationErrors.phone"
+                            value: _vm.validationErrors.firstName,
+                            expression: "validationErrors.firstName"
                           }
                         ],
                         staticClass: "invalid"
                       },
                       [
                         _vm._v(
-                          _vm._s(_vm.trans("localization.invalidPhoneNumber"))
+                          _vm._s(_vm.trans("localization.fieldIsRequired"))
                         )
                       ]
                     )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-success btn-lg w-100 px-0",
-                    attrs: { href: "#", role: "button" },
-                    on: { click: _vm.createFeedback }
-                  },
-                  [_vm._v(_vm._s(_vm.trans("localization.callMeBack")))]
-                )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "feedbackPhone" } }, [
+                      _vm._v(_vm._s(_vm.trans("localization.phone")))
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "input-group" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        class: { "is-invalid": _vm.validationErrors.phone },
+                        attrs: {
+                          type: "tel",
+                          id: "phone",
+                          placeholder: "09xxxxxxxx",
+                          autocomplete: "tel",
+                          maxlength: "10",
+                          pattern: "(.){10}",
+                          required: ""
+                        },
+                        domProps: { value: _vm.phone },
+                        on: {
+                          input: function($event) {
+                            _vm.phoneToInt($event.target.value)
+                          },
+                          change: function($event) {
+                            _vm.phoneValide($event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.validationErrors.phone,
+                              expression: "validationErrors.phone"
+                            }
+                          ],
+                          staticClass: "invalid"
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(_vm.trans("localization.invalidPhoneNumber"))
+                          )
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-success btn-lg w-100 px-0",
+                      attrs: { href: "#", role: "button" },
+                      on: { click: _vm.createFeedback }
+                    },
+                    [_vm._v(_vm._s(_vm.trans("localization.callMeBack")))]
+                  )
+                ])
               ])
             ])
           ])
         ])
-      ])
-    ]
-  )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "successFeedback",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "successFeedback",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog " }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header bg-success" }, [
+              _c("h5", { staticClass: "modal-title" }, [
+                _vm._v(_vm._s(_vm.trans("localization.feedback")))
+              ]),
+              _vm._v(" "),
+              _vm._m(2)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("p", [
+                _vm._v(_vm._s(_vm.trans("localization.successFeedback")))
+              ])
+            ])
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "errorFeedback",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "errorFeedback",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog " }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header bg-danger" }, [
+              _c("h5", { staticClass: "modal-title" }, [
+                _vm._v(_vm._s(_vm.trans("localization.feedback")))
+              ]),
+              _vm._v(" "),
+              _vm._m(3)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("p", [_vm._v(_vm._s(_vm.trans("localization.errorFeedback")))])
+            ])
+          ])
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -67530,6 +67509,40 @@ var staticRenderFns = [
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("div", { staticClass: "input-group-text pt-0 pb-0" }, [_vm._v("+38")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
@@ -67538,6 +67551,419 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-6b286d81", module.exports)
+  }
+}
+
+/***/ }),
+/* 130 */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+    var links = $('.sidebar ul li a');
+    $.each(links, function (key, va) {
+        if (va.href == document.URL) {
+            $(this).addClass('active');
+        }
+    });
+});
+
+window.runToastmessage = function (text, type) {
+    type = type || 'success'; // "notice", "success", "warning", "error"
+    $().toastmessage('showToast', {
+        text: text,
+        sticky: false,
+        inEffectDuration: 600,
+        stayTime: 3000,
+        position: 'top-right',
+        type: type
+    });
+};
+
+/***/ }),
+/* 131 */
+/***/ (function(module, exports) {
+
+if (window.location.pathname == '/ru' || window.location.pathname == '/uk' || window.location.pathname == '/ru/shop' || window.location.pathname == '/uk/shop') {
+    var filterSlider = document.getElementById('filterSlider');
+    window.noUiSlider.create(filterSlider, {
+        start: [data.filter.minPrice, data.filter.maxPrice],
+        animate: true,
+        connect: true,
+        step: 1,
+        range: {
+            'min': data.filter.minPrice,
+            'max': data.filter.maxPrice
+        },
+        format: {
+            to: function to(value) {
+                return parseInt(value, 10);
+            },
+            from: function from(value) {
+                return parseInt(value, 10);
+            }
+        }
+    });
+
+    // Передати значення слайдеру в поля input
+    var filterPriceInput = [minPriceInput, maxPriceInput];
+    filterSlider.noUiSlider.on('update', function (values, handle) {
+        filterPriceInput[handle].value = values[handle];
+        minPriceInput.dispatchEvent(new Event('input'));
+        maxPriceInput.dispatchEvent(new Event('input'));
+    });
+
+    // Запустити подію change в полі input
+    filterSlider.noUiSlider.on('change', function (values, handle) {
+        minPriceInput.dispatchEvent(new Event('change'));
+    });
+
+    // Встановити мінімальне значення слайдеру із поля input
+    minPriceInput.addEventListener('change', function () {
+        filterSlider.noUiSlider.set([this.value, null]);
+    });
+
+    // Встановити максимальне значення слайдеру із поля input
+    maxPriceInput.addEventListener('change', function () {
+        filterSlider.noUiSlider.set([null, this.value]);
+    });
+}
+
+window.wait = function () {
+    var _this = this;
+
+    if (this.wait) {
+        return;
+    }
+    this.wait = true;
+    setTimeout(function () {
+        return _this.wait = false;
+    }, 1000);
+};
+
+/***/ }),
+/* 132 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */,
+/* 144 */,
+/* 145 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(146)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(148)
+/* template */
+var __vue_template__ = __webpack_require__(149)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-cc853652"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/FeedbacksTable.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-cc853652", Component.options)
+  } else {
+    hotAPI.reload("data-v-cc853652", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 146 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(147);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("5ecbdd0f", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cc853652\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./FeedbacksTable.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cc853652\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./FeedbacksTable.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nform[data-v-cc853652] {\n    margin-top: 1.2em;\n}\n#deleteModal h5[data-v-cc853652] {\n    color: white;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 148 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            feedbacks: [],
+            selectedDeleteClock: ""
+        };
+    },
+    props: ['feedbacksData', 'feedbacksUrl'],
+    methods: {
+        sendUpdate: function sendUpdate(feedbackId, revisedValue) {
+            var _this = this;
+
+            if (this.wait) {
+                return;
+            }
+            this.wait = true;
+            setTimeout(function () {
+                return _this.wait = false;
+            }, 1000);
+            var updateUrl = this.feedbacksUrl + "/" + feedbackId;
+            axios({
+                method: 'post',
+                url: updateUrl,
+                data: {
+                    _method: "PUT",
+                    revised: revisedValue
+                }
+            }).then(function (response) {
+                if (response.data.length != 0) {
+                    _this.updateOrders(response.data);
+                    runToastmessage("Зміни успішно внесені в базу даних");
+                };
+            }).catch(function (error) {
+                var errors = error.response.data.errors;
+                console.log(errors);
+                runToastmessage("Помилка. Зміни не внесені в базу даних", "error");
+            });
+        },
+        updateOrders: function updateOrders(data) {
+            this.feedbacks = data;
+        }
+    },
+    created: function created() {
+        this.updateOrders(this.feedbacksData);
+    }
+
+});
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("table", { staticClass: "table table-striped table-sm mt-3" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.feedbacks, function(feedback, key) {
+          return _c("tr", [
+            _c("th", { attrs: { scope: "row" } }, [
+              _vm._v(_vm._s(feedback.feedback_id))
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(feedback.first_name) +
+                  "\n\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "\n                    0" +
+                  _vm._s(feedback.phone) +
+                  "\n                "
+              )
+            ]),
+            _vm._v(" "),
+            feedback.revised === 0
+              ? _c("td", { staticClass: "text-success" }, [
+                  _vm._v("\n                    Новий\n                ")
+                ])
+              : feedback.revised === 1
+                ? _c("td", [
+                    _vm._v(
+                      "\n                    Переглянуто\n                "
+                    )
+                  ])
+                : _c("td", [
+                    _vm._v(
+                      "\n                    Невизначено\n                "
+                    )
+                  ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(feedback.created_at) +
+                  "\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              feedback.revised === 0
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success btn-sm",
+                      attrs: {
+                        type: "button",
+                        title: "Позначити як переглянуте"
+                      },
+                      on: {
+                        click: function($event) {
+                          _vm.sendUpdate(feedback.feedback_id, true)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "far fa-check-square" })]
+                  )
+                : _vm._e()
+            ])
+          ])
+        })
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Ім'я")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Номер телефону")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Статус")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Дата")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Дії")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-cc853652", module.exports)
   }
 }
 

@@ -22,11 +22,11 @@ class SendMail
     }
 
     //Зворотній звязок
-    public function feedbackMail($userName, $phone){
+    public function feedbackMail($firstName, $phone){
         $time = date('d-m-Y H:i:s');
-        Mail::send('emails.feedback', array('userName' => $userName, 'phone' => $phone, 'time' => $time), function($message)
+        Mail::send('emails.feedback', array('firstName' => $firstName, 'phone' => $phone, 'time' => $time), function($message)
         {
-            $message->from('emails@dveri.loc', 'Robot')->subject('Зворотній зв\'язок');
+            $message->from('emails@clock.loc', 'Robot')->subject('Зворотній зв\'язок');
             $message->to(env('MAIL_RECIPIENT'));
         });
     }

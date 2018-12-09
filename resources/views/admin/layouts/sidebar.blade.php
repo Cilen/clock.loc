@@ -32,7 +32,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/feedbacks">
+                <a class="nav-link" href="{{route('feedbacks.index')}}">
                     <i class="fas fa-arrow-right"></i>
                     Зворотній зв'язок
                 </a>

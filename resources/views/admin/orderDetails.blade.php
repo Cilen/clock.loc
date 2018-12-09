@@ -108,10 +108,7 @@
                 <form action="{!! route('orders.update', ['id' => $data['order_id']]) !!}" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" name="_method" value="PUT">
-                    @if ($data['revised'])
-                        <input type="hidden" name="revised" value=0>
-                        <input class="btn btn-warning" type="submit" value="Не переглянуто">
-                    @else
+                    @if ($data['revised'] == 0)
                         <input type="hidden" name="revised" value=1>
                         <input class="btn btn-success w-100" type="submit" value="Переглянуто">
                     @endif
