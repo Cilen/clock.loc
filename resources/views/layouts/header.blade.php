@@ -22,10 +22,10 @@
                         </a>
                     </div>
                 </div>
-                <form class="form-inline col-5 col-lg-3 order-lg-2">
-                    <input class="form-control btn-sm d-none d-sm-block w-100" type="search" placeholder="@lang('localization.search')" aria-label="@lang('localization.search')">
+                <form class="form-inline col-3 col-md-5 col-lg-3 order-lg-2">
+                    <input class="form-control btn-sm d-none d-md-block w-100" type="search" placeholder="@lang('localization.search')" aria-label="@lang('localization.search')">
                 </form>
-                <div class="mobile-links d-lg-none col-2">
+                <div class="mobile-links d-lg-none col-4 col-md-2">
                     <div class="row">
                         <div class="col-6">
                             <a href="#">
@@ -33,8 +33,11 @@
                             </a>
                         </div>
                         <div class="col-6">
-                            <a href="#">
+                            <a href="#" data-toggle="modal" data-target="#cartModal">
                                 <i class="fas fa-shopping-cart"></i>
+                                @if(!! session()->has("cart"))
+                                    <span class='badge badge-warning' id='lblCartCount'>{!! session()->get("cart")->totalQty !!}</span>
+                                @endif
                             </a>
                         </div>
                     </div>
@@ -45,7 +48,7 @@
                             <a class="nav-link" href="#">@lang('localization.blog')</a>
                         </li>
                         <li class="nav-item mr-2">
-                            <a class="nav-link" href="#">@lang('localization.payment')</a>
+                            <a class="nav-link" href="#">@lang('localization.paymentAndDelivery')</a>
                         </li>
                         <li class="nav-item mr-2">
                             <a class="nav-link" href="#">@lang('localization.contacts')</a>

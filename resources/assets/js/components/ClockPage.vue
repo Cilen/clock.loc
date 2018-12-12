@@ -32,14 +32,14 @@
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <div class="comments ml-5">
-                            <a href="#" v-if="clockData.comments == null">
-                                <i class="far fa-comments mr-2"></i>{{ trans('localization.writeComments')}}
-                            </a>
-                            <a href="#" v-else>
-                                <i class="far fa-comments mr-2"></i>{{ trans('localization.comments')}} 0
-                            </a>
-                        </div>
+                        <!--<div class="comments ml-5">-->
+                            <!--<a href="#" v-if="clockData.comments == null">-->
+                                <!--<i class="far fa-comments mr-2"></i>{{ trans('localization.writeComments')}}-->
+                            <!--</a>-->
+                            <!--<a href="#" v-else>-->
+                                <!--<i class="far fa-comments mr-2"></i>{{ trans('localization.comments')}} 0-->
+                            <!--</a>-->
+                        <!--</div>-->
                     </div>
                     <div class="d-flex flex-row justify-content-between mt-4 mb-4">
                         <div>
@@ -64,25 +64,25 @@
                     </div>
                     <div class="row border mt-5">
                         <div class="col-12 delivery">
-                            <i class="fas fa-truck icon"></i> Доставка:
+                            <i class="fas fa-truck icon"></i> {{ trans('localization.delivery') }}:
                         </div>
                         <div class="col-5 offset-1">
                             <div class="delivery-info">
-                                <p class="delivery-service-name">НОВА ПОШТА</p>
-                                <p class="delivery-details">Отримання: 1-2 дня</p>
+                                <p class="delivery-service-name">{{ trans('localization.novaPoshta') }}</p>
+                                <p class="delivery-details">{{ trans('localization.gettingNovaPoshta') }}</p>
                             </div>
                         </div>
                         <div class="col-5 offset-1">
                             <div class="delivery-info">
-                                <p class="delivery-service-name">УКРПОШТА</p>
-                                <p class="delivery-details">Отримання: 2-7 днів</p>
+                                <p class="delivery-service-name">{{ trans('localization.ukrposhta') }}</p>
+                                <p class="delivery-details">{{ trans('localization.gettingUkrposhta') }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="row border border-top-0">
                         <div class="col-12">
-                            <p class="payment"><i class="far fa-credit-card icon"></i>Оплата:</p>
-                            <p class="payment-info">Oплата при отриманні товару, кредитною картою або через Приват24</p>
+                            <p class="payment"><i class="far fa-credit-card icon"></i>{{ trans('localization.payment') }}:</p>
+                            <p class="payment-info">{{ trans('localization.paymentInfo') }}</p>
                         </div>
                     </div>
                 </div>
@@ -96,11 +96,11 @@
                     <li class="nav-item">
                         <a class="nav-link" id="characteristics-tab" data-toggle="tab" href="#characteristics" role="tab" aria-controls="characteristics" aria-selected="false">{{ trans('localization.itemCharacteristics')}}</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="images-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images" aria-selected="false">{{ trans('localization.itemComments')}}</a>
-                    </li>
+                    <!--<li class="nav-item">-->
+                        <!--<a class="nav-link" id="images-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images" aria-selected="false">{{ trans('localization.itemComments')}}</a>-->
+                    <!--</li>-->
                 </ul>
-                <div class="tab-content col-12" id="myTabContent">
+                <div class="tab-content col-6" id="myTabContent">
                     <div class="tab-pane fade  show active" id="descriptions" role="tabpanel" aria-labelledby="descriptions-tab">
                         <descriptions v-bind:descriptions="clockData.descriptions[clockData.language]"
                                       v-bind:name="clockData.name"

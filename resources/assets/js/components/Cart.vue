@@ -16,18 +16,18 @@
                                 <table class="table border-bottom">
                                     <thead>
                                     <tr>
-                                        <th scope="col" class="border-0"></th>
-                                        <th scope="col" class="border-0 text-left">Назва товару</th>
-                                        <th scope="col" class="border-0">Ціна</th>
-                                        <th scope="col" class="border-0">Кількість</th>
-                                        <th scope="col" class="border-0">Сума</th>
+                                        <th scope="col" class="border-0 d-none d-lg-block"></th>
+                                        <th scope="col" class="border-0 text-left">{{ trans('localization.productName')}}</th>
+                                        <th scope="col" class="border-0">{{ trans('localization.price')}}</th>
+                                        <th scope="col" class="border-0">{{ trans('localization.qty')}}</th>
+                                        <th scope="col" class="border-0">{{ trans('localization.total')}}</th>
                                         <th scope="col" class="border-0"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <template v-for="item in items">
                                         <tr>
-                                            <td class="p-1"><img :src="imagesPath+item.logo_uuid" class="img-fluid img-thumbnail" alt="Responsive image"></td>
+                                            <td class="p-1 d-none d-lg-block"><img :src="imagesPath+item.logo_uuid" class="img-fluid img-thumbnail" alt="Responsive image"></td>
                                             <td class="text-left">
                                                 <p class="product-name">{{item.name}}</p>
                                                 <p class="product-detail">{{ trans('localization.productCode')}}: {{item.clockId}}</p>
@@ -48,7 +48,7 @@
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-end">
-                                    <span>Итого: {{totalPrice}} грн</span>
+                                    <span class="cart-total">{{ trans('localization.cartTotal')}}: {{totalPrice}} грн</span>
                                 </div>
                             </div>
                     </div>
@@ -74,7 +74,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <h2 class="cart-empty"><i class="fas fa-shopping-cart"></i> Корзина пуста</h2>
+                                    <h2 class="cart-empty"><i class="fas fa-shopping-cart"></i> {{ trans('localization.cartEmpty')}}</h2>
                                 </div>
 
                 </template>
@@ -178,6 +178,10 @@
     .cart-empty{
         text-align: center;
         height: 100px;
+    }
+    .cart-total{
+        font-size: 1.2em;
+        font-weight: 600;
     }
 
 </style>

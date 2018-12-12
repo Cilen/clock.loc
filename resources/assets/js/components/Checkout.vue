@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mb-3">
-                <h2>Оформление заказа</h2>
+                <h2>{{ trans('localization.checkout')}}</h2>
             </div>
         </div>
         <div class="row">
@@ -145,7 +145,7 @@
             </div>
             <div class="col-12 col-md-6 offset-lg-1 col-lg-5">
                 <div class="container-fluid">
-                    <h4>В корзині</h4>
+                    <h4>{{ trans('localization.in_the_cart')}}</h4>
                     <table class="table table-sm mb-0">
                         <tbody>
                             <tr v-for="item in items">
@@ -167,7 +167,7 @@
                                 <td></td>
                                 <td>
                                     <div class="d-flex justify-content-between">
-                                        <span class="d-inline-flex check-total-title">Итого: </span>
+                                        <span class="d-inline-flex check-total-title">{{ trans('localization.cartTotal')}}: </span>
                                         <span class="d-inline-flex check-total">{{totalPrice}} грн</span>
                                     </div>
                                 </td>
@@ -175,10 +175,10 @@
                         </tbody>
                     </table>
                     <div class="row justify-content-center">
-                        <a class="btn btn-link" href="#"  data-toggle="modal" data-target="#cartModal">Редагувати замовлення</a>
+                        <a class="btn btn-link" href="#"  data-toggle="modal" data-target="#cartModal">{{ trans('localization.editCart')}}</a>
                     </div>
                     <div class="row justify-content-center mt-3">
-                        <button class="btn btn-lg btn-success" v-on:click="createOrder">Замовлення підтверджую</button>
+                        <button class="btn btn-lg btn-success" v-on:click="createOrder">{{ trans('localization.confirmOrder')}}</button>
                     </div>
                 </div>
             </div>

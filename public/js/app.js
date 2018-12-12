@@ -31399,7 +31399,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(132);
+module.exports = __webpack_require__(137);
 
 
 /***/ }),
@@ -31583,7 +31583,7 @@ Vue.component('cart-button', __webpack_require__(110)); //Кнопка корз�
 Vue.component('cart', __webpack_require__(115)); //Корзина
 Vue.component('checkout', __webpack_require__(120)); //Оформлення заказів
 Vue.component('feedback-modal', __webpack_require__(125)); //Зворотній звязок (модальне вікно)
-Vue.component('feedbacks-table', __webpack_require__(145)); //Адмін таблиця зворотнього звязку
+Vue.component('feedbacks-table', __webpack_require__(130)); //Адмін таблиця зворотнього звязку
 Vue.component('stf-select-option', __WEBPACK_IMPORTED_MODULE_1_stf_vue_select__["StfSelectOption"]);
 Vue.component('stf-select', __WEBPACK_IMPORTED_MODULE_1_stf_vue_select__["StfSelect"]);
 
@@ -31592,8 +31592,8 @@ var app = new Vue({
     store: store
 });
 
-__webpack_require__(130);
-__webpack_require__(131);
+__webpack_require__(135);
+__webpack_require__(136);
 
 /***/ }),
 /* 17 */
@@ -62616,6 +62616,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -62662,10 +62668,15 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "container" }, [
+      _vm._m(0),
+      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-12 col-lg-3" },
+          {
+            staticClass: "col-12 col-lg-3 collapse d-lg-block",
+            attrs: { id: "collapseFilters" }
+          },
           [
             _c("filters", {
               attrs: { filter: _vm.filter },
@@ -62719,19 +62730,7 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "feedbacks d-flex mb-2" }, [
-                      _vm._m(0, true),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "comments" }, [
-                        _c("a", { attrs: { href: "#" } }, [
-                          _c("i", { staticClass: "far fa-comments mr-2" }),
-                          _vm._v(
-                            _vm._s(_vm.trans("localization.comments")) +
-                              " 0\n                                        "
-                          )
-                        ])
-                      ])
-                    ]),
+                    _vm._m(1, true),
                     _vm._v(" "),
                     _c("div", { staticClass: "prices-wrapper d-flex" }, [
                       _c(
@@ -62791,16 +62790,45 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "stars mr-auto" }, [
-      _c("i", { staticClass: "fas fa-star" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star" })
+    return _c(
+      "div",
+      { staticClass: "row mt-3 justify-content-start d-lg-none" },
+      [
+        _c("div", { staticClass: "col-3 text-center" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link",
+              attrs: {
+                type: "button",
+                "data-toggle": "collapse",
+                "data-target": "#collapseFilters",
+                "aria-expanded": "true",
+                "aria-controls": "collapseFilters"
+              }
+            },
+            [_c("i", { staticClass: "fas fa-filter" }), _vm._v(" Фильтр")]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "feedbacks d-flex mb-2" }, [
+      _c("div", { staticClass: "stars mr-auto" }, [
+        _c("i", { staticClass: "fas fa-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star" })
+      ])
     ])
   }
 ]
@@ -64614,27 +64642,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "d-flex flex-row mt-2" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "comments ml-5" }, [
-              _vm.clockData.comments == null
-                ? _c("a", { attrs: { href: "#" } }, [
-                    _c("i", { staticClass: "far fa-comments mr-2" }),
-                    _vm._v(
-                      _vm._s(_vm.trans("localization.writeComments")) +
-                        "\n                        "
-                    )
-                  ])
-                : _c("a", { attrs: { href: "#" } }, [
-                    _c("i", { staticClass: "far fa-comments mr-2" }),
-                    _vm._v(
-                      _vm._s(_vm.trans("localization.comments")) +
-                        " 0\n                        "
-                    )
-                  ])
-            ])
-          ]),
+          _vm._m(0),
           _vm._v(" "),
           _c(
             "div",
@@ -64731,9 +64739,53 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "row border mt-5" }, [
+            _c("div", { staticClass: "col-12 delivery" }, [
+              _c("i", { staticClass: "fas fa-truck icon" }),
+              _vm._v(
+                " " +
+                  _vm._s(_vm.trans("localization.delivery")) +
+                  ":\n                    "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-5 offset-1" }, [
+              _c("div", { staticClass: "delivery-info" }, [
+                _c("p", { staticClass: "delivery-service-name" }, [
+                  _vm._v(_vm._s(_vm.trans("localization.novaPoshta")))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "delivery-details" }, [
+                  _vm._v(_vm._s(_vm.trans("localization.gettingNovaPoshta")))
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-5 offset-1" }, [
+              _c("div", { staticClass: "delivery-info" }, [
+                _c("p", { staticClass: "delivery-service-name" }, [
+                  _vm._v(_vm._s(_vm.trans("localization.ukrposhta")))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "delivery-details" }, [
+                  _vm._v(_vm._s(_vm.trans("localization.gettingUkrposhta")))
+                ])
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(2)
+          _c("div", { staticClass: "row border border-top-0" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("p", { staticClass: "payment" }, [
+                _c("i", { staticClass: "far fa-credit-card icon" }),
+                _vm._v(_vm._s(_vm.trans("localization.payment")) + ":")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "payment-info" }, [
+                _vm._v(_vm._s(_vm.trans("localization.paymentInfo")))
+              ])
+            ])
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -64779,31 +64831,13 @@ var render = function() {
                 },
                 [_vm._v(_vm._s(_vm.trans("localization.itemCharacteristics")))]
               )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "nav-link",
-                  attrs: {
-                    id: "images-tab",
-                    "data-toggle": "tab",
-                    href: "#images",
-                    role: "tab",
-                    "aria-controls": "images",
-                    "aria-selected": "false"
-                  }
-                },
-                [_vm._v(_vm._s(_vm.trans("localization.itemComments")))]
-              )
             ])
           ]
         ),
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "tab-content col-12", attrs: { id: "myTabContent" } },
+          { staticClass: "tab-content col-6", attrs: { id: "myTabContent" } },
           [
             _c(
               "div",
@@ -64865,69 +64899,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "stars" }, [
-      _c("i", { staticClass: "fas fa-star" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fas fa-star" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row border mt-5" }, [
-      _c("div", { staticClass: "col-12 delivery" }, [
-        _c("i", { staticClass: "fas fa-truck icon" }),
-        _vm._v(" Доставка:\n                    ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-5 offset-1" }, [
-        _c("div", { staticClass: "delivery-info" }, [
-          _c("p", { staticClass: "delivery-service-name" }, [
-            _vm._v("НОВА ПОШТА")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "delivery-details" }, [
-            _vm._v("Отримання: 1-2 дня")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-5 offset-1" }, [
-        _c("div", { staticClass: "delivery-info" }, [
-          _c("p", { staticClass: "delivery-service-name" }, [
-            _vm._v("УКРПОШТА")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "delivery-details" }, [
-            _vm._v("Отримання: 2-7 днів")
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row border border-top-0" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("p", { staticClass: "payment" }, [
-          _c("i", { staticClass: "far fa-credit-card icon" }),
-          _vm._v("Оплата:")
-        ]),
+    return _c("div", { staticClass: "d-flex flex-row mt-2" }, [
+      _c("div", { staticClass: "stars" }, [
+        _c("i", { staticClass: "fas fa-star" }),
         _vm._v(" "),
-        _c("p", { staticClass: "payment-info" }, [
-          _vm._v(
-            "Oплата при отриманні товару, кредитною картою або через Приват24"
-          )
-        ])
+        _c("i", { staticClass: "fas fa-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fas fa-star" })
       ])
     ])
   }
@@ -65230,7 +65212,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.product-name[data-v-2c4ae852]{\n    font-size: 1.1em;\n    font-family: 'Roboto Slab', serif;\n    color: #343a40;\n    line-height: 0.6;\n}\n.product-detail[data-v-2c4ae852]{\n    font-size: 0.9em;\n    line-height: 0;\n}\n.price[data-v-2c4ae852]{\n    font-size: 1.2em;\n}\n.cart-amount-input-text[data-v-2c4ae852]{\n    width: 40px;\n    display: inline-block;\n    padding: 2px 4px;\n    font-size: 1.2em;\n    line-height: 0;\n    text-align: center;\n}\n.cart-amount-button[data-v-2c4ae852]{\n    border: none;\n    font-size: 1.2em;\n    line-height: 0;\n    padding: 0 4px;\n    vertical-align: unset ;\n    color: #6c757d;\n}\n.cart-amount-button[data-v-2c4ae852]:hover {\n    color: #343a40;\n}\nth[data-v-2c4ae852], td[data-v-2c4ae852] {\n    text-align: center;\n    vertical-align: middle;\n}\n.cart-empty[data-v-2c4ae852]{\n    text-align: center;\n    height: 100px;\n}\n\n", ""]);
+exports.push([module.i, "\n.product-name[data-v-2c4ae852]{\n    font-size: 1.1em;\n    font-family: 'Roboto Slab', serif;\n    color: #343a40;\n    line-height: 0.6;\n}\n.product-detail[data-v-2c4ae852]{\n    font-size: 0.9em;\n    line-height: 0;\n}\n.price[data-v-2c4ae852]{\n    font-size: 1.2em;\n}\n.cart-amount-input-text[data-v-2c4ae852]{\n    width: 40px;\n    display: inline-block;\n    padding: 2px 4px;\n    font-size: 1.2em;\n    line-height: 0;\n    text-align: center;\n}\n.cart-amount-button[data-v-2c4ae852]{\n    border: none;\n    font-size: 1.2em;\n    line-height: 0;\n    padding: 0 4px;\n    vertical-align: unset ;\n    color: #6c757d;\n}\n.cart-amount-button[data-v-2c4ae852]:hover {\n    color: #343a40;\n}\nth[data-v-2c4ae852], td[data-v-2c4ae852] {\n    text-align: center;\n    vertical-align: middle;\n}\n.cart-empty[data-v-2c4ae852]{\n    text-align: center;\n    height: 100px;\n}\n.cart-total[data-v-2c4ae852]{\n    font-size: 1.2em;\n    font-weight: 600;\n}\n\n", ""]);
 
 // exports
 
@@ -65418,7 +65400,59 @@ var render = function() {
                   _c("div", { staticClass: "modal-body" }, [
                     _c("div", { staticClass: "container-fluid" }, [
                       _c("table", { staticClass: "table border-bottom" }, [
-                        _vm._m(1),
+                        _c("thead", [
+                          _c("tr", [
+                            _c("th", {
+                              staticClass: "border-0 d-none d-lg-block",
+                              attrs: { scope: "col" }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "th",
+                              {
+                                staticClass: "border-0 text-left",
+                                attrs: { scope: "col" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.trans("localization.productName"))
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "th",
+                              {
+                                staticClass: "border-0",
+                                attrs: { scope: "col" }
+                              },
+                              [_vm._v(_vm._s(_vm.trans("localization.price")))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "th",
+                              {
+                                staticClass: "border-0",
+                                attrs: { scope: "col" }
+                              },
+                              [_vm._v(_vm._s(_vm.trans("localization.qty")))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "th",
+                              {
+                                staticClass: "border-0",
+                                attrs: { scope: "col" }
+                              },
+                              [_vm._v(_vm._s(_vm.trans("localization.total")))]
+                            ),
+                            _vm._v(" "),
+                            _c("th", {
+                              staticClass: "border-0",
+                              attrs: { scope: "col" }
+                            })
+                          ])
+                        ]),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -65426,15 +65460,19 @@ var render = function() {
                             _vm._l(_vm.items, function(item) {
                               return [
                                 _c("tr", [
-                                  _c("td", { staticClass: "p-1" }, [
-                                    _c("img", {
-                                      staticClass: "img-fluid img-thumbnail",
-                                      attrs: {
-                                        src: _vm.imagesPath + item.logo_uuid,
-                                        alt: "Responsive image"
-                                      }
-                                    })
-                                  ]),
+                                  _c(
+                                    "td",
+                                    { staticClass: "p-1 d-none d-lg-block" },
+                                    [
+                                      _c("img", {
+                                        staticClass: "img-fluid img-thumbnail",
+                                        attrs: {
+                                          src: _vm.imagesPath + item.logo_uuid,
+                                          alt: "Responsive image"
+                                        }
+                                      })
+                                    ]
+                                  ),
                                   _vm._v(" "),
                                   _c("td", { staticClass: "text-left" }, [
                                     _c("p", { staticClass: "product-name" }, [
@@ -65525,8 +65563,13 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "d-flex justify-content-end" }, [
-                        _c("span", [
-                          _vm._v("Итого: " + _vm._s(_vm.totalPrice) + " грн")
+                        _c("span", { staticClass: "cart-total" }, [
+                          _vm._v(
+                            _vm._s(_vm.trans("localization.cartTotal")) +
+                              ": " +
+                              _vm._s(_vm.totalPrice) +
+                              " грн"
+                          )
                         ])
                       ])
                     ])
@@ -65597,7 +65640,16 @@ var render = function() {
                     ])
                   ])
                 ]
-              : [_vm._m(2), _vm._v(" "), _vm._m(3)]
+              : [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("h2", { staticClass: "cart-empty" }, [
+                      _c("i", { staticClass: "fas fa-shopping-cart" }),
+                      _vm._v(" " + _vm._s(_vm.trans("localization.cartEmpty")))
+                    ])
+                  ])
+                ]
           ],
           2
         )
@@ -65627,36 +65679,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "border-0", attrs: { scope: "col" } }),
-        _vm._v(" "),
-        _c(
-          "th",
-          { staticClass: "border-0 text-left", attrs: { scope: "col" } },
-          [_vm._v("Назва товару")]
-        ),
-        _vm._v(" "),
-        _c("th", { staticClass: "border-0", attrs: { scope: "col" } }, [
-          _vm._v("Ціна")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "border-0", attrs: { scope: "col" } }, [
-          _vm._v("Кількість")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "border-0", attrs: { scope: "col" } }, [
-          _vm._v("Сума")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "border-0", attrs: { scope: "col" } })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header border-bottom-0" }, [
       _c(
         "button",
@@ -65670,17 +65692,6 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-body" }, [
-      _c("h2", { staticClass: "cart-empty" }, [
-        _c("i", { staticClass: "fas fa-shopping-cart" }),
-        _vm._v(" Корзина пуста")
-      ])
     ])
   }
 ]
@@ -66163,7 +66174,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12 mb-3" }, [
+        _c("h2", [_vm._v(_vm._s(_vm.trans("localization.checkout")))])
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-12 col-md-6" }, [
@@ -66284,7 +66299,7 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-8" }, [
               _c("div", { staticClass: "input-group" }, [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "form-control",
@@ -66789,7 +66804,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col-12 col-md-6 offset-lg-1 col-lg-5" }, [
         _c("div", { staticClass: "container-fluid" }, [
-          _c("h4", [_vm._v("В корзині")]),
+          _c("h4", [_vm._v(_vm._s(_vm.trans("localization.in_the_cart")))]),
           _vm._v(" "),
           _c("table", { staticClass: "table table-sm mb-0" }, [
             _c(
@@ -66860,7 +66875,11 @@ var render = function() {
                         _c(
                           "span",
                           { staticClass: "d-inline-flex check-total-title" },
-                          [_vm._v("Итого: ")]
+                          [
+                            _vm._v(
+                              _vm._s(_vm.trans("localization.cartTotal")) + ": "
+                            )
+                          ]
                         ),
                         _vm._v(" "),
                         _c(
@@ -66877,7 +66896,20 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(2),
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-link",
+                attrs: {
+                  href: "#",
+                  "data-toggle": "modal",
+                  "data-target": "#cartModal"
+                }
+              },
+              [_vm._v(_vm._s(_vm.trans("localization.editCart")))]
+            )
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "row justify-content-center mt-3" }, [
             _c(
@@ -66886,7 +66918,7 @@ var render = function() {
                 staticClass: "btn btn-lg btn-success",
                 on: { click: _vm.createOrder }
               },
-              [_vm._v("Замовлення підтверджую")]
+              [_vm._v(_vm._s(_vm.trans("localization.confirmOrder")))]
             )
           ])
         ])
@@ -66924,7 +66956,7 @@ var render = function() {
                   [_vm._v(_vm._s(_vm.trans("localization.errorOrder")))]
                 ),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(1)
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -66957,37 +66989,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12 mb-3" }, [
-        _c("h2", [_vm._v("Оформление заказа")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("div", { staticClass: "input-group-text pt-0 pb-0" }, [_vm._v("+38")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-link",
-          attrs: {
-            href: "#",
-            "data-toggle": "modal",
-            "data-target": "#cartModal"
-          }
-        },
-        [_vm._v("Редагувати замовлення")]
-      )
     ])
   },
   function() {
@@ -67556,122 +67559,18 @@ if (false) {
 
 /***/ }),
 /* 130 */
-/***/ (function(module, exports) {
-
-$(document).ready(function () {
-    var links = $('.sidebar ul li a');
-    $.each(links, function (key, va) {
-        if (va.href == document.URL) {
-            $(this).addClass('active');
-        }
-    });
-});
-
-window.runToastmessage = function (text, type) {
-    type = type || 'success'; // "notice", "success", "warning", "error"
-    $().toastmessage('showToast', {
-        text: text,
-        sticky: false,
-        inEffectDuration: 600,
-        stayTime: 3000,
-        position: 'top-right',
-        type: type
-    });
-};
-
-/***/ }),
-/* 131 */
-/***/ (function(module, exports) {
-
-if (window.location.pathname == '/ru' || window.location.pathname == '/uk' || window.location.pathname == '/ru/shop' || window.location.pathname == '/uk/shop') {
-    var filterSlider = document.getElementById('filterSlider');
-    window.noUiSlider.create(filterSlider, {
-        start: [data.filter.minPrice, data.filter.maxPrice],
-        animate: true,
-        connect: true,
-        step: 1,
-        range: {
-            'min': data.filter.minPrice,
-            'max': data.filter.maxPrice
-        },
-        format: {
-            to: function to(value) {
-                return parseInt(value, 10);
-            },
-            from: function from(value) {
-                return parseInt(value, 10);
-            }
-        }
-    });
-
-    // Передати значення слайдеру в поля input
-    var filterPriceInput = [minPriceInput, maxPriceInput];
-    filterSlider.noUiSlider.on('update', function (values, handle) {
-        filterPriceInput[handle].value = values[handle];
-        minPriceInput.dispatchEvent(new Event('input'));
-        maxPriceInput.dispatchEvent(new Event('input'));
-    });
-
-    // Запустити подію change в полі input
-    filterSlider.noUiSlider.on('change', function (values, handle) {
-        minPriceInput.dispatchEvent(new Event('change'));
-    });
-
-    // Встановити мінімальне значення слайдеру із поля input
-    minPriceInput.addEventListener('change', function () {
-        filterSlider.noUiSlider.set([this.value, null]);
-    });
-
-    // Встановити максимальне значення слайдеру із поля input
-    maxPriceInput.addEventListener('change', function () {
-        filterSlider.noUiSlider.set([null, this.value]);
-    });
-}
-
-window.wait = function () {
-    var _this = this;
-
-    if (this.wait) {
-        return;
-    }
-    this.wait = true;
-    setTimeout(function () {
-        return _this.wait = false;
-    }, 1000);
-};
-
-/***/ }),
-/* 132 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 133 */,
-/* 134 */,
-/* 135 */,
-/* 136 */,
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
-/* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(146)
+  __webpack_require__(131)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(148)
+var __vue_script__ = __webpack_require__(133)
 /* template */
-var __vue_template__ = __webpack_require__(149)
+var __vue_template__ = __webpack_require__(134)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -67710,13 +67609,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 146 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(147);
+var content = __webpack_require__(132);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -67736,7 +67635,7 @@ if(false) {
 }
 
 /***/ }),
-/* 147 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -67750,7 +67649,7 @@ exports.push([module.i, "\nform[data-v-cc853652] {\n    margin-top: 1.2em;\n}\n#
 
 
 /***/ }),
-/* 148 */
+/* 133 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67851,7 +67750,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 149 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -67966,6 +67865,98 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-cc853652", module.exports)
   }
 }
+
+/***/ }),
+/* 135 */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+    var links = $('.sidebar ul li a');
+    $.each(links, function (key, va) {
+        if (va.href == document.URL) {
+            $(this).addClass('active');
+        }
+    });
+});
+
+window.runToastmessage = function (text, type) {
+    type = type || 'success'; // "notice", "success", "warning", "error"
+    $().toastmessage('showToast', {
+        text: text,
+        sticky: false,
+        inEffectDuration: 600,
+        stayTime: 3000,
+        position: 'top-right',
+        type: type
+    });
+};
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports) {
+
+if (window.location.pathname == '/ru' || window.location.pathname == '/uk' || window.location.pathname == '/ru/shop' || window.location.pathname == '/uk/shop') {
+    var filterSlider = document.getElementById('filterSlider');
+    window.noUiSlider.create(filterSlider, {
+        start: [data.filter.minPrice, data.filter.maxPrice],
+        animate: true,
+        connect: true,
+        step: 1,
+        range: {
+            'min': data.filter.minPrice,
+            'max': data.filter.maxPrice
+        },
+        format: {
+            to: function to(value) {
+                return parseInt(value, 10);
+            },
+            from: function from(value) {
+                return parseInt(value, 10);
+            }
+        }
+    });
+
+    // Передати значення слайдеру в поля input
+    var filterPriceInput = [minPriceInput, maxPriceInput];
+    filterSlider.noUiSlider.on('update', function (values, handle) {
+        filterPriceInput[handle].value = values[handle];
+        minPriceInput.dispatchEvent(new Event('input'));
+        maxPriceInput.dispatchEvent(new Event('input'));
+    });
+
+    // Запустити подію change в полі input
+    filterSlider.noUiSlider.on('change', function (values, handle) {
+        minPriceInput.dispatchEvent(new Event('change'));
+    });
+
+    // Встановити мінімальне значення слайдеру із поля input
+    minPriceInput.addEventListener('change', function () {
+        filterSlider.noUiSlider.set([this.value, null]);
+    });
+
+    // Встановити максимальне значення слайдеру із поля input
+    maxPriceInput.addEventListener('change', function () {
+        filterSlider.noUiSlider.set([null, this.value]);
+    });
+}
+
+window.wait = function () {
+    var _this = this;
+
+    if (this.wait) {
+        return;
+    }
+    this.wait = true;
+    setTimeout(function () {
+        return _this.wait = false;
+    }, 1000);
+};
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

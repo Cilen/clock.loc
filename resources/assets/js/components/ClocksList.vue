@@ -1,8 +1,14 @@
 <template>
     <div>
         <div class="container">
+            <div class="row mt-3 justify-content-start d-lg-none">
+                <div class="col-3 text-center">
+                    <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="true" aria-controls="collapseFilters"><i class="fas fa-filter"></i> Фильтр</button>
+                </div>
+
+            </div>
             <div class="row">
-                <div class="col-12 col-lg-3">
+                <div id="collapseFilters" class="col-12 col-lg-3 collapse d-lg-block">
                     <filters v-bind:filter="filter"
                              v-on:query="sendUpdate($event)">
 
@@ -30,11 +36,11 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                         </div>
-                                        <div class="comments">
-                                            <a href="#">
-                                                <i class="far fa-comments mr-2"></i>{{ trans('localization.comments')}} 0
-                                            </a>
-                                        </div>
+                                        <!--<div class="comments">-->
+                                            <!--<a href="#">-->
+                                                <!--<i class="far fa-comments mr-2"></i>{{ trans('localization.comments')}} 0-->
+                                            <!--</a>-->
+                                        <!--</div>-->
                                     </div>
                                     <div class="prices-wrapper d-flex">
                                         <div class="prices d-flex flex-column mr-auto justify-content-end">

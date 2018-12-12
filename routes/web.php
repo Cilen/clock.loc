@@ -21,6 +21,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
     Route::get('/', 'ClockController@mainPage')->name('main');
     Route::get('/shop', 'ClockController@shopPage')->name('shop');
     Route::get('/shop/{id}', 'ClockController@show');
+    Route::get('checkout', ['uses' => 'OrderController@create', 'as' => 'checkout']);
+    Route::get('checkout/success', ['uses' => 'OrderController@success', 'as' => 'checkoutSuccess']);
 
     // Localization in Vue
     Route::get('/js/lang.js', 'LocalizationController@getLocalizationFile')->name('assets.lang');
@@ -34,14 +36,12 @@ Route::post('cart/add', ['uses' => 'ClockController@addToCart', 'as' => 'addToCa
 Route::post('cart/update', ['uses' => 'ClockController@updateCart', 'as' => 'updateCart']);
 Route::post('cart/remove', ['uses' => 'ClockController@removeFromCart', 'as' => 'removeFromCart']);
 Route::get('cart', ['uses' => 'ClockController@getCart', 'as' => 'getCart']);
-Route::get('checkout', ['uses' => 'OrderController@create', 'as' => 'checkout']);
-Route::get('checkout/success', ['uses' => 'OrderController@success', 'as' => 'checkoutSuccess']);
 Route::get('nova-poshta/get-warehouses', 'OrderController@getWarehouses');
 Route::post('nova-poshta/get-warehouses', 'OrderController@getWarehouses');
 
 
 
-
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Auth::routes();
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::get('/', 'AdminController@index');

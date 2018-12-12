@@ -7,9 +7,9 @@
                     </a>
                 </div>
                 <div class="col-6 col-md-6 col-lg-4 offset-md-2 offset-lg-4 phones">
-                    <p class="phones-title d-none d-sm-inline-flex">Консультації по телефону:
+                    <p class="phones-title d-none d-sm-inline-flex">@lang('localization.infoPhone'):
                     <p class="phones-number"><span class="d-flex d-sm-inline-flex">(093) 577-85-19,</span> (095) 640-01-98<span class="d-flex d-sm-inline-flex"></span></p>
-                    <a href="#" class="schedule-link" data-toggle="modal" data-target="#workSchedule">Графік роботи <i class="far fa-clock"></i></a>
+                    <a href="#" class="schedule-link" data-toggle="modal" data-target="#workSchedule">@lang('localization.workSchedule') <i class="far fa-clock"></i></a>
                 </div>
             </div>
         </div>
@@ -25,14 +25,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header border-bottom-0">
-                <h5 class="modal-title ">Графік роботи контакт-центру</h5>
+                <h5 class="modal-title ">@lang('localization.workScheduleInfoCenter')</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p class="work-time">з 9:00 до 22:00</p>
-                <p class="schedule-note">Внимание! Заказы через сайт принимаются круглосуточно, по выходным и в праздники!</p>
+                <p class="work-time">@lang('localization.from') 9:00 до 22:00</p>
+                <p class="schedule-note">@lang('localization.scheduleNote')</p>
             </div>
         </div>
     </div>

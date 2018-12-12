@@ -4,18 +4,28 @@ return [
     //Header
     'main' => 'Главная',
     'blog' => 'Блог',
-    'payment' => 'Оплата и доставка',
+    'paymentAndDelivery' => 'Оплата и доставка',
     'contacts' => 'Контакты',
     'search' => 'Поиск',
     'in_the_cart' => 'В корзине',
     'total' => 'Сумма',
+    '' => '',
 
-    //Card
+    //HeaderMin
+    'infoPhone' => 'Консультации по телефону',
+    'workSchedule' => 'График работы',
+    'workScheduleInfoCenter' => 'График работы коллцентра',
+    'scheduleNote' => 'Внимание! Заказы через сайт принимаются круглосуточно, по выходным и в праздники!',
+    'from' => 'c',
+    '' => '',
+
+    //Card (плитка)
     'comments' => 'отзывов:',
     'bay' => 'Купить',
     '' => '',
 
     //Filter
+    'filter' => 'Фильтр',
     'price' => 'Цена',
     'style' => 'Стиль',
     'klasychnyy' => 'Классический',
@@ -47,6 +57,11 @@ return [
     'itemDescriptions' => 'Описание',
     'itemCharacteristics' => 'Характеристики',
     'itemComments' => 'Отзывы',
+    'delivery' => 'Доставка',
+    'gettingNovaPoshta' => 'Получение: 1-2 дня',
+    'gettingUkrposhta' => 'Получение: 2-7 дней',
+    'payment' => 'Оплата',
+    'paymentInfo' => 'Oплата при получении товара, кредитной картой или через Приват24',
     '' => '',
 
     //Descriptions, characteristics
@@ -67,13 +82,18 @@ return [
     'polikarbonatne' => 'Поликарбонатное',
     '' => '',
 
-    //Cart
+    //Cart (корзина)
     'cart' => 'Корзина',
     'backToShop' => 'Продолжить покупки',
     'toOrder' => 'Оформить заказ',
+    'cartEmpty' => 'Ваша корзина пуста...',
+    'cartTotal' => 'Итого',
+    'qty' => 'Количество',
+    'productName' => 'Наименование товара',
     '' => '',
 
     //Checkout
+    'checkout' => 'Оформление заказа',
     'firstName' => 'Имя',
     'lastName' => 'Фамилия',
     'phone' => 'Мобильный телефон',
@@ -92,6 +112,9 @@ return [
     'errorOrder' => 'Ошибка',
     'errorOrderText' => 'При выполнении запроса произошла ошибка. Попробуйте повторить позднее или позвоните к нам. Приносим извинения за временные неудобства',
     'ok' => 'OK',
+    'editCart' => 'Редактировать заказ',
+    'confirmOrder' => 'Заказ подтверждаю',
+    '' => '',
 
     //CheckoutSuccess
     'checkoutSuccess' => 'Спасибо, ваш заказ принят',
