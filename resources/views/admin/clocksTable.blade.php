@@ -4,16 +4,15 @@
 @section('content')
 
 
-    <clocks-table>
+    <clocks-table v-bind:clocks-data='{!! json_encode($data) !!}'
+                  v-bind:clocks-url='"{!! route('clocks.index') !!}"'
+                  v-bind:shop-url='"{!! route('shop') !!}"'
+    >
     </clocks-table>
 
 
 @endsection
 @section('scripts')
-    <script>
-        var clockUrl = "{!! url('/admin/clocks') !!}";
-        var data = {!! json_encode($data) !!};
-    </script>
 
 
 @endsection

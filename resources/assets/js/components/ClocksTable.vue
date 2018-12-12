@@ -6,22 +6,22 @@
                     <th scope="col">ID</th>
                     <th scope="col">Назва годинника</th>
                     <th scope="col">Виробник</th>
-                    <th scope="col">Ціна</th>
-                    <th scope="col">Стара ціна</th>
+                    <th scope="col" class="price-column">Ціна</th>
+                    <th scope="col" class="price-column">Стара ціна</th>
                     <th scope="col">Наявність</th>
                     <th scope="col">Приховати</th>
-                    <th scope="col">Дії</th>
+                    <th scope="col" class="edit-column">Дії</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(clock, key) in clocks">
                     <th scope="row">{{clock.clock_id}}</th>
-                    <td><a v-bind:href="'/clocks/'+clock.clock_id">{{clock.name}}</a></td>
+                    <td><a v-bind:href="shopUrl+'/'+clock.clock_id">{{clock.name}}</a></td>
                     <td>{{clock.producer}}</td>
-                    <td>
+                    <td class="price-column">
                         <input class="form-control form-control-sm" type="number" v-model="clock.price" v-on:input="toInt(clock); setUpdate(clock);">
                     </td>
-                    <td>
+                    <td class="price-column">
                         <input class="form-control form-control-sm" type="number" v-model="clock.old_price" v-on:input="toInt(clock); setUpdate(clock);">
                     </td>
                     <td>
@@ -38,7 +38,7 @@
                             <option value="1">Так</option>
                         </select>
                     </td>
-                    <td>
+                    <td class="edit-column">
                         <button type="button" class="btn btn-danger btn-sm" title="Видалити годинник" v-on:click="showDeleteModal(clock)">
                             <i class="far fa-trash-alt"></i>
                         </button>
@@ -78,10 +78,11 @@
     export default {
         data: function () {
             return {
-                clocks: data,
+                clocks: [],
                 selectedDeleteClock: ""
             }
         },
+        props: ['clocksData', 'clocksUrl', 'shopUrl'],
         methods: {
             toInt: function (clock) {
                 clock.price = parseInt(clock.price, 10);
@@ -93,7 +94,7 @@
                 }
                 this.wait = true;
                 setTimeout(() => this.wait = false, 1000);
-                let updateUrl = clockUrl + "/" + clock.clock_id+"/update";
+                let updateUrl = this.clocksUrl + "/" + clock.clock_id+"/update";
                 axios({
                     method: 'post',
                     url: updateUrl,
@@ -138,7 +139,7 @@
                 }
                 this.wait = true;
                 setTimeout(() => this.wait = false, 1000);
-                let url = clockUrl + "/" + clock.clock_id +"/destroy";
+                let url = clocksUrl + "/" + clock.clock_id +"/destroy";
                 axios({
                     method: 'post',
                     url: url,
@@ -160,7 +161,10 @@
             },
             setUpdate: function (clock) {
                 clock.updated_at = "now";
-             }
+             },
+        },
+        created: function(){
+            this.clocks = this.clocksData;
         },
 
 
@@ -173,5 +177,11 @@
     }
     #deleteModal h5 {
         color: white;
+    }
+    .price-column{
+        max-width: 90px;
+    }
+    .edit-column{
+        width: 110px;
     }
 </style>

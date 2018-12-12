@@ -61910,7 +61910,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\nform[data-v-181ca87c] {\n    margin-top: 1.2em;\n}\n#deleteModal h5[data-v-181ca87c] {\n    color: white;\n}\n", ""]);
+exports.push([module.i, "\nform[data-v-181ca87c] {\n    margin-top: 1.2em;\n}\n#deleteModal h5[data-v-181ca87c] {\n    color: white;\n}\n.price-column[data-v-181ca87c]{\n    max-width: 90px;\n}\n.edit-column[data-v-181ca87c]{\n    width: 110px;\n}\n", ""]);
 
 // exports
 
@@ -61999,22 +61999,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function (_data) {
-        function data() {
-            return _data.apply(this, arguments);
-        }
-
-        data.toString = function () {
-            return _data.toString();
-        };
-
-        return data;
-    }(function () {
+    data: function data() {
         return {
-            clocks: data,
+            clocks: [],
             selectedDeleteClock: ""
         };
-    }),
+    },
+    props: ['clocksData', 'clocksUrl', 'shopUrl'],
     methods: {
         toInt: function toInt(clock) {
             clock.price = parseInt(clock.price, 10);
@@ -62030,7 +62021,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             setTimeout(function () {
                 return _this.wait = false;
             }, 1000);
-            var updateUrl = clockUrl + "/" + clock.clock_id + "/update";
+            var updateUrl = this.clocksUrl + "/" + clock.clock_id + "/update";
             axios({
                 method: 'post',
                 url: updateUrl,
@@ -62076,7 +62067,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             setTimeout(function () {
                 return _this2.wait = false;
             }, 1000);
-            var url = clockUrl + "/" + clock.clock_id + "/destroy";
+            var url = clocksUrl + "/" + clock.clock_id + "/destroy";
             axios({
                 method: 'post',
                 url: url,
@@ -62096,6 +62087,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setUpdate: function setUpdate(clock) {
             clock.updated_at = "now";
         }
+    },
+    created: function created() {
+        this.clocks = this.clocksData;
     }
 
 });
@@ -62121,14 +62115,14 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("td", [
-              _c("a", { attrs: { href: "/clocks/" + clock.clock_id } }, [
+              _c("a", { attrs: { href: _vm.shopUrl + "/" + clock.clock_id } }, [
                 _vm._v(_vm._s(clock.name))
               ])
             ]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(clock.producer))]),
             _vm._v(" "),
-            _c("td", [
+            _c("td", { staticClass: "price-column" }, [
               _c("input", {
                 directives: [
                   {
@@ -62158,7 +62152,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("td", [
+            _c("td", { staticClass: "price-column" }, [
               _c("input", {
                 directives: [
                   {
@@ -62296,7 +62290,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("td", [
+            _c("td", { staticClass: "edit-column" }, [
               _c(
                 "button",
                 {
@@ -62410,15 +62404,21 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Виробник")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Ціна")]),
+        _c("th", { staticClass: "price-column", attrs: { scope: "col" } }, [
+          _vm._v("Ціна")
+        ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Стара ціна")]),
+        _c("th", { staticClass: "price-column", attrs: { scope: "col" } }, [
+          _vm._v("Стара ціна")
+        ]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Наявність")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Приховати")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Дії")])
+        _c("th", { staticClass: "edit-column", attrs: { scope: "col" } }, [
+          _vm._v("Дії")
+        ])
       ])
     ])
   },
