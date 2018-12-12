@@ -42,8 +42,26 @@ Route::post('nova-poshta/get-warehouses', 'OrderController@getWarehouses');
 
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-Auth::routes();
+Route::group(['namespace' => 'Auth'], function () {
+    // Authentication Routes...
+    Route::get('login', 'LoginController@showLoginForm')->name('login');
+    Route::post('login', 'LoginController@login');
+    Route::post('logout', 'LoginController@logout')->name('logout');
+
+    // Registration Routes...
+    Route::get('register', function(){abort(404);})->name('register');
+    Route::post('register', function(){abort(404);});
+
+    // Password Reset Routes...
+    Route::get('password/reset', function(){abort(404);})->name('password.request');
+    Route::post('password/email', function(){abort(404);})->name('password.email');
+    Route::get('password/reset/{token}', function(){abort(404);})->name('password.reset');
+    Route::post('password/reset', function(){abort(404);});
+});
+
+//Auth::routes();
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
+
     Route::get('/', 'AdminController@index');
 
     Route::put('clocks/{id}/update', 'ClockController@updateFromTable');
