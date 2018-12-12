@@ -1,11 +1,15 @@
 <template>
     <div>
         <p class="filter-title mt-3">{{ trans('localization.price')}}</p>
-        <div class="d-flex">
-            <input id="minPriceInput" step="1" type="text" class="form-control form-control-sm mr-2" v-model="minPrice" v-on:change="sendUpdatedString">
-            <input id="maxPriceInput" step="1" type="text" class="form-control form-control-sm" v-model="maxPrice" v-on:change="sendUpdatedString">
+        <div class="row">
+            <div class="col-6">
+                <input id="minPriceInput" step="1" type="text" class="form-control form-control-sm" v-model="minPrice" v-on:change="sendUpdatedString">
+            </div>
+            <div class="col-6">
+                <input id="maxPriceInput" step="1" type="text" class="form-control form-control-sm" v-model="maxPrice" v-on:change="sendUpdatedString">
+            </div>
         </div>
-        <div id="filterSlider" class="mt-3"></div>
+        <div id="filterSlider" class="mt-3 col-12"></div>
         <div>
             <p class="filter-title mt-4">{{ trans('localization.style')}}</p>
             <div class="form-check">
