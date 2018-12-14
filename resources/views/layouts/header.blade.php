@@ -7,12 +7,12 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
-                <div class="col-2  d-lg-none">
+                <div class="col-2 d-lg-none">
                     <a class="navbar-brand d-lg-none ml-4 " href="/">
                         <img src="/images/logo.png" width="60" height="30" alt="">
                     </a>
                 </div>
-                <div class="col-2 order-lg-0">
+                <div class="col-2 col-lg-3 order-lg-0">
                     <div class="d-none d-lg-flex justify-content-start ">
                         <a class="mr-2" href="{{ LaravelLocalization::getLocalizedURL("uk") }}">
                             <img src="/images/ukraine.png" alt="Українська" title="Українська">
@@ -42,16 +42,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="collapse navbar-collapse col-lg-7 order-lg-1" id="navbarToggler">
+                <div class="collapse navbar-collapse col-lg-6 order-lg-1" id="navbarToggler">
                     <ul class="navbar-nav mt-2 mt-lg-0">
+                        {{--<li class="nav-item mr-2">--}}
+                            {{--<a class="nav-link" href="#">@lang('localization.blog')</a>--}}
+                        {{--</li>--}}
                         <li class="nav-item mr-2">
-                            <a class="nav-link" href="#">@lang('localization.blog')</a>
+                            <a class="nav-link" href="{{route('paymentAndDelivery')}}">@lang('localization.paymentAndDelivery')</a>
                         </li>
                         <li class="nav-item mr-2">
-                            <a class="nav-link" href="#">@lang('localization.paymentAndDelivery')</a>
-                        </li>
-                        <li class="nav-item mr-2">
-                            <a class="nav-link" href="#">@lang('localization.contacts')</a>
+                            <a class="nav-link" href="{{route('contacts')}}">@lang('localization.contacts')</a>
                         </li>
                     </ul>
                 </div>

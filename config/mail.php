@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'cilen@ukr.net'),
-        'name' => env('MAIL_FROM_NAME', 'Clock.loc'),
+        'address' => env('MAIL_FROM_ADDRESS', 'clockshop.pro@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Clock Shop'),
     ],
 
     /*
@@ -119,5 +119,7 @@ return [
             resource_path('views/vendor/emails'),
         ],
     ],
+
+    'to' => env('MAIL_RECIPIENT', 'cilen@ukr.net'),
 
 ];

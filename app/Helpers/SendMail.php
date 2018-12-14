@@ -16,8 +16,9 @@ class SendMail
             'totalPrice' => $totalPrice,
             'time' => $time), function($message)
         {
-            $message->from('emails@clock.loc', 'Robot')->subject('Нове замовлення');
-            $message->to(env('MAIL_RECIPIENT'));
+            $message->subject('Нове замовлення');
+            $message->from(config('mail.from.address'), config('mail.from.name'));
+            $message->to(config('mail.to'));
         });
     }
 
@@ -26,8 +27,9 @@ class SendMail
         $time = date('d-m-Y H:i:s');
         Mail::send('emails.feedback', array('firstName' => $firstName, 'phone' => $phone, 'time' => $time), function($message)
         {
-            $message->from('emails@clock.loc', 'Robot')->subject('Зворотній зв\'язок');
-            $message->to(env('MAIL_RECIPIENT'));
+            $message->subject('Зворотній зв\'язок');
+            $message->from(config('mail.from.address'), config('mail.from.name'));
+            $message->to(config('mail.to'));
         });
     }
 }

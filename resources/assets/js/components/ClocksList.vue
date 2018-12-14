@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <div class="row mt-3 justify-content-start d-lg-none">
+            <div class="row justify-content-start d-lg-none">
                 <div class="col-3 text-center">
                     <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="true" aria-controls="collapseFilters"><i class="fas fa-filter"></i> Фильтр</button>
                 </div>

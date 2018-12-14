@@ -60,3 +60,40 @@
 .modal-lg {
   max-width: 90% !important;
 }
+
+#paymentAndDelivery{
+  h3 {
+    margin-top: 2em;
+  }
+  h6 {
+    font-weight: 600;
+    margin-top: 1em;
+  }
+}
+#contacts{
+  h1{
+    margin-bottom: 2em;
+  }
+  h5{
+    font-weight: 600;
+    margin-bottom: 1em;
+  }
+  .phones{
+    .lifecell{
+      background-image: url("/images/lifecell.png");
+    }
+    .kyivstar{
+      background-image: url("/images/kyivstar.png");
+    }
+    .vodafone{
+      background-image: url("/images/vodafone.png");
+    }
+    .lifecell, .kyivstar, .vodafone{
+      background-repeat: no-repeat;
+      height: 24px;
+      padding-left: 32px;
+      margin-top: 2px;
+      margin-bottom: 2px;
+    }
+  }
+}

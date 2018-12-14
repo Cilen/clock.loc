@@ -23,6 +23,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
     Route::get('/shop/{id}', 'ClockController@show');
     Route::get('checkout', ['uses' => 'OrderController@create', 'as' => 'checkout']);
     Route::get('checkout/success', ['uses' => 'OrderController@success', 'as' => 'checkoutSuccess']);
+    Route::view('payment-and-delivery', 'paymentAndDelivery')->name('paymentAndDelivery');
+    Route::view('contacts', 'contacts')->name('contacts');
 
     // Localization in Vue
     Route::get('/js/lang.js', 'LocalizationController@getLocalizationFile')->name('assets.lang');
@@ -59,7 +61,7 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('password/reset', function(){abort(404);});
 });
 
-//Auth::routes();
+
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
 
     Route::get('/', 'AdminController@index');
@@ -80,6 +82,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
 
     Route::get('feedbacks/old', 'FeedbackController@oldFeedbacks');
     Route::resource('feedbacks', 'FeedbackController');
+
+    Route::get('clear', function(){
+        Artisan::call('cache:clear');
+        Artisan::call('view:clear');
+        Artisan::call('route:clear');
+        Artisan::call('config:cache');
+    });
 
 
 

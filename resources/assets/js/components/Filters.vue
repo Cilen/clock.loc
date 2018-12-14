@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p class="filter-title mt-3">{{ trans('localization.price')}}</p>
+        <p class="filter-title">{{ trans('localization.price')}}</p>
         <div class="row">
             <div class="col-6">
                 <input id="minPriceInput" step="1" type="text" class="form-control form-control-sm" v-model="minPrice" v-on:change="sendUpdatedString">
