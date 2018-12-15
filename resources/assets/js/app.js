@@ -111,6 +111,7 @@ Vue.component('orders-table', require('./components/OrdersTable.vue')); //Адм
 Vue.component('filters', require('./components/Filters.vue')); //Фільтри
 Vue.component('clock-page', require('./components/ClockPage.vue')); //Сторінка конкретного товару
 Vue.component('cart-button', require('./components/CartButton.vue')); //Кнопка корзини
+Vue.component('cart-button-min', require('./components/CartButtonMin.vue')); //Кнопка (зменшена) корзини
 Vue.component('cart', require('./components/Cart.vue')); //Корзина
 Vue.component('checkout', require('./components/Checkout')); //Оформлення заказів
 Vue.component('feedback-modal', require('./components/FeedbackModal')); //Зворотній звязок (модальне вікно)

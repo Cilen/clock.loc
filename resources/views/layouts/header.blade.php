@@ -2,17 +2,15 @@
     <div class="top-line">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light bg-light p-0 row">
-                <div class="col-1  d-lg-none">
+                <div class="col-8 col-md-5 d-lg-none">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                </div>
-                <div class="col-2 d-lg-none">
-                    <a class="navbar-brand d-lg-none ml-4 " href="/">
+                    <a class="navbar-brand d-lg-none ml-4 mr-0" href="/">
                         <img src="/images/logo.png" width="60" height="30" alt="">
                     </a>
                 </div>
-                <div class="col-2 col-lg-3 order-lg-0">
+                <div class="collapse navbar-collapse col-lg-3 order-lg-0">
                     <div class="d-none d-lg-flex justify-content-start ">
                         <a class="mr-2" href="{{ LaravelLocalization::getLocalizedURL("uk") }}">
                             <img src="/images/ukraine.png" alt="Українська" title="Українська">
@@ -22,23 +20,21 @@
                         </a>
                     </div>
                 </div>
-                <form class="form-inline col-3 col-md-5 col-lg-3 order-lg-2">
-                    <input class="form-control btn-sm d-none d-md-block w-100" type="search" placeholder="@lang('localization.search')" aria-label="@lang('localization.search')">
-                </form>
-                <div class="mobile-links d-lg-none col-4 col-md-2">
+                <div class="d-none d-md-inline-block col-md-4 col-lg-3 order-lg-2">
+                    <form class="form-inline">
+                        <input class="form-control btn-sm d-none d-md-block w-100" type="search" placeholder="@lang('localization.search')" aria-label="@lang('localization.search')">
+                    </form>
+                </div>
+
+                <div class="mobile-links d-lg-none col-4 col-md-3">
                     <div class="row">
                         <div class="col-6">
-                            <a href="#">
+                            <a href="#" data-toggle="modal" data-target="#feedbackModal">
                                 <i class="fas fa-phone"></i>
                             </a>
                         </div>
                         <div class="col-6">
-                            <a href="#" data-toggle="modal" data-target="#cartModal">
-                                <i class="fas fa-shopping-cart"></i>
-                                @if(!! session()->has("cart"))
-                                    <span class='badge badge-warning' id='lblCartCount'>{!! session()->get("cart")->totalQty !!}</span>
-                                @endif
-                            </a>
+                            <cart-button-min></cart-button-min>
                         </div>
                     </div>
                 </div>

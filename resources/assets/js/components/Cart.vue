@@ -1,52 +1,38 @@
 <template>
     <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModal" aria-hidden="true">
 
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <template v-if="totalQty !==0">
                     <div class="modal-header">
                         <h5 class="modal-title">{{ trans('localization.cart')}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button btn-lg" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
 
-                            <div class="container-fluid">
-                                <table class="table border-bottom">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col" class="border-0 d-none d-lg-block"></th>
-                                        <th scope="col" class="border-0 text-left">{{ trans('localization.productName')}}</th>
-                                        <th scope="col" class="border-0">{{ trans('localization.price')}}</th>
-                                        <th scope="col" class="border-0">{{ trans('localization.qty')}}</th>
-                                        <th scope="col" class="border-0">{{ trans('localization.total')}}</th>
-                                        <th scope="col" class="border-0"></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
+                            <div class="container">
                                     <template v-for="item in items">
-                                        <tr>
-                                            <td class="p-1 d-none d-lg-block"><img :src="imagesPath+item.logo_uuid" class="img-fluid img-thumbnail" alt="Responsive image"></td>
-                                            <td class="text-left">
+                                        <div class="row border py-2 mb-2">
+                                            <div class="col-4 col-md-2 order-0"><img :src="imagesPath+item.logo_uuid" class="img-fluid img-thumbnail" alt="Responsive image"></div>
+                                            <div class="col-6 col-md-4 order-1">
                                                 <p class="product-name">{{item.name}}</p>
+                                                <p class="price d-none d-sm-inline">{{item.price}} грн</p>
                                                 <p class="product-detail">{{ trans('localization.productCode')}}: {{item.clockId}}</p>
-                                            </td>
-                                            <td class="price">{{item.price}} грн</td>
-                                            <td>
+                                            </div>
+                                            <div class="col-8 offset-4 offset-md-0 col-md-3 align-self-center order-3 amount">
                                                 <a href="#" class="btn cart-amount-button" name="minus"v-on:click="minusOneFromCart(item)"><i class="fas fa-minus"></i></a>
                                                 <input name="quantity" type="text" class="form-control cart-amount-input-text" v-bind:value="item.qty">
                                                 <a href="#" class="btn cart-amount-button" name="plus" v-on:click="plusOneToCart(item)"><i class="fas fa-plus"></i></a>
-                                            </td>
-                                            <td class="price">{{item.total}} грн</td>
-                                            <td>
+                                                <span class="cart-amount-text">шт.</span>
+                                            </div>
+                                            <div class="col-8 offset-4 offset-md-0 col-md-2 price align-self-center order-4">{{item.total}} грн</div>
+                                            <div class="col-2 col-md-1 order-2 order-md-4 d-flex justify-content-end align-items-start">
                                                 <button type="button" class="btn btn-outline-danger border-0" name="remove" v-on:click="removeFromCart(item)"><i class="fas fa-times"></i></button>
-                                            </td>
-                                        </tr>
+                                            </div>
+                                        </div>
                                     </template>
-
-                                    </tbody>
-                                </table>
                                 <div class="d-flex justify-content-end">
                                     <span class="cart-total">{{ trans('localization.cartTotal')}}: {{totalPrice}} грн</span>
                                 </div>
@@ -55,10 +41,10 @@
                     <div class="modal-footer">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-12 col-sm-6 col-lg-5">
+                                <div class="col-12 col-sm-6 col-lg-5 mb-1">
                                     <button type="button" class="btn btn-outline-primary btn-lg w-100 px-0" data-dismiss="modal">{{ trans('localization.backToShop')}}</button>
                                 </div>
-                                <div class="col-12 col-sm-6 col-lg-5 offset-lg-2">
+                                <div class="col-12 col-sm-6 col-lg-5 offset-lg-2 mb-1">
                                     <a v-if="currentUrl !== '/checkout'" :href="checkoutUrl" class="btn btn-success btn-lg w-100 px-0" role="button">{{ trans('localization.toOrder')}}</a>
                                     <a v-else href="#" class="btn btn-success btn-lg w-100 px-0" role="button" data-dismiss="modal">{{ trans('localization.toOrder')}}</a>
                                 </div>
@@ -140,16 +126,16 @@
 <style scoped>
     .product-name{
         font-size: 1.1em;
-        font-family: 'Roboto Slab', serif;
         color: #343a40;
-        line-height: 0.6;
     }
     .product-detail{
         font-size: 0.9em;
-        line-height: 0;
     }
     .price{
-        font-size: 1.2em;
+        font-size: 1em;
+    }
+    .product-name, .product-detail, .price, .amount{
+        margin-bottom: 0.4em;
     }
     .cart-amount-input-text{
         width: 40px;
@@ -170,6 +156,9 @@
     }
     .cart-amount-button:hover {
         color: #343a40;
+    }
+    .cart-amount-text{
+        font-size: 1.2em;
     }
     th, td {
         text-align: center;

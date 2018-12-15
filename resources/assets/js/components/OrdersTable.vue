@@ -16,7 +16,7 @@
                 <tr v-for="(order, key) in orders">
                     <th scope="row">{{order.order_id}}</th>
                     <td>
-                        {{order.client_last_name}} {{order.client_last_name}}
+                        {{order.client_last_name}} {{order.client_first_name}}
 
                     </td>
                     <td>
