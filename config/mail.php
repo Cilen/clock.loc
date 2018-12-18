@@ -122,4 +122,5 @@ return [
 
     'to' => env('MAIL_RECIPIENT', 'cilen@ukr.net'),
 
+
 ];

@@ -176,6 +176,20 @@
                             slidesToShow: 4,
                             slidesToScroll: 1
                         }
+                    },
+                    {
+                        breakpoint: 450,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 360,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
                     }
                     // You can unslick at a given breakpoint now by adding:
                     // settings: "unslick"
