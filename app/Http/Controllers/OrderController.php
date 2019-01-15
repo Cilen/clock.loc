@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Clock;
 use App\Order;
+use App\Jobs\SendOrderEmail;
 use Illuminate\Http\Request;
 use NovaPoshta\ApiModels\Address;
 use NovaPoshta\MethodParameters\Address_getWarehouses;
@@ -78,7 +79,8 @@ class OrderController extends Controller
         $request->session()->put('orderId', $order->order_id);
         $request->session()->put('payMethod', $order->pay_method);
         $request->session()->put('confirmedCart', true);
-        $mail->orderMail($request->input('firstName'), $request->input('lastName'), $request->input('phone'), $cart->items, $cart->totalPrice);
+        dispatch(new SendOrderEmail($order, $cart->items));
+//        $mail->orderMail($request->input('firstName'), $request->input('lastName'), $request->input('phone'), $cart->items, $cart->totalPrice);
         return response()->json('Created', 201);
     }
 

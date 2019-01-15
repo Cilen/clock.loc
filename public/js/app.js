@@ -31466,6 +31466,11 @@ window.store = new Vuex.Store({
             state.totalPrice = payload.totalPrice;
             state.totalQty = payload.totalQty;
         },
+        updateState: function updateState(state, payload) {
+            state.items = payload.items;
+            state.totalPrice = payload.totalPrice;
+            state.totalQty = payload.totalQty;
+        },
         updateClientInfo: function updateClientInfo(state, clientInfo) {
             state.clientInfo = clientInfo;
         }
@@ -31595,6 +31600,20 @@ var app = new Vue({
 
 __webpack_require__(140);
 __webpack_require__(141);
+
+// window.onpageshow = function(event) {
+//     if (event.persisted) {
+//         window.location.reload()
+//         console.log('dfdfd');
+//     }
+// };
+
+// if (!!window.performance && window.performance.navigation.type === 2) {
+//     // value 2 means "The page was accessed by navigating into the history"
+//     console.log('Reloading');
+//     // window.location.reload(); // reload whole page
+//     $('cartButton').attr('src', function () { vm.$forceUpdate() }); // reload only iframes
+// }
 
 /***/ }),
 /* 17 */
@@ -65026,7 +65045,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -65059,13 +65078,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {};
     },
-    computed: {
+    methods: {
         totalPrice: function totalPrice() {
             return this.$store.getters.getTotalPrice;
         },
         totalQty: function totalQty() {
             return this.$store.getters.getTotalQty;
         }
+    },
+    created: function created() {
+        if (!!window.performance && window.performance.navigation.type === 2) {}
     }
 });
 
@@ -65077,47 +65099,54 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-3 d-flex align-items-center" }, [
-    _c(
-      "a",
-      {
-        staticClass: "btn btn-success w-100 h-75",
-        attrs: {
-          href: "#",
-          "data-toggle": "modal",
-          "data-target": "#cartModal"
-        }
-      },
-      [
-        _c("div", { staticClass: "cart d-flex flex-row" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "cart-info d-inline-flex p-2 justify-content-center flex-column"
-            },
-            [
-              _c("p", { staticClass: "m-0 d-flex align-items-start" }, [
-                _vm._v(_vm._s(_vm.trans("localization.in_the_cart")) + ": "),
-                _c("strong", { staticClass: "ml-2" }, [
-                  _vm._v(_vm._s(_vm.totalQty))
+  return _c(
+    "div",
+    {
+      staticClass: "col-3 d-flex align-items-center",
+      attrs: { id: "cartButton" }
+    },
+    [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-success w-100 h-75",
+          attrs: {
+            href: "#",
+            "data-toggle": "modal",
+            "data-target": "#cartModal"
+          }
+        },
+        [
+          _c("div", { staticClass: "cart d-flex flex-row" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "cart-info d-inline-flex p-2 justify-content-center flex-column"
+              },
+              [
+                _c("p", { staticClass: "m-0 d-flex align-items-start" }, [
+                  _vm._v(_vm._s(_vm.trans("localization.in_the_cart")) + ": "),
+                  _c("strong", { staticClass: "ml-2" }, [
+                    _vm._v(_vm._s(_vm.totalQty()))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "m-0 d-flex align-items-start" }, [
+                  _vm._v(_vm._s(_vm.trans("localization.total")) + ": "),
+                  _c("strong", { staticClass: "ml-2" }, [
+                    _vm._v(_vm._s(_vm.totalPrice()) + " грн")
+                  ])
                 ])
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "m-0 d-flex align-items-start" }, [
-                _vm._v(_vm._s(_vm.trans("localization.total")) + ": "),
-                _c("strong", { staticClass: "ml-2" }, [
-                  _vm._v(_vm._s(_vm.totalPrice) + " грн")
-                ])
-              ])
-            ]
-          )
-        ])
-      ]
-    )
-  ])
+              ]
+            )
+          ])
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {

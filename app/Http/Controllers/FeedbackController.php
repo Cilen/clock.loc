@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Feedback;
+use App\Jobs\SendNotificationEmail;
 use Illuminate\Http\Request;
-use App\Helpers\SendMail;
 
 
 class FeedbackController extends Controller
@@ -42,7 +42,7 @@ class FeedbackController extends Controller
      * @param  \App\Helpers\SendMail  $mail
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, SendMail $mail)
+    public function store(Request $request)
     {
         $feedback = Feedback::create([
             'first_name' => $request->input('firstName'),
@@ -50,7 +50,8 @@ class FeedbackController extends Controller
             'revised' => false
         ]);
         if (!$feedback) return response()->json(['error' => 'Creation Feedback'], 500);
-        $mail->feedbackMail($request->input('firstName'),$request->input('phone'));
+
+        dispatch(new SendNotificationEmail($feedback));
         return response()->json('Created', 201);
     }
 

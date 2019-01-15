@@ -46,6 +46,11 @@ window.store = new Vuex.Store({
             state.totalPrice = payload.totalPrice;
             state.totalQty = payload.totalQty;
         },
+        updateState(state, payload){
+            state.items = payload.items;
+            state.totalPrice = payload.totalPrice;
+            state.totalQty = payload.totalQty;
+        },
         updateClientInfo (state, clientInfo){
             state.clientInfo = clientInfo;
         }
@@ -130,6 +135,20 @@ const app = new Vue({
 
 require('./admin');
 require('./site');
+
+// window.onpageshow = function(event) {
+//     if (event.persisted) {
+//         window.location.reload()
+//         console.log('dfdfd');
+//     }
+// };
+
+// if (!!window.performance && window.performance.navigation.type === 2) {
+//     // value 2 means "The page was accessed by navigating into the history"
+//     console.log('Reloading');
+//     // window.location.reload(); // reload whole page
+//     $('cartButton').attr('src', function () { vm.$forceUpdate() }); // reload only iframes
+// }
 
 
 
