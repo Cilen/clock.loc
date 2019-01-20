@@ -12643,7 +12643,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.product-name[data-v-2c4ae852]{\n    font-size: 1.1em;\n    color: #343a40;\n}\n.product-detail[data-v-2c4ae852]{\n    font-size: 0.9em;\n}\n.price[data-v-2c4ae852]{\n    font-size: 1em;\n}\n.product-name[data-v-2c4ae852], .product-detail[data-v-2c4ae852], .price[data-v-2c4ae852], .amount[data-v-2c4ae852]{\n    margin-bottom: 0.4em;\n}\n.cart-amount-input-text[data-v-2c4ae852]{\n    width: 40px;\n    display: inline-block;\n    padding: 2px 4px;\n    font-size: 1.2em;\n    line-height: 0;\n    text-align: center;\n}\n.cart-amount-button[data-v-2c4ae852]{\n    border: none;\n    font-size: 1.2em;\n    line-height: 0;\n    padding: 0 4px;\n    vertical-align: unset ;\n    color: #6c757d;\n}\n.cart-amount-button[data-v-2c4ae852]:hover {\n    color: #343a40;\n}\n.cart-amount-text[data-v-2c4ae852]{\n    font-size: 1.2em;\n}\nth[data-v-2c4ae852], td[data-v-2c4ae852] {\n    text-align: center;\n    vertical-align: middle;\n}\n.cart-empty[data-v-2c4ae852]{\n    text-align: center;\n    height: 100px;\n}\n.cart-total[data-v-2c4ae852]{\n    font-size: 1.2em;\n    font-weight: 600;\n}\n\n", ""]);
+exports.push([module.i, "\n.product-name[data-v-2c4ae852]{\n    font-size: 1.1em;\n    color: #343a40;\n}\n.product-detail[data-v-2c4ae852]{\n    font-size: 0.9em;\n}\n.price[data-v-2c4ae852]{\n    font-size: 1em;\n}\n.price-total[data-v-2c4ae852]{\n    font-size: 1.2em;\n}\n.product-name[data-v-2c4ae852], .product-detail[data-v-2c4ae852], .price[data-v-2c4ae852], .amount[data-v-2c4ae852]{\n    margin-bottom: 0.4em;\n}\n.cart-amount-input-text[data-v-2c4ae852]{\n    width: 40px;\n    display: inline-block;\n    padding: 2px 4px;\n    font-size: 1.2em;\n    line-height: 0;\n    text-align: center;\n}\n.cart-amount-button[data-v-2c4ae852]{\n    border: none;\n    font-size: 1.2em;\n    line-height: 0;\n    padding: 0 4px;\n    vertical-align: unset ;\n    color: #6c757d;\n}\n.cart-amount-button[data-v-2c4ae852]:hover {\n    color: #343a40;\n}\n.cart-amount-text[data-v-2c4ae852]{\n    font-size: 1.2em;\n}\nth[data-v-2c4ae852], td[data-v-2c4ae852] {\n    text-align: center;\n    vertical-align: middle;\n}\n.cart-empty[data-v-2c4ae852]{\n    text-align: center;\n    height: 100px;\n}\n.cart-total[data-v-2c4ae852]{\n    font-size: 1.2em;\n    font-weight: 600;\n}\n@media (max-width: 768px) {\n.modal-size[data-v-2c4ae852] {\n        width: 100% !important;\n        max-width: 100% !important;\n        height: 100% !important;\n        margin: 0 !important;\n        padding: 0 !important;\n}\n}\n@media (min-width: 768px) {\n.modal-size[data-v-2c4ae852] {\n        max-width: 740px !important;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -49819,7 +49819,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "modal fade",
+      staticClass: "modal",
       attrs: {
         id: "cartModal",
         tabindex: "-1",
@@ -49829,7 +49829,7 @@ var render = function() {
       }
     },
     [
-      _c("div", { staticClass: "modal-dialog" }, [
+      _c("div", { staticClass: "modal-dialog modal-size" }, [
         _c(
           "div",
           { staticClass: "modal-content" },
@@ -49874,11 +49874,9 @@ var render = function() {
                                     _vm._v(_vm._s(item.name))
                                   ]),
                                   _vm._v(" "),
-                                  _c(
-                                    "p",
-                                    { staticClass: "price d-none d-sm-inline" },
-                                    [_vm._v(_vm._s(item.price) + " грн")]
-                                  ),
+                                  _c("p", { staticClass: "price" }, [
+                                    _vm._v(_vm._s(item.price) + " грн/шт.")
+                                  ]),
                                   _vm._v(" "),
                                   _c("p", { staticClass: "product-detail" }, [
                                     _vm._v(
@@ -49946,7 +49944,7 @@ var render = function() {
                                 "div",
                                 {
                                   staticClass:
-                                    "col-8 offset-4 offset-md-0 col-md-2 price align-self-center order-4"
+                                    "col-8 offset-4 offset-md-0 col-md-2 price-total align-self-center order-4"
                                 },
                                 [_vm._v(_vm._s(item.total) + " грн")]
                               ),
@@ -52449,6 +52447,10 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-success btn-lg w-100 h-100",
+                    attrs: {
+                      "data-toggle": "modal",
+                      "data-target": "#cartModal"
+                    },
                     on: {
                       click: function($event) {
                         _vm.addToCart(_vm.clockData.clock_id)
@@ -52758,6 +52760,10 @@ var render = function() {
                             "button",
                             {
                               staticClass: "btn btn-success",
+                              attrs: {
+                                "data-toggle": "modal",
+                                "data-target": "#cartModal"
+                              },
                               on: {
                                 click: function($event) {
                                   _vm.addToCart(clock.clock_id)
@@ -69267,6 +69273,10 @@ window.wait = function () {
     return _this.wait = false;
   }, 1000);
 };
+
+$('#modal-content').on('shown.bs.modal', function () {
+  $("body.modal-open").removeAttr("style");
+});
 
 /***/ }),
 

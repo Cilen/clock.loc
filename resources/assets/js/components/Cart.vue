@@ -1,7 +1,7 @@
 <template>
-    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModal" aria-hidden="true">
+    <div class="modal" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModal" aria-hidden="true">
 
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-size">
             <div class="modal-content">
                 <template v-if="totalQty !==0">
                     <div class="modal-header">
@@ -18,7 +18,7 @@
                                             <div class="col-4 col-md-2 order-0"><img :src="imagesPath+item.logo_uuid" class="img-fluid img-thumbnail" alt="Responsive image"></div>
                                             <div class="col-6 col-md-4 order-1">
                                                 <p class="product-name">{{item.name}}</p>
-                                                <p class="price d-none d-sm-inline">{{item.price}} грн</p>
+                                                <p class="price">{{item.price}} грн/шт.</p>
                                                 <p class="product-detail">{{ trans('localization.productCode')}}: {{item.clockId}}</p>
                                             </div>
                                             <div class="col-8 offset-4 offset-md-0 col-md-3 align-self-center order-3 amount">
@@ -27,7 +27,7 @@
                                                 <a href="#" class="btn cart-amount-button" name="plus" v-on:click="plusOneToCart(item)"><i class="fas fa-plus"></i></a>
                                                 <span class="cart-amount-text">шт.</span>
                                             </div>
-                                            <div class="col-8 offset-4 offset-md-0 col-md-2 price align-self-center order-4">{{item.total}} грн</div>
+                                            <div class="col-8 offset-4 offset-md-0 col-md-2 price-total align-self-center order-4">{{item.total}} грн</div>
                                             <div class="col-2 col-md-1 order-2 order-md-4 d-flex justify-content-end align-items-start">
                                                 <button type="button" class="btn btn-outline-danger border-0" name="remove" v-on:click="removeFromCart(item)"><i class="fas fa-times"></i></button>
                                             </div>
@@ -136,6 +136,9 @@
     .price{
         font-size: 1em;
     }
+    .price-total{
+        font-size: 1.2em;
+    }
     .product-name, .product-detail, .price, .amount{
         margin-bottom: 0.4em;
     }
@@ -173,6 +176,21 @@
     .cart-total{
         font-size: 1.2em;
         font-weight: 600;
+    }
+    @media (max-width: 768px) {
+        .modal-size {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .modal-size {
+            max-width: 740px !important;
+        }
     }
 
 </style>

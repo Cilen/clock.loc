@@ -52,13 +52,13 @@
   border-bottom:1px solid #eee;
   border-radius: 0;
 }
-#cartModal .modal-dialog {
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+//#cartModal .modal-dialog {
+//  width: 100%;
+//  max-width: 100%;
+//  height: 100%;
+//  margin: 0;
+//  padding: 0;
+//}
 
 #cartModal .modal-content {
   height: auto;
@@ -102,4 +102,10 @@
       margin-bottom: 2px;
     }
   }
+}
+
+
+//Забрати padding-left:15px при малому розмірі екрану
+.modal-scrollbar-measure {
+  overflow: hidden;
 }

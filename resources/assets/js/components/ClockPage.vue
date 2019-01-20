@@ -58,7 +58,7 @@
                             <span class="price">{{clockData.price}} грн</span>
                         </div>
                         <div class="button-wrapper d-flex align-items-end col-6 col-lg-4">
-                            <button class="btn btn-success btn-lg w-100 h-100" v-on:click="addToCart(clockData.clock_id)">
+                            <button class="btn btn-success btn-lg w-100 h-100" data-toggle="modal" data-target="#cartModal" v-on:click="addToCart(clockData.clock_id)">
                                 <i class="fas fa-shopping-cart"></i> {{ trans('localization.bay') }}</button>
                         </div>
                     </div>

@@ -37,7 +37,7 @@ class ClockController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ClockRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(ClockRequest $request)
@@ -84,7 +84,7 @@ class ClockController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  ClockRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
