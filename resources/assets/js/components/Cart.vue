@@ -90,11 +90,13 @@
         },
         methods: {
             uploadToStore: function () {
-                this.$store.commit('updateData', {
-                    items: this.itemsData,
-                    totalPrice: this.totalPriceData,
-                    totalQty: this.totalQtyData,
-                });
+                if (!(!!window.performance && window.performance.navigation.type === 2)) {
+                    this.$store.commit('updateData', {
+                        items: this.itemsData,
+                        totalPrice: this.totalPriceData,
+                        totalQty: this.totalQtyData,
+                    });
+                } else this.$store.dispatch('getCart');
             },
             plusOneToCart: function(item){
                 this.$store.dispatch('updateQty', {

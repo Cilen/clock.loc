@@ -91,7 +91,16 @@ window.store = new Vuex.Store({
                 .catch(function (error) {
                     console.log(error);
                 });
-        }
+        },
+        async getCart (context){
+            axios.post('/cart/get')
+                .then((response) => {
+                    context.commit('updateData', response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
     }
 })
 
@@ -103,24 +112,24 @@ window.store = new Vuex.Store({
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('clock-form', require('./components/ClockForm.vue'));
-Vue.component('descriptions-form', require('./components/DescriptionsForm.vue'));
-Vue.component('descriptions', require('./components/Descriptions.vue'));
-Vue.component('characteristics-form', require('./components/CharacteristicsForm.vue'));
-Vue.component('characteristics', require('./components/Characteristics.vue'));
-Vue.component('images-form', require('./components/ImagesForm.vue'));
-Vue.component('clocks-table', require('./components/ClocksTable.vue')); //Адмін таблиця годинників
-Vue.component('clocks-list', require('./components/ClocksList.vue')); //Прайслист
-Vue.component('orders-table', require('./components/OrdersTable.vue')); //Адмін таблиця замовлень
-Vue.component('filters', require('./components/Filters.vue')); //Фільтри
-Vue.component('clock-page', require('./components/ClockPage.vue')); //Сторінка конкретного товару
-Vue.component('cart-button', require('./components/CartButton.vue')); //Кнопка корзини
-Vue.component('cart-button-min', require('./components/CartButtonMin.vue')); //Кнопка (зменшена) корзини
-Vue.component('cart', require('./components/Cart.vue')); //Корзина
-Vue.component('checkout', require('./components/Checkout')); //Оформлення заказів
-Vue.component('feedback-modal', require('./components/FeedbackModal')); //Зворотній звязок (модальне вікно)
-Vue.component('feedbacks-table', require('./components/FeedbacksTable')); //Адмін таблиця зворотнього звязку
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('clock-form', require('./components/ClockForm.vue').default);
+Vue.component('descriptions-form', require('./components/DescriptionsForm.vue').default);
+Vue.component('descriptions', require('./components/Descriptions.vue').default);
+Vue.component('characteristics-form', require('./components/CharacteristicsForm.vue').default);
+Vue.component('characteristics', require('./components/Characteristics.vue').default);
+Vue.component('images-form', require('./components/ImagesForm.vue').default);
+Vue.component('clocks-table', require('./components/ClocksTable.vue').default); //Адмін таблиця годинників
+Vue.component('clocks-list', require('./components/ClocksList.vue').default); //Прайслист
+Vue.component('orders-table', require('./components/OrdersTable.vue').default); //Адмін таблиця замовлень
+Vue.component('filters', require('./components/Filters.vue').default); //Фільтри
+Vue.component('clock-page', require('./components/ClockPage.vue').default); //Сторінка конкретного товару
+Vue.component('cart-button', require('./components/CartButton.vue').default); //Кнопка корзини
+Vue.component('cart-button-min', require('./components/CartButtonMin.vue').default); //Кнопка (зменшена) корзини
+Vue.component('cart', require('./components/Cart.vue').default); //Корзина
+Vue.component('checkout', require('./components/Checkout').default); //Оформлення заказів
+Vue.component('feedback-modal', require('./components/FeedbackModal').default); //Зворотній звязок (модальне вікно)
+Vue.component('feedbacks-table', require('./components/FeedbacksTable').default); //Адмін таблиця зворотнього звязку
 Vue.component('stf-select-option', StfSelectOption);
 Vue.component('stf-select', StfSelect);
 
@@ -135,20 +144,6 @@ const app = new Vue({
 
 require('./admin');
 require('./site');
-
-// window.onpageshow = function(event) {
-//     if (event.persisted) {
-//         window.location.reload()
-//         console.log('dfdfd');
-//     }
-// };
-
-// if (!!window.performance && window.performance.navigation.type === 2) {
-//     // value 2 means "The page was accessed by navigating into the history"
-//     console.log('Reloading');
-//     // window.location.reload(); // reload whole page
-//     $('cartButton').attr('src', function () { vm.$forceUpdate() }); // reload only iframes
-// }
 
 
 

@@ -252,12 +252,9 @@ class ClockController extends Controller
         $request->session()->put('cart', $cart);
         return json_encode($cart);
     }
-    public function getCart() {
-        if (! session()->has('cart')) {
-            echo "No Cart";
-        }
-
-        dd(session()->get('cart'));
+    public function getCart(Request $request) {
+        $oldCart = $request->session()->has('cart') ? $request->session()->get('cart') : null;
+        return json_encode($oldCart);
     }
 
     public function loadImages(Request $request, $id){

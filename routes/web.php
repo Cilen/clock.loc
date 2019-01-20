@@ -37,7 +37,7 @@ Route::post('feedbacks', 'FeedbackController@store')->name('new-feedback');
 Route::post('cart/add', ['uses' => 'ClockController@addToCart', 'as' => 'addToCart']);
 Route::post('cart/update', ['uses' => 'ClockController@updateCart', 'as' => 'updateCart']);
 Route::post('cart/remove', ['uses' => 'ClockController@removeFromCart', 'as' => 'removeFromCart']);
-Route::get('cart', ['uses' => 'ClockController@getCart', 'as' => 'getCart']);
+Route::post('cart/get', 'ClockController@getCart');
 Route::get('nova-poshta/get-warehouses', 'OrderController@getWarehouses');
 Route::post('nova-poshta/get-warehouses', 'OrderController@getWarehouses');
 

@@ -29,12 +29,6 @@
             totalQty: function () {
                 return this.$store.getters.getTotalQty
             },
-        },
-        created: function () {
-            if (!!window.performance && window.performance.navigation.type === 2) {
-                
-
-            }
         }
     }
 </script>
