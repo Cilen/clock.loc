@@ -90,6 +90,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
         Artisan::call('config:cache');
     });
 
+    Route::get('migrate', function(){
+        Artisan::call('migrate');
+    });
+    Route::get('queues', function(){
+        Artisan::call('queue:work');
+    });
 
 
 });

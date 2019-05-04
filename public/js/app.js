@@ -8653,13 +8653,9 @@ __webpack_require__.r(__webpack_exports__);
           revised: revisedValue
         }
       }).then(function (response) {
-        if (response.data.length != 0) {
-          _this.updateOrders(response.data);
+        _this.updateOrders(response.data);
 
-          runToastmessage("Зміни успішно внесені в базу даних");
-        }
-
-        ;
+        runToastmessage("Зміни успішно внесені в базу даних");
       }).catch(function (error) {
         var errors = error.response.data.errors;
         console.log(errors);

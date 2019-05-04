@@ -77,11 +77,8 @@
                     }
                 })
                     .then(response => {
-                        if (response.data.length != 0) {
-                            this.updateOrders(response.data);
-                            runToastmessage("Зміни успішно внесені в базу даних");
-                        };
-
+                        this.updateOrders(response.data);
+                        runToastmessage("Зміни успішно внесені в базу даних");
                     })
                     .catch(function (error) {
                         let errors = error.response.data.errors;

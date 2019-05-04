@@ -40,6 +40,7 @@
   "homepage": "https://bitbucket.org/Cilen_ua/clock.loc#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.2.0",
+    "@tinymce/tinymce-vue": "^2.0.0",
     "ajv": "^6.5.2",
     "nouislider": "^12.0.0",
     "sass": "^1.16.1",

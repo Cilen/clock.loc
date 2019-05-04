@@ -37,6 +37,24 @@
                     Зворотній зв'язок
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-arrow-right"></i>
+                    Список статтей
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-arrow-right"></i>
+                    Додати нову статтю
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-arrow-right"></i>
+                    Ще щось
+                </a>
+            </li>
         </ul>
     </div>
     <div class="border-bottom d-md-none"></div>

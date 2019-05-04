@@ -1,7 +1,7 @@
 <div id="header">
     <div class="top-line">
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light p-0 row">
+            <nav class="navbar navbar-expand-lg navbar-light px-0 py-1 row">
                 <div class="col-8 col-md-5 d-lg-none">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>

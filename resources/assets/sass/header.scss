@@ -1,12 +1,17 @@
 #header {
   margin-bottom: 2em;
-  background-color: red;
+  border-bottom: red solid 1px;
+  nav{
+    align-items: center;
+  }
+  .navbar-toggler {
+    background-color: $body-bg;
+  }
   .top-line{
-    background-color: #f8f9fa;
+    background-color: #d4eafd;
   }
   .middle-line{
     background-color: #fff;
-    border-bottom: red solid 1px;
   }
   .bottom-line{
     background-color: #ccc;
@@ -46,6 +51,9 @@
 #headerMin{
   border-bottom: red solid 1px;
   margin-top: 0.2em;
+  nav{
+    align-items: center;
+  }
   .phones{
     padding-top: 0.5em;
     p{
@@ -76,7 +84,7 @@
   font-size: 12px;
   background: #ff0000;
   color: #fff;
-  padding: 0 5px;
+  padding: 0 3px;
   vertical-align: top;
   margin-left: -10px;
 }
