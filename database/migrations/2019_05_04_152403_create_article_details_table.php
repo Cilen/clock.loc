@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticlesTable extends Migration
+class CreateArticleDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('article_details', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('article_id')
+                ->references('id')->on('articles')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->string('name');
             $table->string('slug');
             $table->boolean('publish');
@@ -23,12 +27,6 @@ class CreateArticlesTable extends Migration
             $table->text('detail_text');
             $table->string('language');
             $table->timestamps();
-        });
-        Schema::create('article-article', function(Blueprint $table){
-            $table->integer('articles_id')->unsigned()->index();
-            $table->foreign('articles_id')->references('id')->on('articles')->onDelete('cascade');
-            $table->integer('related_articles_id')->unsigned()->index();
-            $table->foreign('related_articles_id')->references('id')->on('articles')->onDelete('cascade');
         });
     }
 
@@ -39,7 +37,6 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
-        Schema::dropIfExists('article-relatedArticle');
+        Schema::dropIfExists('article_details');
     }
 }

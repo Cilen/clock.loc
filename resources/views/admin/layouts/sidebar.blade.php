@@ -38,13 +38,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{route('articles.index')}}">
                     <i class="fas fa-arrow-right"></i>
                     Список статтей
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{route('articles.create')}}">
                     <i class="fas fa-arrow-right"></i>
                     Додати нову статтю
                 </a>

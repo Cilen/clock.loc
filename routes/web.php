@@ -83,13 +83,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
     Route::get('feedbacks/old', 'FeedbackController@oldFeedbacks');
     Route::resource('feedbacks', 'FeedbackController');
 
+    //Блог
+    Route::resource('articles', 'ArticleAdminController');
+
+    // Обслуговування
     Route::get('clear', function(){
         Artisan::call('cache:clear');
         Artisan::call('view:clear');
         Artisan::call('route:clear');
         Artisan::call('config:cache');
     });
-
     Route::get('migrate', function(){
         Artisan::call('migrate');
     });

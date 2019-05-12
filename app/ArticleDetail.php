@@ -8,10 +8,7 @@ class ArticleDetail extends Model
 {
     protected $fillable = ['name', 'slug', 'publish', 'image', 'preview_text', 'detail_text', 'language'];
 
-
-    public function getRouteKey()
-    {
-        return $this->slug;
+    public function article(){
+        return $this->belongsTo('App\Article');
     }
-
 }
