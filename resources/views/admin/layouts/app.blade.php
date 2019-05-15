@@ -12,6 +12,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="//cdn.ckeditor.com/4.11.4/full/ckeditor.js"></script>
+{{--    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>--}}
+
+
+
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab" rel="stylesheet">
@@ -37,7 +42,7 @@
             </div>
         </div>
     </div>
-@yield('scripts')
+    @yield('scripts')
 
 </body>
 </html>

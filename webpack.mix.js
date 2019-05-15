@@ -17,6 +17,20 @@ mix.js('resources/assets/js/app.js', 'public/js')
 
 mix.copy('resources/assets/fonts/*.*',  'public/fonts/');
 
+mix.options({
+    hmrOptions: {
+        host: 'localhost',
+        port: 3000
+    },
+});
+if (Config.hmr) {
+    mix.webpackConfig({
+        output: {
+            publicPath: 'http://localhost:3000/'
+        }
+    })
+}
+
 
 mix.browserSync({
     proxy: "clock.loc",

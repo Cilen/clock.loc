@@ -15,7 +15,6 @@ window.Vuex = require('vuex');
 import {StfSelect, StfSelectOption} from "stf-vue-select";
 
 
-
 require('./vendor/toastmessage');
 
 
@@ -131,6 +130,7 @@ Vue.component('checkout', require('./components/Checkout').default); //Офор�
 Vue.component('feedback-modal', require('./components/FeedbackModal').default); //Зворотній звязок (модальне вікно)
 Vue.component('feedbacks-table', require('./components/FeedbacksTable').default); //Адмін таблиця зворотнього звязку
 Vue.component('article-form', require('./components/ArticleForm').default); //Форма створення та редагування статей
+Vue.component('article-image', require('./components/ArticleImage').default); //Форма створення та редагування статей
 Vue.component('stf-select-option', StfSelectOption);
 Vue.component('stf-select', StfSelect);
 

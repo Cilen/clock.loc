@@ -56,7 +56,7 @@ class ArticleAdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.addOrUpdateArticle');
     }
 
     /**

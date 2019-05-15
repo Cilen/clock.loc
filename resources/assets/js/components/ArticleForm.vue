@@ -1,34 +1,63 @@
 <template>
     <div>
-        <form method="POST" id="articleForm" action="/admin/article">
+        <form method="POST" id="articleForm" action="/admin/articles-detail">
             <input type="hidden" name="_token" :value="csrf">
-
-
-        </form>
-        <div class="form-group ">
-            <button type="submit" class="btn btn-primary" v-if="update == false" form="clockForm">Створити</button>
-            <button class="btn btn-success" v-if="update == true" v-on:click="sendUpdate">Редагувати</button>
-            <button class="btn btn-danger" v-if="update == true" v-on:click="showDeleteModal">Видалити</button>
-        </div>
-        <div id="deleteModal" class="modal fade" role="dialog" tabindex="-1">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-danger">
-                        <h5 class="modal-title">Увага</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            <input type="hidden" name="article_id" value="1">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label for="language">Мова</label>
+                            <select id="language" class="form-control" v-model="language">
+                                <option value="uk" selected>Українська</option>
+                                <option value="ru">Російська</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="publish" v-model="publish">
+                                <label class="form-check-label" for="publish">
+                                    Публікувати
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-row mt-5">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary w-100">Створити</button>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-success w-100">Редагувати</button>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-danger w-100">Видалити</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <p>Ви дійсно бажаєте видалити цю статтю із бази даних?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Ні</button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" v-on:click="sendDestroy()">Видалити</button>
+                    <div class="col-5 offset-2">
+                        <article-image></article-image>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="form-group col-12">
+                <label for="name">Назва статті</label>
+                <input id="name" type="text" class="form-control" name="name" v-model="name">
+            </div>
+
+            <div class="form-group col-12">
+                <label for="slug">URL сторінки</label>
+                <input id="slug" type="text" class="form-control" name="slug" v-model="slug" disabled>
+            </div>
+
+            <div class="form-group col-12">
+                <label for="previewText">Короткий опис статті</label>
+                <textarea id="previewText" class="form-control" name="previewText" rows="5" v-model="previewText"></textarea>
+            </div>
+
+            <div class="form-group col-12">
+                <textarea id="text-editor" name="content" class="form-control" v-model="detailText"></textarea>
+
+            </div>
+        </form>
     </div>
 </template>
 
@@ -36,26 +65,20 @@
     export default {
         data: function () {
             return {
-                clockId: 0,
+                articleId: null,
                 update: false,
                 name: null,
-                gender: "men",
-                typeOfIndexation: "strelochnye",
-                typeOfMechanism: "quartz",
-                producer: null,
-                availability: "yes",
-                hide: 0,
-                price: 0,
-                oldPrice: 0,
+                slug: null,
+                language: "uk",
+                publish: false,
+                previewText: "",
+                detailText: "",
+                image: "",
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             }
         },
-        props: ["clockData", "updateUrl"],
+        props: ["articleData", "updateUrl"],
         methods: {
-            toInt: function (event) {
-                let targetId = event.currentTarget.id;
-                this[targetId] = parseInt(this[targetId], 10);
-            },
             sendUpdate: function () {
                 let updateUrl = this.updateUrl;
                 axios({
@@ -63,16 +86,13 @@
                     url: updateUrl,
                     data: {
                         _method: 'PUT',
-                        clockId: this.clockId,
+                        articleId: this.articleId,
                         name: this.name,
-                        gender: this.gender,
-                        typeOfIndexation: this.typeOfIndexation,
-                        typeOfMechanism: this.typeOfMechanism,
-                        producer: this.producer,
-                        availability: this.availability,
-                        hide: this.hide,
-                        price: this.price,
-                        oldPrice: this.oldPrice,
+                        slug: this.slug,
+                        image: this.image,
+                        language: this.language,
+                        publish: this.publish,
+                        detailText: this.detailText,
                     }
                 })
                     .then(response => {
@@ -80,7 +100,8 @@
                             let resetData = response.data;
                             this.resetData(resetData);
                             runToastmessage("Зміни успішно внесені в базу даних");
-                        };
+                        }
+                        ;
 
                     })
                     .catch(function (error) {
@@ -91,7 +112,7 @@
                         }
                     });
             },
-            showDeleteModal:function (){
+            showDeleteModal: function () {
                 $('#deleteModal').modal('show');
             },
             sendDestroy: function () {
@@ -119,24 +140,37 @@
             },
             resetData: function (data) {
                 if (data !== undefined) {
-                    console.log (data)
                     this.update = true;
-                    this.clockId = data.clock_id;
+                    this.articleId = data.article_id;
                     this.name = data.name;
-                    this.gender = data.gender;
-                    this.typeOfIndexation = data.type_of_indexation;
-                    this.typeOfMechanism = data.type_of_mechanism;
-                    this.producer = data.producer;
-                    this.availability = data.availability;
-                    this.hide = data.hide;
-                    this.price = data.price;
-                    this.oldPrice = data.old_price;
+                    this.slug = data.slug;
+                    this.image = data.image;
+                    this.language = data.language;
+                    this.publish = data.publish;
+                    this.detailText = data.detail_text;
                 };
-            }
+            },
         },
         created() {
-            let data = this.clockData
+            let data = this.articleData
             this.resetData(data);
+
+        },
+        mounted() {
+            //CKEditor
+            var self = this;
+            CKEDITOR.replace('content', {
+                filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+                filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=' + this.csrf,
+                filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+                filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token=' + this.csrf,
+                on: {
+                    'change': function (event) {
+                        self.detailText = event.editor.getData();
+                        self.updateContent = true;
+                    }
+                }
+            }).setData(self.detailText);
         }
 
 

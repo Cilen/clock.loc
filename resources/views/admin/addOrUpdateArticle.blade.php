@@ -3,6 +3,7 @@
 
 @section('content')
 
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -12,19 +13,20 @@
             </ul>
         </div>
     @endif
-
-    @if (! isset($data['clock_id']))
+    @if (strpos(Route::currentRouteAction(), "create"))
         <article-form></article-form>
-    @else
+    @elseif(strpos(Route::currentRouteAction(), "edit"))
 {{--        <clock-form v-bind:clock-data='{!! json_encode($data) !!}'--}}
 {{--                    v-bind:update-url='"{!! url("/admin/clocks")."/".$data["clock_id"] !!}"'--}}
 {{--        ></clock-form>--}}
     @endif
 
 
+
 @endsection
 @section('scripts')
     <script>
+
     </script>
 
 

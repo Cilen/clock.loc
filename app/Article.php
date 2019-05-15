@@ -9,4 +9,5 @@ class Article extends Model
     public function details (){
         return $this->hasMany('App\ArticleDetails');
     }
+
 }
