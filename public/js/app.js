@@ -6268,6 +6268,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6283,7 +6286,7 @@ __webpack_require__.r(__webpack_exports__);
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     };
   },
-  props: ["articleData", "updateUrl"],
+  props: ["articleData", "updateUrl", "imagePath", "articleCreateUrl", "articleDetailCreateUrl", "articleImageCreateUrl"],
   methods: {
     sendUpdate: function sendUpdate() {
       var _this = this;
@@ -6406,46 +6409,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      image: "no_image.png",
-      imagePath: "/images/"
+      image: "",
+      imagePath: "/storage/logos/",
+      noImageUrl: "/images/no_image.png",
+      imageData: null
     };
   },
-  props: ["imageData", "updateUrl", "setLogoUrl", "imagesPath"],
+  props: ["articleImageCreateUrl", "inputImage"],
   methods: {
     onImageChange: function onImageChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-
-      var _arr = Object.keys(files);
-
-      for (var _i = 0; _i < _arr.length; _i++) {
-        var key = _arr[_i];
-        this.createImage(files[key]);
-      }
-
-      ;
-    },
-    createImage: function createImage(file) {
-      var reader = new FileReader();
-      var vm = this;
-
-      reader.onload = function (e) {
-        vm.imageData = e.target.result;
-        vm.uploadImage();
-      };
-
-      reader.readAsDataURL(file);
-    },
-    uploadImage: function uploadImage() {
       var _this = this;
 
-      var updateUrl = this.updateUrl;
-      axios.post(updateUrl, {
-        "image": this.imageData
-      }).then(function (response) {
-        _this.images.push(response.data);
+      var file = e.target.files[0];
+      var formData = new FormData();
+      formData.append('image', file);
+      axios.post(this.articleImageCreateUrl, formData).then(function (response) {
+        console.log(response.data);
+        _this.image = response.data;
+
+        _this.emitImage(_this.image);
 
         runToastmessage("Зображення успішно завантажені");
       }).catch(function (error) {
@@ -6453,22 +6439,12 @@ __webpack_require__.r(__webpack_exports__);
         runToastmessage(error.response.data.error, "error");
       });
     },
-    deleteImage: function deleteImage(imageId) {
-      var _this2 = this;
-
-      var url = this.updateUrl;
-      var sendData = {
-        imageId: imageId,
-        _method: "DELETE"
-      };
-      axios.post(url, sendData).then(function (response) {
-        _this2.images = response.data;
-        runToastmessage("Товар успішно видалено");
-      }).catch(function (error) {
-        console.log(error.response.data.error);
-        runToastmessage(error.response.data.error, "error");
-      });
+    emitImage: function emitImage(image) {
+      this.$emit('changeImage', image);
     }
+  },
+  created: function created() {
+    this.image = this.inputImage;
   }
 });
 
@@ -50210,7 +50186,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "col-12" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-5" }, [
+            _c("div", { staticClass: "col-6" }, [
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "language" } }, [_vm._v("Мова")]),
                 _vm._v(" "),
@@ -50309,15 +50285,25 @@ var render = function() {
                     ]
                   )
                 ])
-              ]),
-              _vm._v(" "),
-              _vm._m(0)
+              ])
             ]),
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "col-5 offset-2" },
-              [_c("article-image")],
+              { staticClass: "col-4 offset-2" },
+              [
+                _c("article-image", {
+                  attrs: {
+                    "article-image-create-url": _vm.articleImageCreateUrl,
+                    "input-image": _vm.image
+                  },
+                  on: {
+                    changeImage: function($event) {
+                      _vm.image = $event
+                    }
+                  }
+                })
+              ],
               1
             )
           ])
@@ -50425,39 +50411,43 @@ var render = function() {
               }
             }
           })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-row my-3 col-6" }, [
+          _c("div", { staticClass: "col" }, [
+            _vm.update == false
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary w-100",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Створити")]
+                )
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _vm.update == true
+              ? _c("button", { staticClass: "btn btn-success w-100" }, [
+                  _vm._v("Редагувати")
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col" }, [
+            _vm.update == true
+              ? _c("button", { staticClass: "btn btn-danger w-100" }, [
+                  _vm._v("Видалити")
+                ])
+              : _vm._e()
+          ])
         ])
       ]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row mt-5" }, [
-      _c("div", { staticClass: "col" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary w-100", attrs: { type: "submit" } },
-          [_vm._v("Створити")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("button", { staticClass: "btn btn-success w-100" }, [
-          _vm._v("Редагувати")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("button", { staticClass: "btn btn-danger w-100" }, [
-          _vm._v("Видалити")
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -50481,15 +50471,20 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "articleImage" } }, [
     _c("div", { staticClass: "text-center" }, [
-      _c("img", {
-        staticClass: "img-fluid mx-auto border rounded",
-        attrs: { src: _vm.imagePath + _vm.image, alt: "Card image cap" }
-      })
+      _vm.image != ""
+        ? _c("img", {
+            staticClass: "img-fluid mx-auto border rounded",
+            attrs: { src: _vm.imagePath + _vm.image, alt: "Card image cap" }
+          })
+        : _c("img", {
+            staticClass: "img-fluid mx-auto border rounded",
+            attrs: { src: _vm.noImageUrl, alt: "Card image cap" }
+          })
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group custom-file mt-3" }, [
       _c("input", {
-        staticClass: "custom-file-input",
+        staticClass: "custom-file-input btn btn-primary",
         attrs: { type: "file", id: "customFile", multiple: "" },
         on: { change: _vm.onImageChange }
       }),

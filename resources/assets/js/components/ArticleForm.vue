@@ -5,7 +5,7 @@
             <input type="hidden" name="article_id" value="1">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-6">
                         <div class="form-group">
                             <label for="language">Мова</label>
                             <select id="language" class="form-control" v-model="language">
@@ -21,20 +21,12 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="form-row mt-5">
-                            <div class="col">
-                                <button type="submit" class="btn btn-primary w-100">Створити</button>
-                            </div>
-                            <div class="col">
-                                <button class="btn btn-success w-100">Редагувати</button>
-                            </div>
-                            <div class="col">
-                                <button class="btn btn-danger w-100">Видалити</button>
-                            </div>
-                        </div>
                     </div>
-                    <div class="col-5 offset-2">
-                        <article-image></article-image>
+                    <div class="col-4 offset-2">
+                        <article-image v-bind:article-image-create-url="articleImageCreateUrl"
+                                       v-bind:input-image="image"
+                                       v-on:changeImage="image = $event">
+                        </article-image>
                     </div>
                 </div>
             </div>
@@ -55,7 +47,18 @@
 
             <div class="form-group col-12">
                 <textarea id="text-editor" name="content" class="form-control" v-model="detailText"></textarea>
+            </div>
 
+            <div class="form-row my-3 col-6">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary w-100" v-if="update == false">Створити</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-success w-100" v-if="update == true">Редагувати</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-danger w-100" v-if="update == true">Видалити</button>
+                </div>
             </div>
         </form>
     </div>
@@ -77,7 +80,7 @@
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             }
         },
-        props: ["articleData", "updateUrl"],
+        props: ["articleData", "updateUrl", "imagePath", "articleCreateUrl", "articleDetailCreateUrl", "articleImageCreateUrl"],
         methods: {
             sendUpdate: function () {
                 let updateUrl = this.updateUrl;
@@ -100,8 +103,7 @@
                             let resetData = response.data;
                             this.resetData(resetData);
                             runToastmessage("Зміни успішно внесені в базу даних");
-                        }
-                        ;
+                        };
 
                     })
                     .catch(function (error) {

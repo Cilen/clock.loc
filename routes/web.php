@@ -86,6 +86,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
     //Блог
     Route::resource('articles', 'ArticleAdminController');
     Route::resource('articles-detail', 'ArticleDetailController');
+    Route::post ('article-image', 'ArticleImageController@loadImage')->name('articles.image');
 
     // Обслуговування
     Route::get('clear', function(){
