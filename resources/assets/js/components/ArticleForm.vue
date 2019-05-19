@@ -32,7 +32,7 @@
             </div>
             <div class="form-group col-12">
                 <label for="name">Назва статті</label>
-                <input id="name" type="text" class="form-control" name="name" v-model="name">
+                <input id="name" type="text" class="form-control" name="name" v-model="name" @input="createSlug(name)">
             </div>
 
             <div class="form-group col-12">
@@ -68,8 +68,8 @@
     export default {
         data: function () {
             return {
-                articleId: null,
                 update: false,
+                articleId: null,
                 name: null,
                 slug: null,
                 language: "uk",
@@ -82,6 +82,9 @@
         },
         props: ["articleData", "updateUrl", "imagePath", "articleCreateUrl", "articleDetailCreateUrl", "articleImageCreateUrl"],
         methods: {
+            createSlug(name){
+                this.slug = url_slug(name);
+            },
             sendUpdate: function () {
                 let updateUrl = this.updateUrl;
                 axios({
